@@ -1,44 +1,27 @@
-## Andy Freeman
+# Andy Freeman GitHub Portfolio
 
-Enterprise software architect and engineering manager focused on production AI systems for
-federal and regulated environments. I build and ship multi-agent orchestration platforms,
-LLM evaluation frameworks, and developer tooling — and use those same repos to onboard
-Deloitte engineers into applied AI engineering.
+A portfolio of production-oriented AI engineering systems: reusable LLM execution primitives, multi-agent orchestration platforms, deterministic business applications with AI interfaces, QA automation enablement, and architecture communication tooling.
 
----
+Portfolio hub for enterprise AI architecture, agentic systems, LLM evaluation, and AI-enabled software delivery. This profile connects the major repositories into a coherent architecture story spanning reusable AI libraries, orchestration platforms, business-facing applications, QA enablement, and technical communication tooling.
 
-### What I'm building
+## Portfolio Map
 
-**[Agentic Runtimes](https://github.com/tafreeman/agentic-runtimes)** — A production-grade
-multi-agent workflow engine. DAG-based execution (Kahn's algorithm), tiered model routing
-with circuit breakers across 8+ providers, rubric-based LLM evaluation, and a React 19
-live dashboard. ~187K lines of Python, 379 tests, 17 ADRs. Zero-credential dev mode for
-fast onboarding.
+| Project | Focus | Description |
+|---|---|---|
+| [Agentic Runtime Platform](https://github.com/tafreeman/agentic-runtime-platform) | Agentic AI Platform | Multi-agent workflow runtime with DAG execution, model routing, provider failover, evaluation, and observability. |
+| [ExecutionKit](https://github.com/tafreeman/executionkit) | AI Engineering Library | Provider-agnostic Python primitives for consensus, refinement, ReAct loops, structured output, and budget-aware LLM calls. |
+| [Financial Scenario Engine](https://github.com/tafreeman/financial-scenario-engine) | Applied Business AI | Local-first project financial analysis engine with deterministic calculations and optional LLM-assisted scenario parsing. |
+| [QA Automation Academy](https://github.com/tafreeman/qa-automation-academy) | Engineering Enablement | Playwright and Copilot training platform for helping QA teams move from manual testing to automated testing. |
+| [Architecture Deck System](https://github.com/tafreeman/architecture-deck-system) | Technical Communication | React presentation platform with reusable layouts, design tokens, content packs, Storybook, and export workflows. |
+| [Agentic Systems Lab](https://github.com/tafreeman/agentic-systems-lab) | R&D / Prototyping | Research lab for agentic workflows, security hardening, orchestration experiments, and evaluation patterns. |
 
-**[ExecutionKit](https://github.com/tafreeman/executionkit)** — Composable LLM reasoning
-patterns: consensus voting, iterative refinement, ReAct tool loops. Works with any
-OpenAI-compatible endpoint. Zero SDK dependencies.
+## Portfolio Roles
 
-**[Midnight Automation Voyage](https://github.com/tafreeman/midnight-automation-voyage)** —
-Guided Playwright learning modules with AI-assisted test generation. Used for developer
-upskilling programs.
-
----
-
-### Stack
-
-![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
-![React](https://img.shields.io/badge/React_19-61DAFB?logo=react&logoColor=black)
-![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?logo=langchain&logoColor=white)
-![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-000000?logo=opentelemetry)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-
----
-
-### Current focus
-
-Evaluation rigor for agentic systems — specifically, how to gate production deployments on
-rubric-scored, multi-dimensional LLM output quality rather than pass/fail unit tests.
-Sprint B just shipped: mypy --strict across the full monorepo, SLO p95 gate hardened,
-and automated Python↔TypeScript wire-format drift detection.
+| Project | Role |
+|---|---|
+| Agentic Runtime Platform | Flagship architecture repo showing platform thinking, runtime design, distributed workflow orchestration, model abstraction, observability, and production AI engineering. |
+| ExecutionKit | Lower-level library repo showing clean API design, abstraction boundaries, dependency discipline, and reusable AI engineering patterns. |
+| Financial Scenario Engine | Applied enterprise AI repo showing how to combine deterministic systems with LLM interfaces in a safer, business-relevant architecture. |
+| QA Automation Academy | Engineering enablement repo showing technical leadership, QA modernization, AI-assisted delivery adoption, and team upskilling strategy. |
+| Architecture Deck System | Technical communication repo showing design-system thinking, reusable frontend architecture, and the ability to turn complex technical concepts into polished delivery artifacts. |
+| Agentic Systems Lab | Innovation and R&D repo showing exploration, experimentation, security thinking, and continuous advancement of the broader agentic architecture ecosystem. |
