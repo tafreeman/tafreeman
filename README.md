@@ -4,7 +4,7 @@
 multi-agent runtimes, provider-agnostic LLM primitives, and deterministic business
 applications with safe AI interfaces.
 
-[LinkedIn](https://linkedin.com/in/tafreeman) · tandfreeman@gmail.com
+[LinkedIn Profile](https://www.linkedin.com/in/andy-freeman-architect/) · tandfreeman@gmail.com
 
 A portfolio of production-oriented AI engineering systems: reusable LLM execution primitives, multi-agent orchestration platforms, deterministic business applications with AI interfaces, QA automation enablement, and architecture communication tooling.
 
