@@ -153,6 +153,7 @@ function SocialCard({ r }) {
 
 // clay-accent the final hyphen segment of the repo name
 function renderName(name) {
+  if (!name) return <span></span>;
   if (!name.includes("-")) return <span>{name}</span>;
   const i = name.lastIndexOf("-");
   return (<><span>{name.slice(0, i + 1)}</span><span className="accent">{name.slice(i + 1)}</span></>);

@@ -1,0 +1,15 @@
+{
+  "name": "tafreeman-profile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub profile + portfolio landing (static, Babel-in-browser JSX).",
+  "scripts": {
+    "validate:jsx": "node scripts/validate-jsx.mjs",
+    "validate:html": "html-validate *.html",
+    "validate": "npm run validate:jsx && npm run validate:html"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.2",
+    "html-validate": "9.5.3"
+  }
+}
