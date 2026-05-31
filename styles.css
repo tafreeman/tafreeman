@@ -247,7 +247,7 @@ body {
 .sb-btn.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: var(--fg-on-accent);
 }
 .sb-btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); box-shadow: 0 0 0 3px var(--accent-glow); }
 .sb-btn.icon { padding: 8px 10px; }

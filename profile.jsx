@@ -663,7 +663,7 @@ function ProfilePage() {
 
       {window.TweaksPanel && (
         <window.TweaksPanel title="Tweaks">
-          <window.TweakSection title="Theme">
+          <window.TweakSection label="Theme">
             <window.TweakRadio label="Mode" value={tweaks.mode}
               options={[{ value: "dark", label: "Dark" }, { value: "light", label: "Light" }]}
               onChange={v => setTweak('mode', v)} />
@@ -676,7 +676,7 @@ function ProfilePage() {
               ]}
               onChange={v => setTweak('accent', v)} />
           </window.TweakSection>
-          <window.TweakSection title="Sections">
+          <window.TweakSection label="Sections">
             <window.TweakToggle label="Systems graph" value={tweaks.showMap} onChange={v => setTweak('showMap', v)} />
             <window.TweakToggle label="Commit signal" value={tweaks.showContrib} onChange={v => setTweak('showContrib', v)} />
             <window.TweakToggle label="Activity ledger" value={tweaks.showActivity} onChange={v => setTweak('showActivity', v)} />

@@ -27,12 +27,12 @@
 
   /* Brand accent — clay / ember */
   --accent:       #d97757;
-  --accent-hover: #e2906f;
-  --accent-press: #c05f3f;
+  --accent-hover: #e48970;
+  --accent-press: #b8603f;
   --accent-glow:  rgba(217, 119, 87, 0.22);
   --accent-soft:  rgba(217, 119, 87, 0.10);
-  --accent-2:     #e8954a;  /* warm gradient pair */
-  --gradient-brand: linear-gradient(135deg, #d97757 0%, #e8954a 100%);
+  --accent-2:     #e8a285;  /* warm gradient pair */
+  --gradient-brand: linear-gradient(135deg, #d97757 0%, #e8a285 100%);
 
   /* Semantic */
   --success: #4ade80;
@@ -182,6 +182,7 @@
   --success: #047857;
   --danger:  #DC2626;
   --warning: #B45309;
+  --info:    #2563EB;
 
   --shadow-soft: 0 1px 2px rgba(26,26,46,0.06), 0 1px 1px rgba(26,26,46,0.04);
   --shadow-pop:  0 12px 32px rgba(26,26,46,0.10), 0 2px 6px rgba(26,26,46,0.06);

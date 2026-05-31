@@ -304,6 +304,7 @@
         const b = e.target.closest('button'); if (!b) return;
         document.documentElement.setAttribute(attr, b.dataset.v);
         [...seg.children].forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+        renderAll(); // re-read computed custom properties under the new theme
       });
     }
     wire('mode', 'data-mode'); wire('accent', 'data-accent');
