@@ -5,14 +5,14 @@
   system is therefore applied through (1) shields.io badge colors (?color=d97757,
   the ember accent), (2) committed on-brand SVG/PNG header art, and (3) layout via
   tables / <div align> / <picture>. React components from the live site cannot be
-  embedded — the live, fully-styled experience is at https://tafreeman.github.io/.
+  embedded — the live, fully-styled experience is at https://tafreeman.github.io/tafreeman/.
   REAL DATA ONLY: no hardcoded star/fork/commit counts; live numbers come from
   dynamic badges or are omitted.
 -->
 
 <div align="center">
 
-[![tafreeman — production-grade AI engineering systems](social-previews/hero-vector.png)](https://tafreeman.github.io/)
+[![tafreeman — production-grade AI engineering systems](social-previews/hero-vector.png)](https://tafreeman.github.io/tafreeman/)
 
 # Andy Freeman · `@tafreeman`
 
@@ -93,7 +93,7 @@ Primitives flow upward into platforms; platforms emit telemetry into research an
 - **L3 · Communication + Applied** — `Architecture Deck System`, `Financial Scenario Engine`, `QA Automation Academy`
 - **L0 · R&D** — `Agentic Systems Lab` (security · evals · prototypes upstreamed into the platform)
 
-The interactive, fully-styled version of this graph lives on the portfolio site → **[tafreeman.github.io](https://tafreeman.github.io/)**
+The interactive, fully-styled version of this graph lives on the portfolio site → **[tafreeman.github.io/tafreeman](https://tafreeman.github.io/tafreeman/)**
 
 ---
 
