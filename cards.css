@@ -1,0 +1,336 @@
+/* =====================================================================
+   GitHub social preview cards — "Console" aesthetic
+   Lifted from the Prompts UI / Direction B style: near-black void,
+   clay-orange accent, cream text, mono everywhere, hairline borders.
+   ===================================================================== */
+
+:root {
+  --void:      #08080c;   /* deepest ground */
+  --panel:     #101018;   /* card surface */
+  --panel-2:   #16161e;   /* header / inset bars */
+  --line:      #2c2c36;   /* hairline border */
+  --line-soft: #1d1d26;
+
+  --clay:        #d97757;  /* primary accent */
+  --clay-bright: #e8954a;  /* warm highlight for glyph fills */
+  --clay-dim:    rgba(217,119,87,0.14);
+  --cream:       #ececde;  /* primary text */
+  --muted:       #8a8a82;  /* supporting */
+  --dim:         #50504a;  /* decorative / ticks */
+  --dimmer:      #34343c;
+
+  --green: #4ade80;
+  --amber: #fbbf24;
+  --red:   #f87171;
+  --blue:  #6ea8d8;
+
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", "Berkeley Mono", Consolas, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ============ CARD SHELL — exactly 1280 × 640 ============ */
+.sc-card {
+  width: 1280px;
+  height: 640px;
+  background: var(--void);
+  color: var(--cream);
+  font-family: var(--mono);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  isolation: isolate;
+}
+
+/* faint technical grid + vignette */
+.sc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.32;
+  -webkit-mask-image: radial-gradient(120% 120% at 70% 40%, #000 30%, transparent 78%);
+          mask-image: radial-gradient(120% 120% at 70% 40%, #000 30%, transparent 78%);
+  z-index: 0;
+}
+/* warm glow under the glyph zone */
+.sc-card::after {
+  content: "";
+  position: absolute;
+  right: -120px; top: 50%;
+  width: 720px; height: 720px;
+  transform: translateY(-50%);
+  background: radial-gradient(circle, rgba(217,119,87,0.16) 0%, rgba(217,119,87,0.05) 32%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.sc-card > * { position: relative; z-index: 1; }
+
+/* tiny starfield dots */
+.sc-stars { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.sc-star { position: absolute; background: var(--cream); border-radius: 50%; opacity: 0.5; }
+
+/* ============ TITLE BAR ============ */
+.sc-titlebar {
+  height: 60px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(var(--panel-2), transparent);
+}
+.sc-tb-left { display: flex; align-items: center; gap: 14px; }
+.sc-tb-mark {
+  width: 12px; height: 12px;
+  background: var(--clay);
+  box-shadow: 0 0 0 1px rgba(236,236,222,0.12), 0 0 14px rgba(217,119,87,0.55);
+}
+.sc-tb-path { font-size: 17px; letter-spacing: 0.5px; color: var(--muted); white-space: nowrap; }
+.sc-tb-path b { color: var(--cream); font-weight: 700; }
+.sc-tb-right { display: flex; align-items: center; gap: 18px; font-size: 13px; color: var(--dim); letter-spacing: 1px; }
+.sc-tb-tag { color: var(--muted); }
+
+/* ============ BODY ============ */
+.sc-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 40px;
+}
+
+.sc-left { display: flex; flex-direction: column; gap: 0; padding-right: 12px; }
+
+.sc-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700; letter-spacing: 3px;
+  color: var(--clay);
+  margin-bottom: 22px;
+}
+.sc-eyebrow::before {
+  content: ""; width: 22px; height: 1px; background: var(--clay); opacity: 0.7;
+}
+
+.sc-name {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -1px;
+  color: var(--cream);
+  word-break: break-word;
+}
+.sc-name .accent { color: var(--clay); }
+
+.sc-tagline {
+  margin-top: 20px;
+  font-size: 21px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 600px;
+  font-family: var(--mono);
+}
+
+/* command line flourish */
+.sc-cmd {
+  margin-top: 26px;
+  font-size: 16px;
+  color: var(--dim);
+  display: flex; align-items: center; gap: 10px;
+}
+.sc-cmd .prompt { color: var(--green); }
+.sc-cmd .cursor {
+  display: inline-block; width: 9px; height: 18px;
+  background: var(--clay); margin-left: 2px; transform: translateY(2px);
+}
+
+/* meta row */
+.sc-meta {
+  margin-top: 34px;
+  display: flex; align-items: center; gap: 26px;
+  font-size: 16px; color: var(--muted);
+}
+.sc-meta .mi { display: inline-flex; align-items: center; gap: 9px; }
+.sc-meta .ldot { width: 12px; height: 12px; border-radius: 50%; }
+.sc-meta svg { color: var(--dim); }
+.sc-meta .val { color: var(--cream); }
+
+/* ============ GLYPH ZONE ============ */
+.sc-glyph {
+  position: relative;
+  width: 440px; height: 440px;
+  display: flex; align-items: center; justify-content: center;
+  justify-self: center;
+}
+.sc-glyph svg { width: 360px; height: 360px; overflow: visible; }
+
+/* technical registration ticks at the corners of the glyph frame */
+.sc-tick { position: absolute; width: 16px; height: 16px; pointer-events: none; }
+.sc-tick::before, .sc-tick::after { content: ""; position: absolute; background: var(--dim); }
+.sc-tick::before { width: 16px; height: 1px; top: 0; }
+.sc-tick::after  { width: 1px; height: 16px; left: 0; }
+.sc-tick.tl { top: 18px; left: 18px; }
+.sc-tick.tr { top: 18px; right: 18px; transform: scaleX(-1); }
+.sc-tick.bl { bottom: 18px; left: 18px; transform: scaleY(-1); }
+.sc-tick.br { bottom: 18px; right: 18px; transform: scale(-1); }
+
+/* ============ FOOTER ============ */
+.sc-footer {
+  height: 66px;
+  flex: none;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+  background: linear-gradient(transparent, var(--panel-2));
+}
+.sc-url { color: var(--muted); letter-spacing: 0.3px; white-space: nowrap; }
+.sc-url .at { color: var(--clay); }
+.sc-status {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; letter-spacing: 2px; font-weight: 700;
+  color: var(--cream);
+  padding: 7px 16px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--panel);
+}
+.sc-status .sdot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px currentColor; }
+.sc-status.flagship { color: var(--clay); border-color: rgba(217,119,87,0.4); background: var(--clay-dim); }
+.sc-status.flagship .sdot { background: var(--clay); }
+.sc-status.beta .sdot { background: var(--amber); }
+.sc-status.live .sdot { background: var(--green); }
+
+/* glyph stroke helpers (shared) */
+.g-stroke { fill: none; stroke: var(--clay); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.g-cream  { fill: none; stroke: var(--cream); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.g-thin   { fill: none; stroke: var(--dim); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.g-fill-clay  { fill: var(--clay); }
+.g-fill-cream { fill: var(--cream); }
+
+/* =====================================================================
+   PROFILE README HERO — 1280 × 400
+   ===================================================================== */
+.hb {
+  width: 1280px; height: 400px;
+  background: var(--void);
+  color: var(--cream);
+  font-family: var(--mono);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  -webkit-font-smoothing: antialiased; isolation: isolate;
+}
+.hb::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 44px 44px; opacity: 0.32;
+  -webkit-mask-image: radial-gradient(120% 130% at 78% 50%, #000 28%, transparent 76%);
+          mask-image: radial-gradient(120% 130% at 78% 50%, #000 28%, transparent 76%);
+}
+.hb::after {
+  content: ""; position: absolute; right: -80px; top: 50%;
+  width: 620px; height: 620px; transform: translateY(-50%);
+  background: radial-gradient(circle, rgba(217,119,87,0.16) 0%, rgba(217,119,87,0.05) 34%, transparent 62%);
+  z-index: 0; pointer-events: none;
+}
+.hb > * { position: relative; z-index: 1; }
+
+.hb-body {
+  flex: 1; display: grid; grid-template-columns: 1fr 360px;
+  align-items: center; gap: 16px; padding: 0 48px;
+}
+.hb-left { display: flex; flex-direction: column; }
+.hb-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px; white-space: nowrap;
+  font-size: 13px; font-weight: 700; letter-spacing: 2.5px; color: var(--clay);
+  margin-bottom: 18px;
+}
+.hb-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--clay); opacity: .7; }
+.hb-name { font-size: 62px; font-weight: 700; line-height: 1; letter-spacing: -1px; }
+.hb-name .accent { color: var(--clay); }
+.hb-handle { font-size: 22px; color: var(--muted); margin-top: 14px; }
+.hb-handle .at { color: var(--clay); }
+.hb-tagline { margin-top: 18px; font-size: 18px; line-height: 1.5; color: var(--muted); max-width: 560px; }
+.hb-chips { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+.hb-chip {
+  font-size: 13px; letter-spacing: .5px; color: var(--cream);
+  padding: 7px 13px; border: 1px solid var(--line); border-radius: 3px;
+  background: var(--panel); display: inline-flex; align-items: center; gap: 8px;
+}
+.hb-chip .cdot { width: 7px; height: 7px; border-radius: 50%; background: var(--clay); }
+.hb-glyph { position: relative; width: 360px; height: 320px; display: flex; align-items: center; justify-content: center; justify-self: center; }
+.hb-glyph svg { width: 300px; height: 300px; overflow: visible; }
+.hb-art {
+  position: relative; width: 320px; height: 320px; justify-self: center;
+  border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
+  box-shadow: 0 0 40px rgba(217,119,87,0.12);
+}
+.hb-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* cinematic full-bleed hero */
+.hb.cine { display: flex; flex-direction: column; }
+.hb.cine::before, .hb.cine::after { display: none; }
+.hb-cine-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: 50% 58%;
+}
+.hb-cine-scrim {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(8,8,12,0.95) 0%, rgba(8,8,12,0.82) 32%, rgba(8,8,12,0.40) 62%, rgba(8,8,12,0.10) 100%),
+    linear-gradient(0deg, rgba(8,8,12,0.78) 0%, transparent 42%);
+}
+.hb.cine .sc-titlebar {
+  position: relative; z-index: 1;
+  background: linear-gradient(rgba(8,8,12,0.55), transparent);
+  border-bottom-color: rgba(236,236,222,0.08);
+}
+.hb-cine-body {
+  position: relative; z-index: 1; flex: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 48px; max-width: 740px;
+}
+
+/* =====================================================================
+   AVATAR / ORG MARK — 460 × 460 (renders inside a circle on GitHub)
+   ===================================================================== */
+.av {
+  width: 460px; height: 460px;
+  background: radial-gradient(circle at 50% 42%, #14141c 0%, var(--void) 68%);
+  color: var(--cream); font-family: var(--mono);
+  position: relative; overflow: hidden;
+  display: grid; place-items: center; isolation: isolate;
+}
+.av::before { /* circle-safe guide ring */
+  content: ""; position: absolute; inset: 46px; border-radius: 50%;
+  border: 1px solid var(--line); opacity: .6;
+}
+.av-stars { position: absolute; inset: 0; }
+.av-mono { display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 1; }
+.av-mark { width: 26px; height: 26px; background: var(--clay); box-shadow: 0 0 24px rgba(217,119,87,.6); }
+.av-letters { font-size: 180px; font-weight: 700; line-height: .9; letter-spacing: -6px; }
+.av-letters .a { color: var(--cream); }
+.av-letters .f { color: var(--clay); }
+.av-prompt { font-size: 26px; color: var(--dim); letter-spacing: 2px; }
+.av-glyph { width: 320px; height: 320px; z-index: 1; }
+.av-glyph svg { width: 100%; height: 100%; overflow: visible; }
+.av-tick { position: absolute; width: 18px; height: 18px; }
+.av-tick::before, .av-tick::after { content: ""; position: absolute; background: var(--dim); }
+.av-tick::before { width: 18px; height: 1px; top: 0; }
+.av-tick::after { width: 1px; height: 18px; left: 0; }
+.av-tick.tl { top: 30px; left: 30px; }
+.av-tick.tr { top: 30px; right: 30px; transform: scaleX(-1); }
+.av-tick.bl { bottom: 30px; left: 30px; transform: scaleY(-1); }
+.av-tick.br { bottom: 30px; right: 30px; transform: scale(-1); }
+.av-art { padding: 0; }
+.av-art img { width: 100%; height: 100%; object-fit: cover; display: block; }

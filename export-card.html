@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-mode="dark" data-accent="ember">
+<head>
+  <meta charset="utf-8" />
+  <title>card export</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="cards.css" />
+  <style>
+    html, body { margin: 0; padding: 0; background: #08080c; }
+    #root { width: max-content; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+
+  <script type="text/babel" src="glyphs.jsx"></script>
+  <script type="text/babel" src="social-cards.jsx"></script>
+  <script type="text/babel" src="banner.jsx"></script>
+
+  <script type="text/babel">
+    const q = new URLSearchParams(location.search);
+    const card = q.get("card");
+    const mode = q.get("mode");
+    let el;
+    if (mode === "hero-vector") el = <window.HeroBanner />;
+    else if (mode === "hero-cine") el = <window.HeroBanner mode="cine" art="assets/hero-cinematic.jpg" />;
+    else if (mode === "hero-panel") el = <window.HeroBanner art="assets/avatar-art.png" />;
+    else {
+      const r = (window.REPOS || []).find(x => x.id === card);
+      el = r ? <window.SocialCard r={r} /> : <div style={{color:"#fff",padding:40}}>unknown card: {String(card)}</div>;
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(el);
+  </script>
+</body>
+</html>
