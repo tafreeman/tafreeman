@@ -1,0 +1,23 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+
+# Local tooling & design scratch (not part of the published Pages site)
+.claude/
+.design-canvas.state.json
+uploads/
+screenshots/
+review/
+heroreview/
+assetcap/
+cardpng/
