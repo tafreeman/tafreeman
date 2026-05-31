@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en" data-mode="dark" data-accent="ember">
+<head>
+  <meta charset="utf-8" />
+  <title>tafreeman — Design System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="tokens.css" />
+  <style>
+    /* ---- styleguide chrome only; everything visual below is token-driven ---- */
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .sg-wrap { max-width: 1040px; margin: 0 auto; padding: var(--sp-2xl) var(--sp-lg) var(--sp-3xl); }
+
+    .sg-top {
+      display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--sp-md);
+      justify-content: space-between; margin-bottom: var(--sp-xl);
+      padding-bottom: var(--sp-md); border-bottom: 1px solid var(--border);
+    }
+    .sg-top h1 { margin: 0 0 6px; }
+    .sg-top .caption { margin: 0; }
+
+    /* live theme switcher — proves accents/modes resolve from tokens.css alone */
+    .sg-switch { display: flex; gap: var(--sp-md); flex-wrap: wrap; }
+    .sg-switch .grp { display: flex; flex-direction: column; gap: 6px; }
+    .sg-switch .grp > span {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-label);
+      text-transform: uppercase; color: var(--fg-3);
+    }
+    .sg-seg { display: inline-flex; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; }
+    .sg-seg button {
+      font-family: var(--font-mono); font-size: 12px; font-weight: var(--fw-medium);
+      padding: 6px 12px; border: 0; background: var(--surface); color: var(--fg-2); cursor: pointer;
+      border-right: 1px solid var(--border);
+    }
+    .sg-seg button:last-child { border-right: 0; }
+    .sg-seg button[aria-pressed="true"] { background: var(--accent); color: var(--fg-on-accent); }
+
+    section.sg { margin: var(--sp-2xl) 0 0; }
+    section.sg > .sg-h { margin-bottom: var(--sp-md); }
+    .sg-h .eyebrow { display: block; margin-bottom: 6px; }
+    .sg-h h2 { margin: 0; }
+    .sg-h p { margin: 8px 0 0; color: var(--fg-2); max-width: 60ch; }
+
+    .grid { display: grid; gap: var(--sp-sm); }
+    .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 720px) { .grid.cols-4, .grid.cols-3, .grid.cols-2 { grid-template-columns: repeat(2, 1fr); } }
+
+    /* color swatches */
+    .swatch { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); }
+    .swatch .chip { height: 64px; }
+    .swatch .meta { padding: 10px 12px; }
+    .swatch .meta .name { font-family: var(--font-mono); font-size: 12px; color: var(--fg-1); }
+    .swatch .meta .var { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-3); margin-top: 3px; }
+
+    /* type rows */
+    .type-row { display: flex; align-items: baseline; gap: var(--sp-md); padding: 14px 0; border-bottom: 1px solid var(--border-soft); }
+    .type-row .lbl { flex: 0 0 130px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+    .type-row .demo { color: var(--fg-1); }
+
+    /* spacing / radius / shadow demos */
+    .spacer { background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: var(--radius-sm); height: 28px; }
+    .spec { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-3); margin-top: 6px; }
+    .radius-box { height: 72px; background: var(--surface-2); border: 1px solid var(--border); display: grid; place-items: center; }
+    .shadow-box { height: 84px; background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); }
+
+    /* component demos */
+    .demo-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-md); }
+    .btn {
+      font-family: var(--font-body); font-size: 14px; font-weight: var(--fw-semi);
+      display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px;
+      border-radius: var(--radius-md); border: 1px solid var(--border); cursor: pointer;
+      text-decoration: none; transition: all var(--dur-fast) var(--ease-out);
+    }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--fg-on-accent); }
+    .btn.primary:hover { background: var(--accent-hover); box-shadow: 0 0 0 3px var(--accent-glow); }
+    .btn.ghost { background: var(--surface); color: var(--fg-1); }
+    .btn.ghost:hover { border-color: var(--fg-3); background: var(--surface-2); }
+    .badge {
+      font-family: var(--font-mono); font-size: 10px; font-weight: var(--fw-bold);
+      letter-spacing: var(--tracking-label); text-transform: uppercase;
+      padding: 4px 9px; border-radius: var(--radius-sm); background: var(--accent-soft); color: var(--accent);
+    }
+    .badge.success { background: color-mix(in srgb, var(--success) 12%, transparent); color: var(--success); }
+    .badge.warning { background: color-mix(in srgb, var(--warning) 14%, transparent); color: var(--warning); }
+    .badge.danger  { background: color-mix(in srgb, var(--danger) 12%, transparent);  color: var(--danger); }
+    .stat .v { font-family: var(--font-display); font-weight: var(--fw-black); font-size: var(--fs-stat); line-height: 1; color: var(--fg-1); }
+    .stat .v.accent { color: var(--accent); }
+    .stat .l { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--fg-3); margin-top: 10px; }
+    .term {
+      font-family: var(--font-mono); font-size: 13px; color: var(--fg-2);
+      background: var(--surface-deep); border: 1px solid var(--border-soft);
+      border-left: var(--border-accent); border-radius: var(--radius-md); padding: 12px 16px;
+    }
+    .term .prompt { color: var(--success); } .term .cmd { color: var(--fg-1); }
+    .row { display: flex; gap: var(--sp-sm); flex-wrap: wrap; align-items: center; }
+
+    footer.sg-foot { margin-top: var(--sp-3xl); padding-top: var(--sp-md); border-top: 1px solid var(--border); }
+    footer.sg-foot .caption { margin: 0; }
+    footer.sg-foot a { font-family: var(--font-mono); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="sg-wrap">
+
+    <header class="sg-top">
+      <div>
+        <span class="eyebrow">// Design System</span>
+        <h1>tafreeman</h1>
+        <p class="caption">One token source (tokens.css) · Console dark (primary) + Paper&nbsp;&amp;&nbsp;Ink light · ember / indigo / cobalt / mint accents</p>
+      </div>
+      <div class="sg-switch">
+        <div class="grp">
+          <span>Mode</span>
+          <div class="sg-seg" id="mode">
+            <button data-v="dark" aria-pressed="true">Dark</button>
+            <button data-v="light" aria-pressed="false">Light</button>
+          </div>
+        </div>
+        <div class="grp">
+          <span>Accent</span>
+          <div class="sg-seg" id="accent">
+            <button data-v="ember" aria-pressed="true">Ember</button>
+            <button data-v="indigo" aria-pressed="false">Indigo</button>
+            <button data-v="cobalt" aria-pressed="false">Cobalt</button>
+            <button data-v="mint" aria-pressed="false">Mint</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- COLOR -->
+    <section class="sg">
+      <div class="sg-h">
+        <span class="eyebrow">// Tokens</span>
+        <h2>Color</h2>
+        <p>Surfaces, borders and text shift with <code>data-mode</code>; the accent ramp shifts with <code>data-accent</code>. Nothing here is a literal hex — every chip reads a custom property.</p>
+      </div>
+
+      <h4 style="margin:0 0 12px">Surfaces &amp; borders</h4>
+      <div class="grid cols-4" id="surfaces"></div>
+
+      <h4 style="margin:24px 0 12px">Text</h4>
+      <div class="grid cols-4" id="text"></div>
+
+      <h4 style="margin:24px 0 12px">Accent ramp</h4>
+      <div class="grid cols-4" id="accents"></div>
+
+      <h4 style="margin:24px 0 12px">Semantic</h4>
+      <div class="grid cols-4" id="semantic"></div>
+    </section>
+
+    <!-- TYPE -->
+    <section class="sg">
+      <div class="sg-h">
+        <span class="eyebrow">// Tokens</span>
+        <h2>Typography</h2>
+        <p>Display &amp; body are JetBrains Mono; DM Serif Display is reserved for editorial accents. Scale runs from eyebrow (11px) to stat (48px).</p>
+      </div>
+      <div id="type"></div>
+    </section>
+
+    <!-- SPACING -->
+    <section class="sg">
+      <div class="sg-h">
+        <span class="eyebrow">// Tokens</span>
+        <h2>Spacing</h2>
+        <p>8px grid. Use the <code>--sp-*</code> scale for padding, gaps and rhythm.</p>
+      </div>
+      <div class="grid cols-4" id="spacing"></div>
+    </section>
+
+    <!-- RADIUS -->
+    <section class="sg">
+      <div class="sg-h">
+        <span class="eyebrow">// Tokens</span>
+        <h2>Radius</h2>
+      </div>
+      <div class="grid cols-4" id="radius"></div>
+    </section>
+
+    <!-- SHADOW -->
+    <section class="sg">
+      <div class="sg-h">
+        <span class="eyebrow">// Tokens</span>
+        <h2>Elevation</h2>
+      </div>
+      <div class="grid cols-3">
+        <div class="shadow-box" style="box-shadow: var(--shadow-soft)">--shadow-soft</div>
+        <div class="shadow-box" style="box-shadow: var(--shadow-glow)">--shadow-glow</div>
+        <div class="shadow-box" style="box-shadow: var(--shadow-pop)">--shadow-pop</div>
+      </div>
+    </section>
+
+    <!-- COMPONENTS -->
+    <section class="sg">
+      <div class="sg-h">
+        <span class="eyebrow">// Patterns</span>
+        <h2>Components</h2>
+        <p>Representative patterns assembled purely from tokens — the same primitives the profile (index.html) is built on.</p>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="demo-card">
+          <h4 style="margin:0 0 14px">Buttons</h4>
+          <div class="row">
+            <a class="btn primary">Primary</a>
+            <a class="btn ghost">Ghost</a>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <h4 style="margin:0 0 14px">Badges</h4>
+          <div class="row">
+            <span class="badge">Flagship</span>
+            <span class="badge success">Live</span>
+            <span class="badge warning">Beta</span>
+            <span class="badge danger">Deprecated</span>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <h4 style="margin:0 0 14px">Stat</h4>
+          <div class="row" style="gap: var(--sp-xl)">
+            <div class="stat"><div class="v accent">6</div><div class="l">Production repos</div></div>
+            <div class="stat"><div class="v">1.4k</div><div class="l">Commits · 12mo</div></div>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <h4 style="margin:0 0 14px">Terminal line</h4>
+          <div class="term"><span class="prompt">~ $</span> <span class="cmd">npx create-agentic-runtime</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="sg-foot">
+      <p class="caption">Source of truth: <a href="tokens.css">tokens.css</a> · Full reference: <a href="DESIGN-SYSTEM.md">DESIGN-SYSTEM.md</a> · Live profile: <a href="index.html">index.html</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // ---- swatch generation: read live computed values from the cascade ----
+    const cs = () => getComputedStyle(document.documentElement);
+    const val = (v) => cs().getPropertyValue(v).trim();
+
+    const make = (id, items) => {
+      const host = document.getElementById(id);
+      host.innerHTML = items.map(([name, v]) => `
+        <div class="swatch">
+          <div class="chip" style="background:${v.startsWith('--') ? `var(${v})` : v}"></div>
+          <div class="meta"><div class="name">${name}</div><div class="var">${v}</div></div>
+        </div>`).join('');
+    };
+
+    const SURFACES = [['bg','--bg'],['bg-deep','--bg-deep'],['surface','--surface'],['surface-2','--surface-2'],['surface-deep','--surface-deep'],['border','--border'],['border-soft','--border-soft']];
+    const TEXT = [['fg-1','--fg-1'],['fg-2','--fg-2'],['fg-3','--fg-3'],['fg-on-accent','--fg-on-accent']];
+    const ACCENTS = [['accent','--accent'],['accent-hover','--accent-hover'],['accent-press','--accent-press'],['accent-2','--accent-2'],['accent-soft','--accent-soft'],['accent-glow','--accent-glow']];
+    const SEMANTIC = [['success','--success'],['danger','--danger'],['warning','--warning'],['info','--info']];
+
+    const TYPE = [
+      ['--fs-stat / 48','stat','Andy Freeman'],
+      ['--fs-hero / 44','h1','Production-grade AI systems'],
+      ['--fs-title / 32','h2','How the repositories compose'],
+      ['--fs-section / 24','h3','Flagship repositories'],
+      ['--fs-card / 18','h4','Agentic Runtime Platform'],
+      ['--fs-body / 16','p','Body copy uses the body scale at a 1.6 line-height for comfortable reading across long passages.'],
+      ['--fs-caption / 13','caption','Updated 12 min ago · UTC-5'],
+      ['--fs-eyebrow / 11','eyebrow','// SECTION LABEL'],
+    ];
+
+    const SPACING = [['--sp-xs','8'],['--sp-sm','16'],['--sp-md','24'],['--sp-lg','32'],['--sp-xl','48'],['--sp-2xl','64'],['--sp-3xl','80']];
+    const RADII = [['--radius-sm','3'],['--radius-md','4'],['--radius-lg','6'],['--radius-xl','10'],['--radius-pill','999']];
+
+    function renderType() {
+      document.getElementById('type').innerHTML = TYPE.map(([lbl, cls, txt]) => {
+        const tag = (cls === 'p' || cls === 'caption' || cls === 'eyebrow') ? 'p' : cls;
+        const extra = (cls === 'caption' || cls === 'eyebrow') ? ' ' + cls : '';
+        const style = cls === 'stat'
+          ? ' style="font-family:var(--font-display);font-weight:var(--fw-black);font-size:var(--fs-stat);line-height:1;color:var(--fg-1)"'
+          : '';
+        return `<div class="type-row"><span class="lbl">${lbl}</span><${tag} class="demo${extra}"${style}>${txt}</${tag}></div>`;
+      }).join('');
+    }
+
+    function renderSpacing() {
+      document.getElementById('spacing').innerHTML = SPACING.map(([v, px]) => `
+        <div><div class="spacer" style="width:var(${v})"></div><div class="spec">${v} · ${px}px</div></div>`).join('');
+    }
+    function renderRadius() {
+      document.getElementById('radius').innerHTML = RADII.map(([v]) => `
+        <div><div class="radius-box" style="border-radius:var(${v})"></div><div class="spec">${v}</div></div>`).join('');
+    }
+
+    function renderAll() {
+      make('surfaces', SURFACES); make('text', TEXT); make('accents', ACCENTS); make('semantic', SEMANTIC);
+      renderType(); renderSpacing(); renderRadius();
+    }
+
+    function wire(id, attr) {
+      const seg = document.getElementById(id);
+      seg.addEventListener('click', (e) => {
+        const b = e.target.closest('button'); if (!b) return;
+        document.documentElement.setAttribute(attr, b.dataset.v);
+        [...seg.children].forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+      });
+    }
+    wire('mode', 'data-mode'); wire('accent', 'data-accent');
+    renderAll();
+  </script>
+</body>
+</html>
