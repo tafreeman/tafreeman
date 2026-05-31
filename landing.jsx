@@ -320,15 +320,19 @@ function SiteFooter({ tweaks }) {
 // PAGE
 // ===================================================================
 function LandingPage() {
-  const [tweaks, setTweak] = window.useTweaks ? window.useTweaks(window.TWEAK_DEFAULTS) : [window.TWEAK_DEFAULTS, () => {}];
+  const [tweaks, setTweak] = window.useTweaks ? window.useTweaks(window.TWEAK_DEFAULTS) : [window.TWEAK_DEFAULTS || {}, () => {}];
 
   React.useEffect(() => {
     // Theme + accent live entirely in tokens.css. We only toggle the two
     // attributes the design system reads — no palette duplicated in JS.
     const root = document.documentElement;
-    root.setAttribute("data-mode", tweaks.mode);
-    root.setAttribute("data-accent", tweaks.accent);
-  }, [tweaks.accent, tweaks.mode]);
+    if (tweaks?.mode) {
+      root.setAttribute("data-mode", tweaks.mode);
+    }
+    if (tweaks?.accent) {
+      root.setAttribute("data-accent", tweaks.accent);
+    }
+  }, [tweaks?.accent, tweaks?.mode]);
 
   return (
     <div className="site" data-screen-label="tafreeman.github.io">

@@ -301,7 +301,7 @@ function RepoCard({ r }) {
   return (
     <a className="repo-card" href={r.url} target="_blank" rel="noopener">
       <div className="repo-head">
-        <div className="repo-mark">{r.title[0]}</div>
+        <div className="repo-mark">{r.title?.[0] || ""}</div>
         <div className="repo-head-text">
           <span className="repo-eyebrow">{r.eyebrow}</span>
           <p className="repo-name">{r.name}</p>
