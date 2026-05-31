@@ -128,10 +128,10 @@ function TopBar() {
         <span>Browse <span style={{color: 'var(--fg-2)'}}>tafreeman</span> repositories</span>
       </a>
       <nav className="gh-nav-links">
-        <a href="https://github.com/pulls">Pull requests</a>
-        <a href="https://github.com/issues">Issues</a>
-        <a href="https://github.com/explore">Explore</a>
         <a href={GH + "?tab=repositories"}>Repositories</a>
+        <a href={GH + "?tab=projects"}>Projects</a>
+        <a href={GH + "?tab=packages"}>Packages</a>
+        <a href="https://github.com/explore">Explore</a>
       </nav>
       <div className="gh-top-actions">
         <a className="gh-avatar-btn" href={GH} title="Andy Freeman on GitHub">AF</a>
