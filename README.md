@@ -33,6 +33,8 @@ Architect of **six interconnected repositories** spanning reusable LLM execution
 
 **Start here:** [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform) → [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
 
+AI-assisted development appears across the portfolio where it accelerates implementation; architecture, tests, and public releases remain under my review.
+
 ## The architecture, in one diagram
 
 Every project follows the same pattern — a deterministic, fully-tested core insulated from the non-determinism of LLMs, which sit at the interface boundary rather than in the critical path:
