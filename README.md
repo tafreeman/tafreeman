@@ -35,6 +35,7 @@ Architect of **six interconnected repositories** spanning reusable LLM execution
 
 AI-assisted development appears across the portfolio where it accelerates implementation; architecture, tests, and public releases remain under my review.
 
+
 ## The architecture, in one diagram
 
 Every project follows the same pattern — a deterministic, fully-tested core insulated from the non-determinism of LLMs, which sit at the interface boundary rather than in the critical path:
