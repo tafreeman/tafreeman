@@ -95,7 +95,7 @@ function Hero() {
         </h1>
 
         <p className="hero-lede">
-          Shipped with the discipline of platform infrastructure. Reusable LLM execution
+          15+ years shipping production systems. Reusable LLM execution
           primitives, multi-agent orchestration, deterministic business apps with AI
           interfaces, QA enablement, and architecture comms.
         </p>

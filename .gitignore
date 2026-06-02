@@ -21,3 +21,11 @@ review/
 heroreview/
 assetcap/
 cardpng/
+
+# Design-tool outputs & local dev artifacts
+GitHub ID Images.html
+GitHub ID Images-print.html
+Landing Page.html
+avatars/
+design-canvas.jsx
+export.html

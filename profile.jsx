@@ -257,6 +257,10 @@ function ReadmeBanner() {
         Architect of six interconnected repositories spanning reusable LLM execution primitives, multi-agent orchestration platforms, deterministic business apps with AI interfaces, QA enablement, and architecture communication tooling.
       </p>
 
+      <p className="readme-sub" style={{marginTop: '0.5rem', color: 'var(--fg-2)'}}>
+        15+ years shipping production systems — from platform infrastructure to AI-native tooling.
+      </p>
+
       <div className="readme-stats">
         <div className="r-stat">
           <span className="v accent">6</span>
