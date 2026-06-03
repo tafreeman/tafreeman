@@ -16,9 +16,6 @@
 
 # Andy Freeman · `@tafreeman`
 
-he / him
-
-![Based](https://img.shields.io/badge/Mobile,_AL_→_Lake_Mary,_FL-101018?style=flat-square)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-andy--freeman--architect-d97757?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andy-freeman-architect/)
 [![Email](https://img.shields.io/badge/email-tandfreeman@gmail.com-101018?style=flat-square&logo=gmail&logoColor=d97757)](mailto:tandfreeman@gmail.com)
 
@@ -99,8 +96,7 @@ The interactive, fully-styled version of this graph lives on the portfolio site 
 
 <div align="center">
 
-**Open to Principal / Staff AI engineering and AI solutions-architecture roles.**
-
-Reach me at **[tandfreeman@gmail.com](mailto:tandfreeman@gmail.com)** or on **[LinkedIn](https://www.linkedin.com/in/andy-freeman-architect/)**.
+**AI engineering and AI solutions-architecture.**
+**[LinkedIn](https://www.linkedin.com/in/andy-freeman-architect/)**.
 
 </div>
