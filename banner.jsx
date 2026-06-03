@@ -31,10 +31,10 @@ function HeroBanner({ mode = "vector", art }) {
           <div className="sc-tb-right"><span className="sc-tb-tag">~/portfolio</span></div>
         </div>
         <div className="hb-cine-body">
-          <span className="hb-eyebrow">AI ARCHITECTURE · MOBILE, AL</span>
+          <span className="hb-eyebrow">AI ENGINEERING · MOBILE, AL</span>
           <h1 className="hb-name">Andy <span className="accent">Freeman</span></h1>
           <p className="hb-handle"><span className="at">$</span> whoami → @tafreeman</p>
-          <p className="hb-tagline">Production-grade AI engineering systems, shipped with the discipline of platform infrastructure.</p>
+          <p className="hb-tagline">AI engineering systems — LLM primitives, multi-agent orchestration, deterministic apps.</p>
           <div className="hb-chips">
             <span className="hb-chip"><span className="cdot" />6 interconnected repos</span>
             <span className="hb-chip"><span className="cdot" style={{ background: "#3776ab" }} />Python</span>
@@ -57,10 +57,10 @@ function HeroBanner({ mode = "vector", art }) {
 
       <div className="hb-body">
         <div className="hb-left">
-          <span className="hb-eyebrow">AI ARCHITECTURE · MOBILE, AL</span>
+          <span className="hb-eyebrow">AI ENGINEERING · MOBILE, AL</span>
           <h1 className="hb-name">Andy <span className="accent">Freeman</span></h1>
           <p className="hb-handle"><span className="at">$</span> whoami → @tafreeman · he/him</p>
-          <p className="hb-tagline">Production-grade AI engineering systems, shipped with the discipline of platform infrastructure.</p>
+          <p className="hb-tagline">AI engineering systems — LLM primitives, multi-agent orchestration, deterministic apps.</p>
           <div className="hb-chips">
             <span className="hb-chip"><span className="cdot" />6 interconnected repos</span>
             <span className="hb-chip"><span className="cdot" style={{ background: "#3776ab" }} />Python</span>

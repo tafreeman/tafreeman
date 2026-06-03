@@ -71,7 +71,7 @@ const REPOS = [
     id: "tafreeman",
     eyebrow: "PORTFOLIO HUB",
     name: "tafreeman",
-    tagline: "Production-grade AI engineering systems, shipped with the discipline of platform infrastructure.",
+    tagline: "AI engineering systems — LLM primitives, multi-agent orchestration, deterministic apps.",
     cmd: "whoami → tafreeman",
     glyph: "astro-cat",
     lang: "Andy Freeman", langColor: "#d97757", langPlain: true,

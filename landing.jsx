@@ -85,19 +85,14 @@ function Hero() {
         <div className="glow two"></div>
       </div>
       <div className="wrap">
-        <div className="hero-status">
-          <span className="dot"></span>
-          <span>Available · senior AI architecture · Q3 2026</span>
-        </div>
-
         <h1 className="hero-h1">
-          Production-grade <span className="accent glow-text">AI engineering</span> systems.
+          <span className="accent glow-text">AI engineering</span> systems.
         </h1>
 
         <p className="hero-lede">
-          15+ years shipping production systems. Reusable LLM execution
-          primitives, multi-agent orchestration, deterministic business apps with AI
-          interfaces, QA enablement, and architecture comms.
+          Reusable LLM execution primitives, multi-agent orchestration,
+          deterministic business apps with AI interfaces, QA enablement,
+          and architecture comms.
         </p>
 
         <div className="hero-term">
@@ -250,11 +245,9 @@ function NowStrip() {
           <div className="now-block">
             <div className="now-label">$ status</div>
             <div className="now-log">
-              <div><span className="k">open to:</span> <span className="v accent">senior AI architecture engagements</span></div>
-              <div><span className="k">booking:</span> <span className="v">Q3 2026</span></div>
+              <div><span className="k">open to:</span> <span className="v accent">Principal / Staff AI eng · solutions arch</span></div>
               <div><span className="k">based:</span> <span className="v">Mobile, AL · Lake Mary, FL (Orlando metro)</span></div>
               <div><span className="k">building:</span> <span className="v">agentic runtimes · LLM execution primitives</span></div>
-              <div><span className="k">status:</span> <span className="green">▲ available for senior engagements · Q3 2026</span></div>
             </div>
           </div>
           <div className="now-block lang-block">
@@ -287,8 +280,8 @@ function Contact() {
       <div className="contact-glow" aria-hidden="true"></div>
       <div className="wrap">
         <span className="eyebrow">// Get in touch</span>
-        <h2>Available for senior AI<br />architecture engagements.</h2>
-        <p>Reusable LLM primitives, multi-agent platforms, and the architecture comms to ship them. Currently booking Q3 2026.</p>
+        <h2>Get in touch.</h2>
+        <p>tandfreeman@gmail.com · open to Principal / Staff AI engineering and AI solutions-architecture roles.</p>
         <div className="contact-cta">
           <a className="btn primary" href={`mailto:${EMAIL}`}><Icon name="mail" size={15} /> {EMAIL}</a>
           <a className="btn ghost" href="https://www.linkedin.com/in/andy-freeman-architect/" target="_blank" rel="noopener"><Icon name="linkedin" size={15} /> LinkedIn</a>

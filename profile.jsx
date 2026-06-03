@@ -169,17 +169,17 @@ function Sidebar() {
     <aside className="sidebar">
       <div className="sb-avatar">
         <span className="glyph">af</span>
-        <span className="status-dot" title="Available for senior AI architecture engagements"></span>
+        <span className="status-dot"></span>
       </div>
 
       <div className="sb-id">
         <h1 className="name">Andy Freeman</h1>
         <p className="handle">tafreeman</p>
-        <p className="pronouns">he / him · architect</p>
+        <p className="pronouns">he / him</p>
       </div>
 
       <p className="sb-tagline">
-        Production-grade AI engineering systems. Reusable LLM primitives, multi-agent orchestration, deterministic business apps with AI interfaces.
+        AI engineering systems — LLM primitives, multi-agent orchestration, deterministic apps with AI interfaces.
       </p>
 
       <div className="sb-cta">
@@ -213,9 +213,8 @@ function Sidebar() {
       <div>
         <div className="sb-section-h">Status</div>
         <div className="now-card">
-          <div className="label">Availability</div>
-          <div className="line"><span className="k">open to:</span> senior AI architecture</div>
-          <div className="line"><span className="k">booking:</span> Q3 2026</div>
+          <div className="label">Open to work</div>
+          <div className="line"><span className="k">roles:</span> Principal / Staff AI eng · solutions arch</div>
           <div className="line"><span className="k">repos:</span> 6 public · interconnected</div>
         </div>
       </div>
@@ -244,21 +243,12 @@ function ReadmeBanner() {
         </div>
       </div>
 
-      <div className="readme-eyebrow">
-        <span className="dot"></span>
-        <span>Available for senior AI architecture engagements · Q3 2026</span>
-      </div>
-
       <h1 className="readme-title">
-        Production-grade <span className="accent">AI engineering systems</span>, shipped with the discipline of platform infrastructure.
+        <span className="accent">AI engineering systems</span> — six interconnected repos.
       </h1>
 
       <p className="readme-sub">
-        Architect of six interconnected repositories spanning reusable LLM execution primitives, multi-agent orchestration platforms, deterministic business apps with AI interfaces, QA enablement, and architecture communication tooling.
-      </p>
-
-      <p className="readme-sub" style={{marginTop: '0.5rem', color: 'var(--fg-2)'}}>
-        15+ years shipping production systems — from platform infrastructure to AI-native tooling.
+        LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, QA tooling, and architecture comms.
       </p>
 
       <div className="readme-stats">

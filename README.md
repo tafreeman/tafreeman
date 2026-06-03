@@ -12,13 +12,12 @@
 
 <div align="center">
 
-[![tafreeman — production-grade AI engineering systems](social-previews/hero-vector.png)](https://tafreeman.github.io/tafreeman/)
+[![tafreeman — AI engineering portfolio](social-previews/hero-vector.png)](https://tafreeman.github.io/tafreeman/)
 
 # Andy Freeman · `@tafreeman`
 
-**Principal AI & Software Engineering Architect** · he / him
+he / him
 
-![Available](https://img.shields.io/badge/available-senior_AI_architecture_·_Q3_2026-d97757?style=flat-square)
 ![Based](https://img.shields.io/badge/Mobile,_AL_→_Lake_Mary,_FL-101018?style=flat-square)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-andy--freeman--architect-d97757?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andy-freeman-architect/)
 [![Email](https://img.shields.io/badge/email-tandfreeman@gmail.com-101018?style=flat-square&logo=gmail&logoColor=d97757)](mailto:tandfreeman@gmail.com)
@@ -27,9 +26,7 @@
 
 ---
 
-> **Production-grade AI engineering systems, shipped with the discipline of platform infrastructure.**
-
-Architect of **six interconnected repositories** spanning reusable LLM execution primitives, multi-agent orchestration platforms, deterministic business apps with AI interfaces, QA enablement, and architecture communication tooling. Built on a foundation of enterprise and federal systems delivery, now focused on AI-native architecture — systems that pair deterministic, auditable cores with LLM-driven interfaces.
+Six interconnected repositories: reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, QA tooling, and architecture comms. Each pairs a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path.
 
 **Start here:** [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform) → [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
 
