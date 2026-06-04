@@ -59,7 +59,7 @@ const REPOS = [
     name: "qa-automation-academy",
     eyebrow: "ENABLEMENT",
     title: "QA Automation Academy",
-    desc: "Playwright + GitHub Copilot training platform — 53 interactive modules, a practice app with intentional bugs, and 59 reference specs that move manual QA engineers to automated testing.",
+    desc: "Playwright + GitHub Copilot training platform — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs that move manual QA engineers to automated testing.",
     lang: "TypeScript", langClass: "lang-ts",
     status: "WIP", statusClass: "",
     url: "https://tafreeman.github.io/qa-automation-academy/",
