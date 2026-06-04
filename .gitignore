@@ -12,6 +12,10 @@ Thumbs.db
 # Dependencies
 node_modules/
 
+# Playwright E2E artifacts
+playwright-report/
+test-results/
+
 # Local tooling & design scratch (not part of the published Pages site)
 .claude/
 .design-canvas.state.json
