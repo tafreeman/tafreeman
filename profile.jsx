@@ -7,16 +7,7 @@
 // Repo + language data is the single source of truth in repo-data.jsx, which
 // MUST be loaded (as <script type="text/babel" src="repo-data.jsx">) BEFORE
 // this file. profile.jsx consumes the rich fields (eyebrow/title/desc/etc.).
-const { GH, REPOS, LANGS } = window.PORTFOLIO;
-
-// Gate the dev/edit TweaksPanel: only on localhost or with an explicit ?tweaks
-// flag. Hidden on the public github.io site.
-const SHOW_TWEAKS = (() => {
-  try {
-    if (new URLSearchParams(location.search).has('tweaks')) return true;
-    return /^(localhost|127\.0\.0\.1|\[?::1\]?)$/.test(location.hostname);
-  } catch (e) { return false; }
-})();
+const { GH, REPOS, LANGS, SHOW_TWEAKS } = window.PORTFOLIO;
 
 // --- icons (lightweight inline SVGs) ---
 const Icon = ({ name, size = 14 }) => {
