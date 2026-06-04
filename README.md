@@ -61,7 +61,7 @@ flowchart LR
 
 ## The six systems
 
-Each repository has its own styled GitHub Pages site (links below). All are public; none are archived.
+Each repository has its own styled GitHub Pages site (links below). These are the public canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
 
 | System | What it is | Stack | Live |
 |---|---|---|---|

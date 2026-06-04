@@ -51,7 +51,7 @@ const REPOS = [
     id: "qa-automation-academy",
     eyebrow: "ENABLEMENT",
     name: "qa-automation-academy",
-    tagline: "Playwright + Copilot training — 53 interactive modules and a practice app with intentional bugs that move QA teams from manual to automated testing.",
+    tagline: "Playwright + Copilot training — 49 interactive modules and a practice app with intentional bugs that move QA teams from manual to automated testing.",
     cmd: "pnpm dev",
     glyph: "rocket-check",
     lang: "TypeScript", langColor: "#3178c6",
