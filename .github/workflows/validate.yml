@@ -23,3 +23,8 @@ jobs:
         run: npm run validate:jsx
       - name: Validate HTML
         run: npm run validate:html
+      - name: Check links
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress --accept 301,302 '**/*.md' '**/*.html' '**/*.jsx'
+          fail: true
