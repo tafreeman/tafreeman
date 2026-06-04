@@ -16,8 +16,9 @@
 
 # Andy Freeman · `@tafreeman`
 
+[![Validate](https://github.com/tafreeman/tafreeman/actions/workflows/validate.yml/badge.svg)](https://github.com/tafreeman/tafreeman/actions/workflows/validate.yml)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-andy--freeman--architect-d97757?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andy-freeman-architect/)
-[![Email](https://img.shields.io/badge/email-tandfreeman@gmail.com-101018?style=flat-square&logo=gmail&logoColor=d97757)](mailto:tandfreeman@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-tafreeman-d97757?style=flat-square&logo=github&logoColor=white)](https://github.com/tafreeman)
 
 </div>
 
@@ -61,7 +62,7 @@ flowchart LR
 
 ## The six systems
 
-Each repository has its own styled GitHub Pages site (links below). These are the public canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
+Most repositories have their own styled GitHub Pages site; the research lab links to its repo only. These are the public canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
 
 | System | What it is | Stack | Live |
 |---|---|---|---|
@@ -91,6 +92,26 @@ Primitives flow upward into platforms; platforms emit telemetry into research an
 - **L0 · R&D** — `Agentic Systems Lab` (security · evals · prototypes upstreamed into the platform)
 
 The interactive, fully-styled version of this graph lives on the portfolio site → **[tafreeman.github.io/tafreeman](https://tafreeman.github.io/tafreeman/)**
+
+---
+
+## Develop / run locally
+
+Reproduce the CI validation gate (JSX-syntax check + HTML validation) in under two minutes:
+
+```sh
+npm ci
+npm run validate
+```
+
+Serve the site locally and open the canonical portfolio entry:
+
+```sh
+python -m http.server 8099
+# then open → http://localhost:8099/index.html
+```
+
+`index.html` is the canonical GitHub Pages entry (served at `https://tafreeman.github.io/tafreeman/`).
 
 ---
 
