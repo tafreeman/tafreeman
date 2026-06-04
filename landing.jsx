@@ -3,33 +3,27 @@
    the live GitHub account and each repo's README. No fabricated metrics
    (stars, commit counts, contribution heat) appear here. */
 
-const GH = "https://github.com/tafreeman";
-
-// Six real repos. img = on-brand social card (regenerated with real data);
-// url = primary destination (live Pages where published, else the repo).
-const REPOS = [
-  { id: "agentic-runtime-platform", name: "agentic-runtime-platform", img: "social-previews/agentic-runtime-platform.png", url: "https://tafreeman.github.io/agentic-runtime-platform/" },
-  { id: "executionkit",             name: "executionkit",             img: "social-previews/executionkit.png",             url: "https://tafreeman.github.io/executionkit/" },
-  { id: "financial-scenario-engine",name: "financial-scenario-engine",img: "social-previews/financial-scenario-engine.png", url: "https://tafreeman.github.io/financial-scenario-engine/" },
-  { id: "architecture-deck-system", name: "architecture-deck-system", img: "social-previews/architecture-deck-system.png", url: "https://tafreeman.github.io/architecture-deck-system/" },
-  { id: "qa-automation-academy",    name: "qa-automation-academy",    img: "social-previews/qa-automation-academy.png",    url: "https://tafreeman.github.io/qa-automation-academy/" },
-  { id: "agentic-systems-lab",      name: "agentic-systems-lab",      img: "social-previews/agentic-systems-lab.png",      url: GH + "/agentic-systems-lab" },
-];
-
-// Real primary-language split across the six repos (3 Python, 3 TypeScript).
-const LANGS = [
-  { name: "Python",     pct: 50, color: "#3776ab" },
-  { name: "TypeScript", pct: 50, color: "#3178c6" },
-];
+// Repo + language data is the single source of truth in repo-data.jsx, which
+// MUST be loaded (as <script type="text/babel" src="repo-data.jsx">) BEFORE
+// this file. landing.jsx only needs {id,name,img,url}; the richer objects work
+// directly (extra fields are harmless).
+const { GH, REPOS, LANGS } = window.PORTFOLIO;
 
 const DECKS = "https://tafreeman.github.io/architecture-deck-system/";
-const EMAIL = "tandfreeman@gmail.com";
+
+// Gate the dev/edit TweaksPanel: only on localhost or with an explicit ?tweaks
+// flag. Hidden on the public github.io site.
+const SHOW_TWEAKS = (() => {
+  try {
+    if (new URLSearchParams(location.search).has('tweaks')) return true;
+    return /^(localhost|127\.0\.0\.1|\[?::1\]?)$/.test(location.hostname);
+  } catch (e) { return false; }
+})();
 
 // --- lightweight inline icons ---
 const Icon = ({ name, size = 14 }) => {
   const paths = {
     "arrow": <><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></>,
-    "mail": <><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></>,
     "github": <><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></>,
     "linkedin": <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></>,
   };
@@ -67,7 +61,7 @@ function SiteNav() {
           <a href="#now">Now</a>
           <a href={DECKS} className="ext" target="_blank" rel="noopener">Decks</a>
         </div>
-        <a className="nav-cta" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <a className="nav-cta" href={GH} target="_blank" rel="noopener">github.com/tafreeman</a>
       </div>
     </nav>
   );
@@ -281,11 +275,10 @@ function Contact() {
       <div className="wrap">
         <span className="eyebrow">// Get in touch</span>
         <h2>Get in touch.</h2>
-        <p>tandfreeman@gmail.com · open to Principal / Staff AI engineering and AI solutions-architecture roles.</p>
+        <p>Open to Principal / Staff AI engineering and AI solutions-architecture roles.</p>
         <div className="contact-cta">
-          <a className="btn primary" href={`mailto:${EMAIL}`}><Icon name="mail" size={15} /> {EMAIL}</a>
+          <a className="btn primary" href={GH} target="_blank" rel="noopener"><Icon name="github" size={15} /> github.com/tafreeman</a>
           <a className="btn ghost" href="https://www.linkedin.com/in/andy-freeman-architect/" target="_blank" rel="noopener"><Icon name="linkedin" size={15} /> LinkedIn</a>
-          <a className="btn ghost" href={GH} target="_blank" rel="noopener"><Icon name="github" size={15} /> github.com/tafreeman</a>
         </div>
       </div>
     </section>
@@ -301,7 +294,6 @@ function SiteFooter({ tweaks }) {
           <a href={GH} target="_blank" rel="noopener">GitHub</a>
           <a href="https://www.linkedin.com/in/andy-freeman-architect/" target="_blank" rel="noopener">LinkedIn</a>
           <a href={DECKS} target="_blank" rel="noopener">Decks</a>
-          <a href={`mailto:${EMAIL}`}>Email</a>
         </div>
         <span>{tweaks.mode} · {tweaks.accent}</span>
       </div>
@@ -337,7 +329,7 @@ function LandingPage() {
       <Contact />
       <SiteFooter tweaks={tweaks} />
 
-      {window.TweaksPanel && (
+      {SHOW_TWEAKS && window.TweaksPanel && (
         <window.TweaksPanel title="Tweaks">
           <window.TweakSection title="Theme">
             <window.TweakRadio label="Mode" value={tweaks.mode}

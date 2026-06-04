@@ -4,86 +4,10 @@
    No star/fork/contribution/achievement metrics are shown because none are
    real (all six repos currently sit at 0 stars / 0 forks / no releases). */
 
-const GH = "https://github.com/tafreeman";
-
-// Six real, public, non-archived repositories. `url` is the primary
-// destination (live Pages where published, repo otherwise); `repo` is always
-// the GitHub source. Descriptions and language are pulled from each repo.
-const REPOS = [
-  {
-    id: "agentic-runtime-platform",
-    name: "agentic-runtime-platform",
-    eyebrow: "PLATFORM",
-    title: "Agentic Runtime Platform",
-    desc: "Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across 8+ providers, failover, evaluation, and live observability.",
-    lang: "Python", langClass: "lang-py",
-    status: "ACTIVE", statusClass: "",
-    url: "https://tafreeman.github.io/agentic-runtime-platform/",
-    repo: GH + "/agentic-runtime-platform",
-  },
-  {
-    id: "executionkit",
-    name: "executionkit",
-    eyebrow: "LIBRARY",
-    title: "ExecutionKit",
-    desc: "Provider-agnostic Python library for composable LLM execution patterns — consensus, refinement, ReAct tool loops, structured output, and budget-aware calls. Zero runtime deps.",
-    lang: "Python", langClass: "lang-py",
-    status: "v0.1.0", statusClass: "",
-    url: "https://tafreeman.github.io/executionkit/",
-    repo: GH + "/executionkit",
-  },
-  {
-    id: "financial-scenario-engine",
-    name: "financial-scenario-engine",
-    eyebrow: "APPLIED AI",
-    title: "Financial Scenario Engine",
-    desc: "Local-first financial scenario analysis — a deterministic TypeScript engine produces every number; the LLM only parses intent and narrates. SQLite-backed, GitHub Models or local Ollama.",
-    lang: "TypeScript", langClass: "lang-ts",
-    status: "BETA", statusClass: "beta",
-    url: "https://tafreeman.github.io/financial-scenario-engine/",
-    repo: GH + "/financial-scenario-engine",
-  },
-  {
-    id: "architecture-deck-system",
-    name: "architecture-deck-system",
-    eyebrow: "COMMUNICATION",
-    title: "Architecture Deck System",
-    desc: "React 19 + Vite presentation platform — 34 registered layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.",
-    lang: "TypeScript", langClass: "lang-ts",
-    status: "LIVE", statusClass: "live",
-    url: "https://tafreeman.github.io/architecture-deck-system/",
-    repo: GH + "/architecture-deck-system",
-  },
-  {
-    id: "qa-automation-academy",
-    name: "qa-automation-academy",
-    eyebrow: "ENABLEMENT",
-    title: "QA Automation Academy",
-    desc: "Playwright + GitHub Copilot training platform — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs that move manual QA engineers to automated testing.",
-    lang: "TypeScript", langClass: "lang-ts",
-    status: "WIP", statusClass: "",
-    url: "https://tafreeman.github.io/qa-automation-academy/",
-    repo: GH + "/qa-automation-academy",
-  },
-  {
-    id: "agentic-systems-lab",
-    name: "agentic-systems-lab",
-    eyebrow: "R&D",
-    title: "Agentic Systems Lab",
-    desc: "Research and prototyping companion to the runtime platform — runnable workflow examples, security-hardening sprints, evaluation patterns, and orchestration ideas before they upstream.",
-    lang: "Python", langClass: "lang-py",
-    status: "R&D", statusClass: "beta",
-    // Pages not yet enabled — links to the repo until the Phase 3 PR lands.
-    url: GH + "/agentic-systems-lab",
-    repo: GH + "/agentic-systems-lab",
-  },
-];
-
-// Real primary-language split across the six pinned repos (3 Python, 3 TypeScript).
-const LANGS = [
-  { name: "Python",     pct: 50, color: "#3776ab" },
-  { name: "TypeScript", pct: 50, color: "#3178c6" },
-];
+// Repo + language data is the single source of truth in repo-data.jsx, which
+// MUST be loaded (as <script type="text/babel" src="repo-data.jsx">) BEFORE
+// this file. profile.jsx consumes the rich fields (eyebrow/title/desc/etc.).
+const { GH, REPOS, LANGS, SHOW_TWEAKS } = window.PORTFOLIO;
 
 // --- icons (lightweight inline SVGs) ---
 const Icon = ({ name, size = 14 }) => {
@@ -99,7 +23,6 @@ const Icon = ({ name, size = 14 }) => {
     "package": <><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></>,
     "map-pin": <><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></>,
     "link": <><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></>,
-    "mail": <><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></>,
     "linkedin": <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></>,
     "ext": <><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></>,
     "lightning": <><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></>,
@@ -189,7 +112,7 @@ function Sidebar() {
       <div className="sb-meta">
         <div className="sb-meta-row"><Icon name="map-pin" size={14} /><span>Mobile, AL · works out of Lake Mary, FL</span></div>
         <div className="sb-meta-row"><Icon name="linkedin" size={14} /><a href="https://www.linkedin.com/in/andy-freeman-architect/" target="_blank" rel="noopener">in/andy-freeman-architect</a></div>
-        <div className="sb-meta-row"><Icon name="mail" size={14} /><a href="mailto:tandfreeman@gmail.com" style={{fontFamily: 'var(--font-mono)', fontSize: 12}}>tandfreeman@gmail.com</a></div>
+        <div className="sb-meta-row"><Icon name="link" size={14} /><a href={GH} target="_blank" rel="noopener" style={{fontFamily: 'var(--font-mono)', fontSize: 12}}>github.com/tafreeman</a></div>
       </div>
 
       <div>
@@ -438,7 +361,7 @@ function ProfilePage() {
         <span>tokens: <span style={{color: 'var(--accent)'}}>{tweaks.accent}</span> · mode: {tweaks.mode}</span>
       </footer>
 
-      {window.TweaksPanel && (
+      {SHOW_TWEAKS && window.TweaksPanel && (
         <window.TweaksPanel title="Tweaks">
           <window.TweakSection label="Theme">
             <window.TweakRadio label="Mode" value={tweaks.mode}

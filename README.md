@@ -16,8 +16,9 @@
 
 # Andy Freeman · `@tafreeman`
 
+[![Validate](https://github.com/tafreeman/tafreeman/actions/workflows/validate.yml/badge.svg)](https://github.com/tafreeman/tafreeman/actions/workflows/validate.yml)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-andy--freeman--architect-d97757?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andy-freeman-architect/)
-[![Email](https://img.shields.io/badge/email-tandfreeman@gmail.com-101018?style=flat-square&logo=gmail&logoColor=d97757)](mailto:tandfreeman@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-tafreeman-d97757?style=flat-square&logo=github&logoColor=white)](https://github.com/tafreeman)
 
 </div>
 
@@ -59,13 +60,15 @@ flowchart LR
     Core -->|"structured logs, traces, reproducible runs"| Obs
 ```
 
+<sub>The Observability edge is real, not aspirational: workflow and agent spans are emitted through [OpenTelemetry](https://github.com/tafreeman/agentic-runtime-platform/blob/main/agentic-workflows-v2/agentic_v2/integrations/otel.py) and exported via an [OTLP collector to Jaeger](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml), with structured logs and reproducible run artifacts alongside.</sub>
+
 ## The six systems
 
-Each repository has its own styled GitHub Pages site (links below). These are the public canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
+Most repositories have their own styled GitHub Pages site; the research lab links to its repo only. These are the public canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
 
 | System | What it is | Stack | Live |
 |---|---|---|---|
-| **[Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/)** · `PLATFORM` | Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across 8+ providers, failover, evaluation, and live observability. | Python | [docs ↗](https://tafreeman.github.io/agentic-runtime-platform/) · [repo ↗](https://github.com/tafreeman/agentic-runtime-platform) |
+| **[Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/)** · `PLATFORM` | Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across 8+ providers, failover, [evaluation](https://github.com/tafreeman/agentic-runtime-platform/blob/main/docs/architecture-eval.md), and [live observability](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml). | Python | [docs ↗](https://tafreeman.github.io/agentic-runtime-platform/) · [repo ↗](https://github.com/tafreeman/agentic-runtime-platform) |
 | **[ExecutionKit](https://tafreeman.github.io/executionkit/)** · `LIBRARY` | Provider-agnostic LLM execution primitives — consensus, refinement, ReAct tool loops, structured output, budget-aware calls. Zero runtime dependencies. | Python | [docs ↗](https://tafreeman.github.io/executionkit/) · [repo ↗](https://github.com/tafreeman/executionkit) |
 | **[Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/)** · `APPLIED AI` | Local-first project finance — a deterministic TypeScript engine produces every number; the LLM only parses intent and narrates. SQLite-backed, GitHub Models or local Ollama. | TypeScript | [site ↗](https://tafreeman.github.io/financial-scenario-engine/) · [repo ↗](https://github.com/tafreeman/financial-scenario-engine) |
 | **[Architecture Deck System](https://tafreeman.github.io/architecture-deck-system/)** · `COMMUNICATION` | React 19 + Vite presentation platform — 34 layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export. | TypeScript | [site ↗](https://tafreeman.github.io/architecture-deck-system/) · [repo ↗](https://github.com/tafreeman/architecture-deck-system) |
@@ -91,6 +94,26 @@ Primitives flow upward into platforms; platforms emit telemetry into research an
 - **L0 · R&D** — `Agentic Systems Lab` (security · evals · prototypes upstreamed into the platform)
 
 The interactive, fully-styled version of this graph lives on the portfolio site → **[tafreeman.github.io/tafreeman](https://tafreeman.github.io/tafreeman/)**
+
+---
+
+## Develop / run locally
+
+Reproduce the CI validation gate (JSX-syntax check + HTML validation) in under two minutes:
+
+```sh
+npm ci
+npm run validate
+```
+
+Serve the site locally and open the canonical portfolio entry:
+
+```sh
+python -m http.server 8099
+# then open → http://localhost:8099/index.html
+```
+
+`index.html` is the canonical GitHub Pages entry (served at `https://tafreeman.github.io/tafreeman/`).
 
 ---
 
