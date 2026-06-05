@@ -5,9 +5,10 @@
    real (all six repos currently sit at 0 stars / 0 forks / no releases). */
 
 // Repo + language data is the single source of truth in repo-data.jsx, which
-// MUST be loaded (as <script type="text/babel" src="repo-data.jsx">) BEFORE
+// MUST be loaded (as <script src="repo-data.jsx">) BEFORE
 // this file. profile.jsx consumes the rich fields (eyebrow/title/desc/etc.).
-const { GH, REPOS, LANGS } = window.PORTFOLIO;
+const { REPOS, LANGS } = window.PORTFOLIO;
+const PROFILE_GH = window.PORTFOLIO.GH;
 
 // Gate the dev/edit TweaksPanel: only on localhost or with an explicit ?tweaks
 // flag. Hidden on the public github.io site.
@@ -55,18 +56,18 @@ function TopBar() {
           <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
         </svg>
       </div>
-      <a className="gh-search" href={GH + "?tab=repositories"}>
+      <a className="gh-search" href={PROFILE_GH + "?tab=repositories"}>
         <Icon name="search" size={14} />
         <span>Browse <span style={{color: 'var(--fg-2)'}}>tafreeman</span> repositories</span>
       </a>
       <nav className="gh-nav-links">
-        <a href={GH + "?tab=repositories"}>Repositories</a>
-        <a href={GH + "?tab=projects"}>Projects</a>
-        <a href={GH + "?tab=packages"}>Packages</a>
+        <a href={PROFILE_GH + "?tab=repositories"}>Repositories</a>
+        <a href={PROFILE_GH + "?tab=projects"}>Projects</a>
+        <a href={PROFILE_GH + "?tab=packages"}>Packages</a>
         <a href="https://github.com/explore">Explore</a>
       </nav>
       <div className="gh-top-actions">
-        <a className="gh-avatar-btn" href={GH} title="Andy Freeman on GitHub">AF</a>
+        <a className="gh-avatar-btn" href={PROFILE_GH} title="Andy Freeman on GitHub">AF</a>
       </div>
     </div>
   );
@@ -76,9 +77,9 @@ function ProfileTabs({ active = "Overview" }) {
   // Counts shown only where verified. 7 = real public repo count
   // (tafreeman hub + the six project repos). No fabricated star/package counts.
   const tabs = [
-    { name: "Overview", icon: "book", href: GH },
-    { name: "Repositories", icon: "git-fork", count: 7, href: GH + "?tab=repositories" },
-    { name: "Stars", icon: "star", href: GH + "?tab=stars" },
+    { name: "Overview", icon: "book", href: PROFILE_GH },
+    { name: "Repositories", icon: "git-fork", count: 7, href: PROFILE_GH + "?tab=repositories" },
+    { name: "Stars", icon: "star", href: PROFILE_GH + "?tab=stars" },
   ];
   return (
     <div className="profile-tabs">
@@ -115,13 +116,13 @@ function Sidebar() {
       </p>
 
       <div className="sb-cta">
-        <a className="sb-btn primary" href={GH} target="_blank" rel="noopener"><Icon name="users" size={13} /> Follow on GitHub</a>
+        <a className="sb-btn primary" href={PROFILE_GH} target="_blank" rel="noopener"><Icon name="users" size={13} /> Follow on GitHub</a>
       </div>
 
       <div className="sb-meta">
         <div className="sb-meta-row"><Icon name="map-pin" size={14} /><span>Mobile, AL · works out of Lake Mary, FL</span></div>
         <div className="sb-meta-row"><Icon name="linkedin" size={14} /><a href="https://www.linkedin.com/in/andy-freeman-architect/" target="_blank" rel="noopener">in/andy-freeman-architect</a></div>
-        <div className="sb-meta-row"><Icon name="link" size={14} /><a href={GH} target="_blank" rel="noopener" style={{fontFamily: 'var(--font-mono)', fontSize: 12}}>github.com/tafreeman</a></div>
+        <div className="sb-meta-row"><Icon name="link" size={14} /><a href={PROFILE_GH} target="_blank" rel="noopener" style={{fontFamily: 'var(--font-mono)', fontSize: 12}}>github.com/tafreeman</a></div>
       </div>
 
       <div>
@@ -171,7 +172,7 @@ function ReadmeBanner() {
           <span className="file">README.md</span>
         </div>
         <div className="readme-actions">
-          <a className="readme-action-btn" href={GH + "/tafreeman"} target="_blank" rel="noopener" title="Open repository"><Icon name="ext" size={13} /></a>
+          <a className="readme-action-btn" href={PROFILE_GH + "/tafreeman"} target="_blank" rel="noopener" title="Open repository"><Icon name="ext" size={13} /></a>
         </div>
       </div>
 
@@ -214,7 +215,7 @@ function PinnedGrid() {
       <div className="section-h2">
         <span className="eyebrow">// Pinned</span>
         <h2>The six systems</h2>
-        <span className="right"><a href={GH + "?tab=repositories"} target="_blank" rel="noopener">All repositories →</a></span>
+        <span className="right"><a href={PROFILE_GH + "?tab=repositories"} target="_blank" rel="noopener">All repositories →</a></span>
       </div>
       <div className="pinned-grid">
         {REPOS.map(r => <RepoCard key={r.id} r={r} />)}
