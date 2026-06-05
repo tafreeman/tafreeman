@@ -6,19 +6,9 @@
 // Repo + language data is the single source of truth in repo-data.jsx, which
 // MUST be loaded (as <script type="text/babel" src="repo-data.jsx">) BEFORE
 // this file. landing.jsx only needs {id,name,img,url}; the richer objects work
-// directly (extra fields are harmless).
-const { GH, REPOS, LANGS } = window.PORTFOLIO;
+const { GH, REPOS, LANGS, SHOW_TWEAKS } = window.PORTFOLIO || {};
 
 const DECKS = "https://tafreeman.github.io/architecture-deck-system/";
-
-// Gate the dev/edit TweaksPanel: only on localhost or with an explicit ?tweaks
-// flag. Hidden on the public github.io site.
-const SHOW_TWEAKS = (() => {
-  try {
-    if (new URLSearchParams(location.search).has('tweaks')) return true;
-    return /^(localhost|127\.0\.0\.1|\[?::1\]?)$/.test(location.hostname);
-  } catch (e) { return false; }
-})();
 
 // --- lightweight inline icons ---
 const Icon = ({ name, size = 14 }) => {
