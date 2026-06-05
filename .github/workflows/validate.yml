@@ -23,6 +23,10 @@ jobs:
         run: npm run validate:jsx
       - name: Validate HTML
         run: npm run validate:html
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: Run Playwright smoke tests
+        run: npm test
       - name: Check links
         uses: lycheeverse/lychee-action@v1
         with:
