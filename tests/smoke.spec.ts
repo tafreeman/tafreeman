@@ -66,26 +66,35 @@ test('outbound links respond', { tag: '@network' }, async () => {
   });
 
   try {
-    for (const url of outboundUrls) {
-      // Try HEAD first (lighter); fall back to GET for servers that reject HEAD.
-      let response = await apiContext.head(url, {
-        timeout: 30_000,
-        // Some CDNs return 405 for HEAD — we handle that below.
-        failOnStatusCode: false,
-      });
+    const results = await Promise.all(
+      outboundUrls.map(async (url) => {
+        try {
+          let response = await apiContext.head(url, {
+            timeout: 15_000,
+            failOnStatusCode: false,
+          });
+          if (response.status() === 405) {
+            response = await apiContext.get(url, {
+              timeout: 15_000,
+              failOnStatusCode: false,
+            });
+          }
+          return { url, status: response.status(), error: null };
+        } catch (err: any) {
+          return { url, status: null, error: err.message || String(err) };
+        }
+      })
+    );
 
-      if (response.status() === 405) {
-        response = await apiContext.get(url, {
-          timeout: 30_000,
-          failOnStatusCode: false,
-        });
+    for (const res of results) {
+      if (res.error) {
+        expect(res.error, `Expected ${res.url} to respond, but got error: ${res.error}`).toBeNull();
+      } else {
+        expect(
+          res.status,
+          `Expected ${res.url} to return status < 400, got ${res.status}`
+        ).toBeLessThan(400);
       }
-
-      // Accept any 2xx or 3xx status.  4xx/5xx is a real failure.
-      expect(
-        response.status(),
-        `Expected ${url} to return status < 400, got ${response.status()}`
-      ).toBeLessThan(400);
     }
   } finally {
     await apiContext.dispose();
