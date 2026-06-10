@@ -7,10 +7,11 @@
 
 const GH = "https://github.com/tafreeman";
 
-// Six real, public, non-archived repositories. `url` is the primary
-// destination (live Pages where published, repo otherwise); `repo` is always
-// the GitHub source; `img` is the on-brand social card. Descriptions and
-// language are pulled from each repo.
+// Six real, non-archived repositories (five public, one private). `url` is
+// the primary destination (live Pages where published, repo otherwise; null
+// while a repo is private — cards render without a link); `repo` is the
+// GitHub source where public; `img` is the on-brand social card.
+// Descriptions and language are pulled from each repo.
 window.PORTFOLIO = {
   GH,
   REPOS: [
@@ -19,7 +20,7 @@ window.PORTFOLIO = {
       name: "agentic-runtime-platform",
       eyebrow: "PLATFORM",
       title: "Agentic Runtime Platform",
-      desc: "Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across 8+ providers, failover, evaluation, and live observability.",
+      desc: "Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across five model backends (plus any OpenAI-compatible endpoint), failover, evaluation, and live observability.",
       lang: "Python", langClass: "lang-py",
       status: "ACTIVE", statusClass: "",
       url: "https://tafreeman.github.io/agentic-runtime-platform/",
@@ -55,7 +56,7 @@ window.PORTFOLIO = {
       name: "architecture-deck-system",
       eyebrow: "COMMUNICATION",
       title: "Architecture Deck System",
-      desc: "React 19 + Vite presentation platform — 34 registered layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.",
+      desc: "React 19 + Vite presentation platform — 39 registered layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.",
       lang: "TypeScript", langClass: "lang-ts",
       status: "LIVE", statusClass: "live",
       url: "https://tafreeman.github.io/architecture-deck-system/",
@@ -69,9 +70,11 @@ window.PORTFOLIO = {
       title: "QA Automation Academy",
       desc: "Playwright + GitHub Copilot training platform — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs that move manual QA engineers to automated testing.",
       lang: "TypeScript", langClass: "lang-ts",
-      status: "WIP", statusClass: "",
-      url: "https://tafreeman.github.io/qa-automation-academy/",
-      repo: GH + "/qa-automation-academy",
+      status: "PRIVATE", statusClass: "",
+      // Repo is private ahead of its public release — no public links yet,
+      // so the card renders without navigation (null href is omitted).
+      url: null,
+      repo: null,
       img: "social-previews/qa-automation-academy.png",
     },
     {

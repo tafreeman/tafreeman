@@ -171,7 +171,7 @@ function ArchitectureMap() {
             </g>
             <Node x={170} y={90} w={210} title="Architecture Deck System" sub="React · Storybook · export" kind="surface" href="https://tafreeman.github.io/architecture-deck-system/" />
             <Node x={420} y={90} w={210} title="Financial Scenario Engine" sub="TS · local-first · SQLite" kind="surface" href="https://tafreeman.github.io/financial-scenario-engine/" />
-            <Node x={670} y={90} w={210} title="QA Automation Academy" sub="Playwright · Copilot" kind="surface" href="https://tafreeman.github.io/qa-automation-academy/" />
+            <Node x={670} y={90} w={210} title="QA Automation Academy" sub="Playwright · Copilot · private" kind="surface" />
             <Node x={295} y={185} w={210} title="Agentic Runtime Platform" sub="DAG · routing · failover" kind="platform" featured href="https://tafreeman.github.io/agentic-runtime-platform/" />
             <Node x={545} y={185} w={210} title="ExecutionKit" sub="consensus · ReAct · budget" kind="library" featured href="https://tafreeman.github.io/executionkit/" />
             <Node x={420} y={290} w={210} title="Agentic Systems Lab" sub="security · evals · prototypes" kind="lab" href="https://github.com/tafreeman/agentic-systems-lab" />
