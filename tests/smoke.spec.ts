@@ -48,14 +48,15 @@ test('hub renders', async ({ page }) => {
 // Test 2 — outbound link health checks (requires network access)
 // ---------------------------------------------------------------------------
 test('outbound links respond', { tag: '@network' }, async () => {
-  // Six verified outbound URLs from profile.jsx.
+  // Five verified outbound URLs from profile.jsx.
   // agentic-systems-lab has no Pages site — checked as a github.com repo URL.
+  // qa-automation-academy is private (no public Pages or repo URL), so it is
+  // intentionally absent until its public release.
   const outboundUrls: string[] = [
     'https://tafreeman.github.io/agentic-runtime-platform/',
     'https://tafreeman.github.io/executionkit/',
     'https://tafreeman.github.io/financial-scenario-engine/',
     'https://tafreeman.github.io/architecture-deck-system/',
-    'https://tafreeman.github.io/qa-automation-academy/',
     'https://github.com/tafreeman/agentic-systems-lab',
   ];
 

@@ -41,7 +41,7 @@ const REPOS = [
     id: "architecture-deck-system",
     eyebrow: "COMMUNICATION",
     name: "architecture-deck-system",
-    tagline: "React 19 + Vite presentation platform — 34 layouts, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.",
+    tagline: "React 19 + Vite presentation platform — 39 layouts, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.",
     cmd: "npm run dev",
     glyph: "deck",
     lang: "TypeScript", langColor: "#3178c6",
