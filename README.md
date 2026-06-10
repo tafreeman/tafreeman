@@ -31,7 +31,9 @@ Six interconnected repositories: reusable LLM execution primitives, multi-agent 
 AI-assisted development appears across the portfolio where it accelerates implementation; architecture, tests, and public releases remain under my review.
 
 
-## The architecture
+## The architecture, in one diagram
+
+Every project follows the same pattern — a deterministic, fully-tested core insulated from the non-determinism of LLMs, which sit at the interface boundary rather than in the critical path:
 
 ```mermaid
 flowchart LR
@@ -57,9 +59,9 @@ flowchart LR
     Iface --> User
     Core -->|"structured logs, traces, reproducible runs"| Obs
 ```
-<sub>
- [OpenTelemetry](https://github.com/tafreeman/agentic-runtime-platform/blob/main/agentic-workflows-v2/agentic_v2/integrations/otel.py) 
- [OTLP collector to Jaeger](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml), with structured logs and reproducible run artifacts alongside.</sub>
+
+<sub>The Observability edge is real, not aspirational: workflow and agent spans are emitted through [OpenTelemetry](https://github.com/tafreeman/agentic-runtime-platform/blob/main/agentic-workflows-v2/agentic_v2/integrations/otel.py) and exported via an [OTLP collector to Jaeger](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml), with structured logs and reproducible run artifacts alongside.</sub>
+
 
 ## The six systems
 
@@ -70,13 +72,17 @@ Most repositories have their own styled GitHub Pages site; the research lab link
 | **[Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/)** · `PLATFORM` | Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across 8+ providers, failover, [evaluation](https://github.com/tafreeman/agentic-runtime-platform/blob/main/docs/architecture-eval.md), and [live observability](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml). | Python | [docs ↗](https://tafreeman.github.io/agentic-runtime-platform/) · [repo ↗](https://github.com/tafreeman/agentic-runtime-platform) |
 | **[ExecutionKit](https://tafreeman.github.io/executionkit/)** · `LIBRARY` | Provider-agnostic LLM execution primitives — consensus, refinement, ReAct tool loops, structured output, budget-aware calls. Zero runtime dependencies. | Python | [docs ↗](https://tafreeman.github.io/executionkit/) · [repo ↗](https://github.com/tafreeman/executionkit) |
 | **[Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/)** · `APPLIED AI` | Local-first project finance — a deterministic TypeScript engine produces every number; the LLM only parses intent and narrates. SQLite-backed, GitHub Models or local Ollama. | TypeScript | [site ↗](https://tafreeman.github.io/financial-scenario-engine/) · [repo ↗](https://github.com/tafreeman/financial-scenario-engine) |
-| **[Architecture Deck System](https://tafreeman.github.io/architecture-deck-system/)** · `COMMUNICATION` | React 19 + Vite presentation platform — 34 layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export. | TypeScript | [site ↗]
+| **[Architecture Deck System](https://tafreeman.github.io/architecture-deck-system/)** · `COMMUNICATION` | React 19 + Vite presentation platform — 34 layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export. | TypeScript | [site ↗](https://tafreeman.github.io/architecture-deck-system/) · [repo ↗](https://github.com/tafreeman/architecture-deck-system) |
+| **[QA Automation Academy](https://tafreeman.github.io/qa-automation-academy/)** · `ENABLEMENT` | Playwright + GitHub Copilot training — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs moving QA teams from manual to automated testing. | TypeScript | [docs ↗](https://tafreeman.github.io/qa-automation-academy/) · [repo ↗](https://github.com/tafreeman/qa-automation-academy) |
+| **[Agentic Systems Lab](https://github.com/tafreeman/agentic-systems-lab)** · `R&D` | Research and prototyping companion to the runtime platform — runnable examples, security-hardening sprints, evaluation patterns, and orchestration ideas before they upstream. | Python | [repo ↗](https://github.com/tafreeman/agentic-systems-lab) |
 
 <sub>Live repo signal (updates automatically — no hardcoded counts):</sub>
 
 [![arp last commit](https://img.shields.io/github/last-commit/tafreeman/agentic-runtime-platform?label=arp&color=d97757&style=flat-square)](https://github.com/tafreeman/agentic-runtime-platform)
 [![ek last commit](https://img.shields.io/github/last-commit/tafreeman/executionkit?label=executionkit&color=d97757&style=flat-square)](https://github.com/tafreeman/executionkit)
 [![fse last commit](https://img.shields.io/github/last-commit/tafreeman/financial-scenario-engine?label=fse&color=d97757&style=flat-square)](https://github.com/tafreeman/financial-scenario-engine)
+[![ads last commit](https://img.shields.io/github/last-commit/tafreeman/architecture-deck-system?label=deck-system&color=d97757&style=flat-square)](https://github.com/tafreeman/architecture-deck-system)
+[![qaa last commit](https://img.shields.io/github/last-commit/tafreeman/qa-automation-academy?label=qa-academy&color=d97757&style=flat-square)](https://github.com/tafreeman/qa-automation-academy)
 [![asl last commit](https://img.shields.io/github/last-commit/tafreeman/agentic-systems-lab?label=systems-lab&color=d97757&style=flat-square)](https://github.com/tafreeman/agentic-systems-lab)
 
 ## How they compose
@@ -85,7 +91,7 @@ Primitives flow upward into platforms; platforms emit telemetry into research an
 
 - **L1 · Primitives** — `ExecutionKit` (consensus · ReAct · budget-aware calls)
 - **L2 · Platform** — `Agentic Runtime Platform` (DAG · routing · failover · observability)
-- **L3 · Communication + Applied** — `Financial Scenario Engine`
+- **L3 · Communication + Applied** — `Architecture Deck System`, `Financial Scenario Engine`, `QA Automation Academy`
 - **L0 · R&D** — `Agentic Systems Lab` (security · evals · prototypes upstreamed into the platform)
 
 The interactive, fully-styled version of this graph lives on the portfolio site → **[tafreeman.github.io/tafreeman](https://tafreeman.github.io/tafreeman/)**
