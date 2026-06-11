@@ -74,11 +74,12 @@ function TopBar() {
 }
 
 function ProfileTabs({ active = "Overview" }) {
-  // Counts shown only where verified. 7 = real public repo count
-  // (tafreeman hub + the six project repos). No fabricated star/package counts.
+  // Repo count intentionally omitted — GitHub's own profile omits it too, and
+  // any static integer silently drifts on visibility changes. CI validates the
+  // portfolio repo list in scripts/validate-repo-data.mjs instead.
   const tabs = [
     { name: "Overview", icon: "book", href: PROFILE_GH },
-    { name: "Repositories", icon: "git-fork", count: 7, href: PROFILE_GH + "?tab=repositories" },
+    { name: "Repositories", icon: "git-fork", href: PROFILE_GH + "?tab=repositories" },
     { name: "Stars", icon: "star", href: PROFILE_GH + "?tab=stars" },
   ];
   return (
@@ -148,7 +149,7 @@ function Sidebar() {
         <div className="now-card">
           <div className="label">Open to work</div>
           <div className="line"><span className="k">roles:</span> Principal / Staff AI eng · solutions arch</div>
-          <div className="line"><span className="k">repos:</span> 6 public · interconnected</div>
+          <div className="line"><span className="k">repos:</span> 5 public · 1 forthcoming</div>
         </div>
       </div>
     </aside>
@@ -177,7 +178,7 @@ function ReadmeBanner() {
       </div>
 
       <h1 className="readme-title">
-        <span className="accent">AI engineering systems</span> — six interconnected repos.
+        <span className="accent">AI engineering systems</span> — five public repos, one forthcoming.
       </h1>
 
       <p className="readme-sub">
@@ -189,8 +190,9 @@ function ReadmeBanner() {
           <span className="v accent">6</span>
           <span className="l">Interconnected repos</span>
         </div>
+        {/* last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry) */}
         <div className="r-stat">
-          <span className="v">34</span>
+          <span className="v">39</span>
           <span className="l">Deck layouts · deck-system</span>
         </div>
         <div className="r-stat">
