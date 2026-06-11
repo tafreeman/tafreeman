@@ -186,9 +186,10 @@ function ReadmeBanner() {
       </p>
 
       <div className="readme-stats">
+        {/* last-verified: 2026-06-11 — 5 public · 1 forthcoming (qa-automation-academy private) */}
         <div className="r-stat">
-          <span className="v accent">6</span>
-          <span className="l">Interconnected repos</span>
+          <span className="v accent">5</span>
+          <span className="l">Public repos (1 forthcoming)</span>
         </div>
         {/* last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry) */}
         <div className="r-stat">
@@ -216,7 +217,7 @@ function PinnedGrid() {
     <section>
       <div className="section-h2">
         <span className="eyebrow">// Pinned</span>
-        <h2>The six systems</h2>
+        <h2>The systems</h2>
         <span className="right"><a href={PROFILE_GH + "?tab=repositories"} target="_blank" rel="noopener">All repositories →</a></span>
       </div>
       <div className="pinned-grid">
@@ -255,7 +256,7 @@ function ArchitectureMap() {
       <div className="map-card-head">
         <div>
           <span className="eyebrow">// Systems graph</span>
-          <h3>How the six repositories compose</h3>
+          <h3>How the repositories compose</h3>
           <p className="sub">Primitives flow upward into platforms; platforms emit telemetry into research and communication surfaces. Click any node to open it.</p>
         </div>
         <div className="legend">

@@ -144,7 +144,10 @@ function SocialCard({ r }) {
       </div>
 
       <div className="sc-footer">
-        <span className="sc-url"><span className="at">↳</span> github.com/tafreeman/{r.name}</span>
+        {r.isPrivate
+          ? <span className="sc-url"><span className="at">↳</span> private — public release planned</span>
+          : <span className="sc-url"><span className="at">↳</span> github.com/tafreeman/{r.name}</span>
+        }
         <span className={`sc-status ${r.statusClass}`}>
           <span className="sdot" />{r.status}
         </span>
