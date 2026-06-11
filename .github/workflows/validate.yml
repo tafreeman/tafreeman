@@ -21,6 +21,8 @@ jobs:
         run: npm ci
       - name: Validate JSX/JS syntax
         run: npm run validate:jsx
+      - name: Validate portfolio repo metadata
+        run: npm run validate:repos
       - name: Validate HTML
         run: npm run validate:html
       - name: Install Playwright browsers

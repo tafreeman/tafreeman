@@ -5,8 +5,9 @@
   "description": "GitHub profile + portfolio landing (static, Babel-in-browser JSX).",
   "scripts": {
     "validate:jsx": "node scripts/validate-jsx.mjs",
+    "validate:repos": "node scripts/validate-repo-data.mjs",
     "validate:html": "html-validate *.html",
-    "validate": "npm run validate:jsx && npm run validate:html",
+    "validate": "npm run validate:jsx && npm run validate:repos && npm run validate:html",
     "test:e2e": "playwright test",
     "test": "playwright test"
   },
