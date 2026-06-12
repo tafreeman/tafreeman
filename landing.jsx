@@ -112,7 +112,7 @@ function Work() {
       <div className="wrap">
         <div className="section-head">
           <span className="eyebrow">// Pinned</span>
-          <h2>Six interconnected systems</h2>
+          <h2>The systems</h2>
           <p>Each repository is a production surface — primitives at the base, platforms in the middle, communication and applied tools on top.</p>
         </div>
         <div className="work-grid">
@@ -140,7 +140,7 @@ function ArchitectureMap() {
       <div className="wrap">
         <div className="section-head">
           <span className="eyebrow">// Systems graph</span>
-          <h2>How the six repositories compose</h2>
+          <h2>How the repositories compose</h2>
           <p>Primitives flow upward into platforms; platforms emit telemetry into research and communication surfaces. Click any node to open it.</p>
         </div>
         <div className="map-card">
@@ -235,7 +235,7 @@ function NowStrip() {
             </div>
           </div>
           <div className="now-block lang-block">
-            <div className="now-label">// Primary languages · across the six repos</div>
+            <div className="now-label">// Primary languages · across the repos</div>
             <div className="lang-bar">
               {LANGS.map(l => <span key={l.name} style={{ width: `${l.pct}%`, background: l.color }}></span>)}
             </div>

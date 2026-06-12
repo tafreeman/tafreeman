@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>tafreeman — GitHub profile · redesign</title>
   <meta name="viewport" content="width=1380" />
-  <meta name="description" content="Andy Freeman (tafreeman) — AI engineering portfolio: six interconnected repos spanning LLM execution primitives, multi-agent orchestration, deterministic business apps, and architecture comms." />
+  <meta name="description" content="Andy Freeman (tafreeman) — AI engineering portfolio: five public repositories (one forthcoming) spanning LLM execution primitives, multi-agent orchestration, deterministic business apps, and architecture comms." />
 
   <!-- Open Graph / social preview -->
   <meta property="og:type" content="website" />
@@ -24,6 +24,10 @@
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
+  <!-- SRI is intentionally omitted for same-origin assets below.
+       GitHub Pages enforces HTTPS, so same-origin scripts are already
+       protected by TLS — adding integrity= hashes to local files would
+       require re-hashing on every save with no security benefit. -->
   <script type="text/babel" src="tweaks-panel.jsx"></script>
   <script src="repo-data.jsx"></script>
   <script type="text/babel" src="profile.jsx"></script>

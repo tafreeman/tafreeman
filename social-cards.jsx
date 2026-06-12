@@ -41,6 +41,7 @@ const REPOS = [
     id: "architecture-deck-system",
     eyebrow: "COMMUNICATION",
     name: "architecture-deck-system",
+    // last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry, theme config)
     tagline: "React 19 + Vite presentation platform — 39 layouts, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.",
     cmd: "npm run dev",
     glyph: "deck",
@@ -51,11 +52,12 @@ const REPOS = [
     id: "qa-automation-academy",
     eyebrow: "ENABLEMENT",
     name: "qa-automation-academy",
-    tagline: "Playwright + Copilot training — 49 interactive modules and a practice app with intentional bugs that move QA teams from manual to automated testing.",
+    tagline: "Playwright + Copilot training platform — interactive modules and reference specs that move QA teams from manual to automated testing.",
     cmd: "pnpm dev",
     glyph: "rocket-check",
     lang: "TypeScript", langColor: "#3178c6",
-    status: "WIP", statusClass: "",
+    status: "PRIVATE", statusClass: "",
+    isPrivate: true,
   },
   {
     id: "agentic-systems-lab",
@@ -112,7 +114,7 @@ function SocialCard({ r }) {
           <span className="sc-tb-path">tafreeman&nbsp;/&nbsp;<b>{r.name}</b></span>
         </div>
         <div className="sc-tb-right">
-          <span className="sc-tb-tag">{r.isHub ? "OVERVIEW" : "PUBLIC"}</span>
+          <span className="sc-tb-tag">{r.isHub ? "OVERVIEW" : r.isPrivate ? "PRIVATE" : "PUBLIC"}</span>
         </div>
       </div>
 
@@ -142,7 +144,10 @@ function SocialCard({ r }) {
       </div>
 
       <div className="sc-footer">
-        <span className="sc-url"><span className="at">↳</span> github.com/tafreeman/{r.name}</span>
+        {r.isPrivate
+          ? <span className="sc-url"><span className="at">↳</span> private — public release planned</span>
+          : <span className="sc-url"><span className="at">↳</span> github.com/tafreeman/{r.name}</span>
+        }
         <span className={`sc-status ${r.statusClass}`}>
           <span className="sdot" />{r.status}
         </span>

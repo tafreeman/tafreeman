@@ -56,6 +56,7 @@ window.PORTFOLIO = {
       name: "architecture-deck-system",
       eyebrow: "COMMUNICATION",
       title: "Architecture Deck System",
+      // last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry, theme config)
       desc: "React 19 + Vite presentation platform — 39 registered layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.",
       lang: "TypeScript", langClass: "lang-ts",
       status: "LIVE", statusClass: "live",
@@ -68,6 +69,7 @@ window.PORTFOLIO = {
       name: "qa-automation-academy",
       eyebrow: "ENABLEMENT",
       title: "QA Automation Academy",
+      // last-verified: 2026-06-11 from qa-automation-academy@main (curriculum.ts, specs count)
       desc: "Playwright + GitHub Copilot training platform — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs that move manual QA engineers to automated testing.",
       lang: "TypeScript", langClass: "lang-ts",
       status: "PRIVATE", statusClass: "",

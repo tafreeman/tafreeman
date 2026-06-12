@@ -24,9 +24,9 @@
 
 ---
 
-Six interconnected repositories: reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, QA tooling, and architecture comms. Each pairs a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path.
+Five public repositories (one forthcoming): reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, and architecture comms. Each pairs a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path.
 
-**Start here:** [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform) → [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
+**Start here:** [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform that consumes it) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
 
 AI-assisted development appears across the portfolio where it accelerates implementation; architecture, tests, and public releases remain under my review.
 
@@ -63,7 +63,7 @@ flowchart LR
 <sub>The Observability edge is real, not aspirational: workflow and agent spans are emitted through [OpenTelemetry](https://github.com/tafreeman/agentic-runtime-platform/blob/main/agentic-workflows-v2/agentic_v2/integrations/otel.py) and exported via an [OTLP collector to Jaeger](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml), with structured logs and reproducible run artifacts alongside.</sub>
 
 
-## The six systems
+## The systems
 
 Most repositories have their own styled GitHub Pages site; the research lab links to its repo only, and the QA Automation Academy is currently private ahead of its public release. These are the canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
 
@@ -72,8 +72,8 @@ Most repositories have their own styled GitHub Pages site; the research lab link
 | **[Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/)** · `PLATFORM` | Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across five model backends (plus any OpenAI-compatible endpoint), failover, [evaluation](https://github.com/tafreeman/agentic-runtime-platform/blob/main/docs/architecture-eval.md), and [live observability](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml). | Python | [docs ↗](https://tafreeman.github.io/agentic-runtime-platform/) · [repo ↗](https://github.com/tafreeman/agentic-runtime-platform) |
 | **[ExecutionKit](https://tafreeman.github.io/executionkit/)** · `LIBRARY` | Provider-agnostic LLM execution primitives — consensus, refinement, ReAct tool loops, structured output, budget-aware calls. Zero runtime dependencies. | Python | [docs ↗](https://tafreeman.github.io/executionkit/) · [repo ↗](https://github.com/tafreeman/executionkit) |
 | **[Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/)** · `APPLIED AI` | Local-first project finance — a deterministic TypeScript engine produces every number; the LLM only parses intent and narrates. SQLite-backed, GitHub Models or local Ollama. | TypeScript | [site ↗](https://tafreeman.github.io/financial-scenario-engine/) · [repo ↗](https://github.com/tafreeman/financial-scenario-engine) |
-| **[Architecture Deck System](https://tafreeman.github.io/architecture-deck-system/)** · `COMMUNICATION` | React 19 + Vite presentation platform — 39 layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export. | TypeScript | [site ↗](https://tafreeman.github.io/architecture-deck-system/) · [repo ↗](https://github.com/tafreeman/architecture-deck-system) |
-| **QA Automation Academy** · `ENABLEMENT` | Playwright + GitHub Copilot training — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs moving QA teams from manual to automated testing. | TypeScript | _private — public release planned_ |
+| **[Architecture Deck System](https://tafreeman.github.io/architecture-deck-system/)** · `COMMUNICATION` | React 19 + Vite presentation platform — 39 layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export. <!-- last-verified: 2026-06-11 from architecture-deck-system@main --> | TypeScript | [site ↗](https://tafreeman.github.io/architecture-deck-system/) · [repo ↗](https://github.com/tafreeman/architecture-deck-system) |
+| **QA Automation Academy** · `ENABLEMENT` | Playwright + GitHub Copilot training — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs moving QA teams from manual to automated testing. <!-- last-verified: 2026-06-11 from qa-automation-academy@main --> | TypeScript | _private — public release planned_ |
 | **[Agentic Systems Lab](https://github.com/tafreeman/agentic-systems-lab)** · `R&D` | Research and prototyping companion to the runtime platform — runnable examples, security-hardening sprints, evaluation patterns, and orchestration ideas before they upstream. | Python | [repo ↗](https://github.com/tafreeman/agentic-systems-lab) |
 
 <sub>Live repo signal (updates automatically — no hardcoded counts):</sub>
