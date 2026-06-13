@@ -138,7 +138,7 @@ function Sidebar() {
             <div key={l.name} className="row">
               <span className="dot" style={{background: l.color}}></span>
               <span className="name">{l.name}</span>
-              <span className="pct">3 repos</span>
+              <span className="pct">{REPOS.filter(r => r.lang === l.name).length} repos</span>
             </div>
           ))}
         </div>
@@ -228,8 +228,8 @@ function PinnedGrid() {
 }
 
 function RepoCard({ r }) {
-  return (
-    <a className="repo-card" href={r.url} target="_blank" rel="noopener">
+  const inner = (
+    <>
       <div className="repo-head">
         <div className="repo-mark">{r.title?.[0] || ""}</div>
         <div className="repo-head-text">
@@ -243,7 +243,12 @@ function RepoCard({ r }) {
         <span className="item"><span className={`repo-lang-dot ${r.langClass}`}></span> {r.lang}</span>
         <span className={`status ${r.statusClass}`}>{r.status}</span>
       </div>
-    </a>
+    </>
+  );
+  return r.url ? (
+    <a className="repo-card" href={r.url} target="_blank" rel="noopener">{inner}</a>
+  ) : (
+    <div className="repo-card" aria-disabled="true" title="Private — public release planned">{inner}</div>
   );
 }
 

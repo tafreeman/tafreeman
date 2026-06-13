@@ -94,7 +94,8 @@ function Hero() {
 
         <div className="hero-stats">
           <div className="hs"><div className="v accent">6</div><div className="l">Interconnected repos</div></div>
-          <div className="hs"><div className="v">34</div><div className="l">Deck layouts</div></div>
+          {/* last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry) */}
+          <div className="hs"><div className="v">39</div><div className="l">Deck layouts</div></div>
           <div className="hs"><div className="v">8+</div><div className="l">LLM providers routed</div></div>
           <div className="hs"><div className="v">DAG</div><div className="l">+ ReAct + Consensus</div></div>
         </div>
@@ -116,7 +117,7 @@ function Work() {
           <p>Each repository is a production surface — primitives at the base, platforms in the middle, communication and applied tools on top.</p>
         </div>
         <div className="work-grid">
-          {REPOS.map(r => (
+          {REPOS.map(r => r.url ? (
             <a key={r.id} className="work-card" href={r.url} target="_blank" rel="noopener">
               <img src={r.img} alt={r.name} loading="lazy" />
               <div className="work-foot">
@@ -124,6 +125,14 @@ function Work() {
                 <span className="go"><Icon name="arrow" size={14} /></span>
               </div>
             </a>
+          ) : (
+            <div key={r.id} className="work-card" aria-disabled="true" title="Private — public release planned">
+              <img src={r.img} alt={r.name} loading="lazy" />
+              <div className="work-foot">
+                <span className="path">github.com/tafreeman/<b>{r.id}</b></span>
+                <span className="go"><Icon name="arrow" size={14} /></span>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -244,7 +253,7 @@ function NowStrip() {
                 <div key={l.name} className="row">
                   <span className="dot" style={{ background: l.color }}></span>
                   <span className="name">{l.name}</span>
-                  <span className="pct">3 repos</span>
+                  <span className="pct">{REPOS.filter(r => r.lang === l.name).length} repos</span>
                 </div>
               ))}
             </div>
