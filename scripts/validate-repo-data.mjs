@@ -1,8 +1,13 @@
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
+import { transform } from "esbuild";
 
 const GH_OWNER = "tafreeman";
 const REPO_DATA_FILE = "repo-data.jsx";
+const SOCIAL_CARDS_FILE = "social-cards.jsx";
+// social-cards.jsx carries a self-referential portfolio-hub card that has no
+// matching entry in PORTFOLIO.REPOS; it is the only id allowed to be absent.
+const SOCIAL_ONLY_IDS = new Set(["tafreeman"]);
 const EXPECTED_IDS = new Set([
   "agentic-runtime-platform",
   "executionkit",
@@ -24,6 +29,62 @@ function evaluatePortfolio(source) {
   vm.createContext(sandbox);
   vm.runInContext(source, sandbox, { filename: REPO_DATA_FILE });
   return sandbox.window.PORTFOLIO;
+}
+
+// social-cards.jsx contains JSX (component bodies), so it cannot be VM-eval'd
+// raw. Transpile it with esbuild (same toolchain as validate-jsx.mjs), then run
+// the result: only top-level statements execute — the `const REPOS = [...]` and
+// `window.REPOS = REPOS` assignment — without invoking any React component.
+async function evaluateSocialCards(source) {
+  const { code } = await transform(source, { loader: "jsx", logLevel: "silent" });
+  const sandbox = {
+    window: {},
+    // SocialCard/Glyph bodies reference React, but they are never called here;
+    // a stub keeps the module from throwing if any top-level code touches it.
+    React: { useMemo: () => undefined, createElement: () => null },
+  };
+  vm.createContext(sandbox);
+  vm.runInContext(code, sandbox, { filename: SOCIAL_CARDS_FILE });
+  return sandbox.window.REPOS;
+}
+
+function isPrivateSocialCard(card) {
+  return card.isPrivate === true || card.status === "PRIVATE";
+}
+
+function validateSocialCardsConsistency(portfolio, socialRepos) {
+  assert(Array.isArray(socialRepos), "social-cards.jsx must expose window.REPOS as an array");
+  if (!Array.isArray(socialRepos)) return;
+
+  const portfolioRepos = Array.isArray(portfolio.REPOS) ? portfolio.REPOS : [];
+  const portfolioById = new Map(portfolioRepos.map((repo) => [repo.id, repo]));
+  const socialById = new Map(socialRepos.map((card) => [card.id, card]));
+
+  // 1. Every canonical PORTFOLIO repo id must appear in social-cards REPOS.
+  for (const repo of portfolioRepos) {
+    assert(socialById.has(repo.id), `social-cards.jsx is missing a card for portfolio repo: ${repo.id}`);
+  }
+
+  // 2. No social-cards id may be absent from PORTFOLIO except the self-
+  //    referential hub card(s).
+  for (const card of socialRepos) {
+    assert(
+      portfolioById.has(card.id) || SOCIAL_ONLY_IDS.has(card.id),
+      `social-cards.jsx card "${card.id}" has no matching PORTFOLIO.REPOS entry (and is not an allowed hub card)`,
+    );
+  }
+
+  // 3. Private status must agree across both sources.
+  for (const repo of portfolioRepos) {
+    const card = socialById.get(repo.id);
+    if (!card) continue;
+    const portfolioPrivate = repo.status === "PRIVATE";
+    const socialPrivate = isPrivateSocialCard(card);
+    assert(
+      portfolioPrivate === socialPrivate,
+      `${repo.id}: private flag drift — PORTFOLIO ${portfolioPrivate ? "PRIVATE" : "public"} vs social-cards ${socialPrivate ? "PRIVATE" : "public"}`,
+    );
+  }
 }
 
 function validateStaticShape(portfolio) {
@@ -125,6 +186,11 @@ const portfolio = evaluatePortfolio(source);
 const repos = validateStaticShape(portfolio);
 if (portfolio && repos.length > 0) {
   validateLanguageSplit(portfolio, repos);
+
+  const socialSource = await readFile(SOCIAL_CARDS_FILE, "utf8");
+  const socialRepos = await evaluateSocialCards(socialSource);
+  validateSocialCardsConsistency(portfolio, socialRepos);
+
   await validatePublicGithubState(portfolio, repos);
 }
 

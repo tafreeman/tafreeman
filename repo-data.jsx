@@ -7,6 +7,17 @@
 
 const GH = "https://github.com/tafreeman";
 
+// Gate the dev/edit TweaksPanel: only on localhost or with an explicit ?tweaks
+// flag. Hidden on the public github.io site. Single source of truth — exposed
+// on window.PORTFOLIO so landing.jsx (and any other consumer) reads the same
+// value. Mirrors the detection profile.jsx computes locally.
+const SHOW_TWEAKS = (() => {
+  try {
+    if (new URLSearchParams(location.search).has('tweaks')) return true;
+    return /^(localhost|127\.0\.0\.1|\[?::1\]?)$/.test(location.hostname);
+  } catch (e) { return false; }
+})();
+
 // Six real, non-archived repositories (five public, one private). `url` is
 // the primary destination (live Pages where published, repo otherwise; null
 // while a repo is private — cards render without a link); `repo` is the
@@ -14,6 +25,7 @@ const GH = "https://github.com/tafreeman";
 // Descriptions and language are pulled from each repo.
 window.PORTFOLIO = {
   GH,
+  SHOW_TWEAKS,
   REPOS: [
     {
       id: "agentic-runtime-platform",
@@ -69,8 +81,7 @@ window.PORTFOLIO = {
       name: "qa-automation-academy",
       eyebrow: "ENABLEMENT",
       title: "QA Automation Academy",
-      // last-verified: 2026-06-11 from qa-automation-academy@main (curriculum.ts, specs count)
-      desc: "Playwright + GitHub Copilot training platform — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs that move manual QA engineers to automated testing.",
+      desc: "Playwright + GitHub Copilot training platform — a guided curriculum of interactive modules, a practice app with intentional bugs, and a growing library of reference specs that move manual QA engineers to automated testing.",
       lang: "TypeScript", langClass: "lang-ts",
       status: "PRIVATE", statusClass: "",
       // Repo is private ahead of its public release — no public links yet,
