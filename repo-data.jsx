@@ -3,7 +3,7 @@
 // REAL DATA ONLY. Every repo, link, and label below is verified against the
 // live GitHub account (gh repo list tafreeman) and each repo's own README.
 // No star/fork/contribution/achievement metrics are shown because none are
-// real (all six repos currently sit at 0 stars / 0 forks / no releases).
+// real (all five repos currently sit at 0 stars / 0 forks / no releases).
 
 const GH = "https://github.com/tafreeman";
 
@@ -15,7 +15,7 @@ const GH = "https://github.com/tafreeman";
 // make profile.jsx fail with "SHOW_TWEAKS has already been declared").
 // landing.jsx reads window.PORTFOLIO.SHOW_TWEAKS. Mirrors profile.jsx detection.
 
-// Six real, non-archived repositories (five public, one private). `url` is
+// Five real, non-archived repositories (four public, one private). `url` is
 // the primary destination (live Pages where published, repo otherwise; null
 // while a repo is private — cards render without a link); `repo` is the
 // GitHub source where public; `img` is the on-brand social card.
@@ -95,23 +95,10 @@ window.PORTFOLIO = {
       repo: null,
       img: "social-previews/qa-automation-academy.png",
     },
-    {
-      id: "agentic-systems-lab",
-      name: "agentic-systems-lab",
-      eyebrow: "R&D",
-      title: "Agentic Systems Lab",
-      desc: "Research and prototyping companion to the runtime platform — runnable workflow examples, security-hardening sprints, evaluation patterns, and orchestration ideas before they upstream.",
-      lang: "Python", langClass: "lang-py",
-      status: "R&D", statusClass: "beta",
-      // Pages not yet enabled — links to the repo until the Phase 3 PR lands.
-      url: GH + "/agentic-systems-lab",
-      repo: GH + "/agentic-systems-lab",
-      img: "social-previews/agentic-systems-lab.png",
-    },
   ],
-  // Real primary-language split across the six pinned repos (3 Python, 3 TypeScript).
+  // Real primary-language split across the five pinned repos (2 Python, 3 TypeScript).
   LANGS: [
-    { name: "Python",     pct: 50, color: "#3776ab" },
-    { name: "TypeScript", pct: 50, color: "#3178c6" },
+    { name: "Python",     pct: 40, color: "#3776ab" },
+    { name: "TypeScript", pct: 60, color: "#3178c6" },
   ],
 };

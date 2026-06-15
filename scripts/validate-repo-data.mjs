@@ -14,7 +14,6 @@ const EXPECTED_IDS = new Set([
   "financial-scenario-engine",
   "architecture-deck-system",
   "qa-automation-academy",
-  "agentic-systems-lab",
 ]);
 const PRIVATE_IDS = new Set(["qa-automation-academy"]);
 
