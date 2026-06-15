@@ -58,7 +58,16 @@ function validateSocialCardsConsistency(portfolio, socialRepos) {
 
   const portfolioRepos = Array.isArray(portfolio.REPOS) ? portfolio.REPOS : [];
   const portfolioById = new Map(portfolioRepos.map((repo) => [repo.id, repo]));
-  const socialById = new Map(socialRepos.map((card) => [card.id, card]));
+  // Build the social-cards index, rejecting any malformed/null card up front so
+  // a bad entry yields a clear assertion instead of a TypeError on `.id` later.
+  const socialById = new Map();
+  for (const card of socialRepos) {
+    assert(
+      card && typeof card.id === "string",
+      "social-cards.jsx contains an invalid or malformed card (expected an object with a string id)",
+    );
+    socialById.set(card.id, card);
+  }
 
   // 1. Every canonical PORTFOLIO repo id must appear in social-cards REPOS.
   for (const repo of portfolioRepos) {
@@ -67,7 +76,7 @@ function validateSocialCardsConsistency(portfolio, socialRepos) {
 
   // 2. No social-cards id may be absent from PORTFOLIO except the self-
   //    referential hub card(s).
-  for (const card of socialRepos) {
+  for (const card of socialById.values()) {
     assert(
       portfolioById.has(card.id) || SOCIAL_ONLY_IDS.has(card.id),
       `social-cards.jsx card "${card.id}" has no matching PORTFOLIO.REPOS entry (and is not an allowed hub card)`,
