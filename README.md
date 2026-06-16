@@ -24,7 +24,7 @@
 
 ---
 
-Four public repositories (one forthcoming): reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, and architecture comms. Each pairs a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path.
+Five repositories (four public, one forthcoming): reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, and architecture comms. Each pairs a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path.
 
 **Start here:** [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform that consumes it) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
 
@@ -65,7 +65,7 @@ flowchart LR
 
 ## The systems
 
-Most repositories have their own styled GitHub Pages site; the QA Automation Academy is currently private ahead of its public release. These are the canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
+Most repositories have their own styled GitHub Pages site, and the QA Automation Academy is currently private ahead of its public release. These are the canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
 
 | System | What it is | Stack | Live |
 |---|---|---|---|
@@ -73,7 +73,7 @@ Most repositories have their own styled GitHub Pages site; the QA Automation Aca
 | **[ExecutionKit](https://tafreeman.github.io/executionkit/)** · `LIBRARY` | Provider-agnostic LLM execution primitives — consensus, refinement, ReAct tool loops, structured output, budget-aware calls. Zero runtime dependencies. | Python | [docs ↗](https://tafreeman.github.io/executionkit/) · [repo ↗](https://github.com/tafreeman/executionkit) |
 | **[Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/)** · `APPLIED AI` | Local-first project finance — a deterministic TypeScript engine produces every number; the LLM only parses intent and narrates. SQLite-backed, GitHub Models or local Ollama. | TypeScript | [site ↗](https://tafreeman.github.io/financial-scenario-engine/) · [repo ↗](https://github.com/tafreeman/financial-scenario-engine) |
 | **[Architecture Deck System](https://tafreeman.github.io/architecture-deck-system/)** · `COMMUNICATION` | React 19 + Vite presentation platform — 39 layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export. <!-- last-verified: 2026-06-11 from architecture-deck-system@main --> | TypeScript | [site ↗](https://tafreeman.github.io/architecture-deck-system/) · [repo ↗](https://github.com/tafreeman/architecture-deck-system) |
-| **QA Automation Academy** · `ENABLEMENT` | Playwright + GitHub Copilot training — a guided curriculum of interactive modules, a practice app with intentional bugs, and a growing library of reference specs moving QA teams from manual to automated testing. | TypeScript | _private — public release planned_ |
+| **QA Automation Academy** · `ENABLEMENT` | Playwright + GitHub Copilot training — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs moving QA teams from manual to automated testing. <!-- last-verified: 2026-06-11 from qa-automation-academy@main --> | TypeScript | _private — public release planned_ |
 
 <sub>Live repo signal (updates automatically — no hardcoded counts):</sub>
 
@@ -84,7 +84,7 @@ Most repositories have their own styled GitHub Pages site; the QA Automation Aca
 
 ## How they compose
 
-Primitives flow upward into platforms; platforms emit telemetry into communication and applied surfaces:
+Primitives flow upward into platforms; platforms emit telemetry into research and communication surfaces:
 
 - **L1 · Primitives** — `ExecutionKit` (consensus · ReAct · budget-aware calls)
 - **L2 · Platform** — `Agentic Runtime Platform` (DAG · routing · failover · observability)

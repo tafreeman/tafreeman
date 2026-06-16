@@ -57,7 +57,7 @@ function GlyphCube() {
   );
 }
 
-// 3 — FLASK · agentic-systems-lab
+// 3 — FLASK · research / R&D glyph
 function GlyphFlask() {
   return (
     <svg viewBox="0 0 200 200">

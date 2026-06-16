@@ -149,7 +149,8 @@ function Sidebar() {
         <div className="now-card">
           <div className="label">Open to work</div>
           <div className="line"><span className="k">roles:</span> Principal / Staff AI eng · solutions arch</div>
-          <div className="line"><span className="k">repos:</span> 5 public · 1 forthcoming</div>
+          {/* Intentional prose — "forthcoming" conveys the planned release; count is derived below in ReadmeBanner */}
+          <div className="line"><span className="k">repos:</span> public · one forthcoming</div>
         </div>
       </div>
     </aside>
@@ -178,7 +179,8 @@ function ReadmeBanner() {
       </div>
 
       <h1 className="readme-title">
-        <span className="accent">AI engineering systems</span> — five public repos, one forthcoming.
+        {/* Intentional prose — "forthcoming" conveys planned release cadence; numeric count rendered below */}
+        <span className="accent">AI engineering systems</span> — public repos, one forthcoming.
       </h1>
 
       <p className="readme-sub">
@@ -186,9 +188,9 @@ function ReadmeBanner() {
       </p>
 
       <div className="readme-stats">
-        {/* last-verified: 2026-06-11 — 5 public · 1 forthcoming (qa-automation-academy private) */}
         <div className="r-stat">
-          <span className="v accent">5</span>
+          {/* Derived at render time from REPOS — no bare integer that drifts on visibility changes */}
+          <span className="v accent">{REPOS.filter(r => r.status !== 'PRIVATE').length}</span>
           <span className="l">Public repos (1 forthcoming)</span>
         </div>
         {/* last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry) */}
@@ -248,7 +250,10 @@ function RepoCard({ r }) {
   return r.url ? (
     <a className="repo-card" href={r.url} target="_blank" rel="noopener">{inner}</a>
   ) : (
-    <div className="repo-card" aria-disabled="true" title="Private — public release planned">{inner}</div>
+    // data-private suppresses hover lift/glow (see styles.css .repo-card[data-private])
+    // No aria-disabled — that attribute has no a11y effect on a generic div; the
+    // PRIVATE badge in the card body is the visible status indicator.
+    <div className="repo-card" data-private title="Private — public release planned">{inner}</div>
   );
 }
 
