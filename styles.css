@@ -543,6 +543,14 @@ body {
   box-shadow: var(--shadow-glow);
 }
 .repo-card:hover::before { opacity: 1; }
+/* Private cards are not clickable — suppress the hover lift/glow false affordance */
+.repo-card[data-private]:hover {
+  border-color: var(--border);
+  transform: none;
+  box-shadow: none;
+  cursor: default;
+}
+.repo-card[data-private]:hover::before { opacity: .35; }
 .repo-head {
   display: flex; align-items: flex-start; gap: 10px;
 }

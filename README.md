@@ -24,7 +24,7 @@
 
 ---
 
-Five public repositories (one forthcoming): reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, and architecture comms. Each pairs a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path.
+Five repositories (four public, one forthcoming): reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, and architecture comms. Each pairs a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path.
 
 **Start here:** [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform that consumes it) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
 
@@ -65,7 +65,7 @@ flowchart LR
 
 ## The systems
 
-Most repositories have their own styled GitHub Pages site; the research lab links to its repo only, and the QA Automation Academy is currently private ahead of its public release. These are the canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
+Most repositories have their own styled GitHub Pages site, and the QA Automation Academy is currently private ahead of its public release. These are the canonical repos; private `*-archive` copies are legacy snapshots kept outside the portfolio surface.
 
 | System | What it is | Stack | Live |
 |---|---|---|---|
@@ -74,7 +74,6 @@ Most repositories have their own styled GitHub Pages site; the research lab link
 | **[Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/)** · `APPLIED AI` | Local-first project finance — a deterministic TypeScript engine produces every number; the LLM only parses intent and narrates. SQLite-backed, GitHub Models or local Ollama. | TypeScript | [site ↗](https://tafreeman.github.io/financial-scenario-engine/) · [repo ↗](https://github.com/tafreeman/financial-scenario-engine) |
 | **[Architecture Deck System](https://tafreeman.github.io/architecture-deck-system/)** · `COMMUNICATION` | React 19 + Vite presentation platform — 39 layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export. <!-- last-verified: 2026-06-11 from architecture-deck-system@main --> | TypeScript | [site ↗](https://tafreeman.github.io/architecture-deck-system/) · [repo ↗](https://github.com/tafreeman/architecture-deck-system) |
 | **QA Automation Academy** · `ENABLEMENT` | Playwright + GitHub Copilot training — 49 interactive modules, a practice app with intentional bugs, and 59 reference specs moving QA teams from manual to automated testing. <!-- last-verified: 2026-06-11 from qa-automation-academy@main --> | TypeScript | _private — public release planned_ |
-| **[Agentic Systems Lab](https://github.com/tafreeman/agentic-systems-lab)** · `R&D` | Research and prototyping companion to the runtime platform — runnable examples, security-hardening sprints, evaluation patterns, and orchestration ideas before they upstream. | Python | [repo ↗](https://github.com/tafreeman/agentic-systems-lab) |
 
 <sub>Live repo signal (updates automatically — no hardcoded counts):</sub>
 
@@ -82,7 +81,6 @@ Most repositories have their own styled GitHub Pages site; the research lab link
 [![ek last commit](https://img.shields.io/github/last-commit/tafreeman/executionkit?label=executionkit&color=d97757&style=flat-square)](https://github.com/tafreeman/executionkit)
 [![fse last commit](https://img.shields.io/github/last-commit/tafreeman/financial-scenario-engine?label=fse&color=d97757&style=flat-square)](https://github.com/tafreeman/financial-scenario-engine)
 [![ads last commit](https://img.shields.io/github/last-commit/tafreeman/architecture-deck-system?label=deck-system&color=d97757&style=flat-square)](https://github.com/tafreeman/architecture-deck-system)
-[![asl last commit](https://img.shields.io/github/last-commit/tafreeman/agentic-systems-lab?label=systems-lab&color=d97757&style=flat-square)](https://github.com/tafreeman/agentic-systems-lab)
 
 ## How they compose
 
@@ -91,7 +89,6 @@ Primitives flow upward into platforms; platforms emit telemetry into research an
 - **L1 · Primitives** — `ExecutionKit` (consensus · ReAct · budget-aware calls)
 - **L2 · Platform** — `Agentic Runtime Platform` (DAG · routing · failover · observability)
 - **L3 · Communication + Applied** — `Architecture Deck System`, `Financial Scenario Engine`, `QA Automation Academy`
-- **L0 · R&D** — `Agentic Systems Lab` (security · evals · prototypes upstreamed into the platform)
 
 The interactive, fully-styled version of this graph lives on the portfolio site → **[tafreeman.github.io/tafreeman](https://tafreeman.github.io/tafreeman/)**
 

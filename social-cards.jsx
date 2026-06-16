@@ -60,16 +60,6 @@ const REPOS = [
     isPrivate: true,
   },
   {
-    id: "agentic-systems-lab",
-    eyebrow: "RESEARCH",
-    name: "agentic-systems-lab",
-    tagline: "Research and prototyping companion to the runtime platform — runnable examples, security-hardening sprints, evaluation patterns, and orchestration ideas.",
-    cmd: "python examples/01_hello_workflow.py",
-    glyph: "flask",
-    lang: "Python", langColor: "#3776ab",
-    status: "R&D", statusClass: "beta",
-  },
-  {
     id: "tafreeman",
     eyebrow: "PORTFOLIO HUB",
     name: "tafreeman",
