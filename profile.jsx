@@ -258,7 +258,7 @@ function RepoCard({ r }) {
 }
 
 // ===================================================================
-// ARCHITECTURE MAP — how the six repos connect (real composition)
+// ARCHITECTURE MAP — how the repos connect (real composition)
 // ===================================================================
 function ArchitectureMap() {
   return (
@@ -267,7 +267,7 @@ function ArchitectureMap() {
         <div>
           <span className="eyebrow">// Systems graph</span>
           <h3>How the repositories compose</h3>
-          <p className="sub">Primitives flow upward into platforms; platforms emit telemetry into research and communication surfaces. Click any node to open it.</p>
+          <p className="sub">Primitives flow upward into platforms; platforms emit telemetry into communication and applied surfaces. Click any node to open it.</p>
         </div>
         <div className="legend">
           <span><span className="ld lp"></span> Platform</span>
@@ -276,7 +276,7 @@ function ArchitectureMap() {
         </div>
       </div>
 
-      <svg viewBox="0 0 1000 360" className="map-svg">
+      <svg viewBox="0 0 1000 280" className="map-svg">
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M0 0 L10 5 L0 10 z" style={{ fill: "var(--accent)" }} />
@@ -291,7 +291,6 @@ function ArchitectureMap() {
           <line x1="20" y1="163" x2="980" y2="163" strokeDasharray="2 4" style={{ stroke: "var(--border)" }} />
           <text x="20" y="250">L1 · PRIMITIVES</text>
           <line x1="20" y1="258" x2="980" y2="258" strokeDasharray="2 4" style={{ stroke: "var(--border)" }} />
-          <text x="20" y="340">L0 · R&D</text>
         </g>
 
         {/* L3 — Communication / Applied */}
@@ -305,17 +304,12 @@ function ArchitectureMap() {
         {/* L1 — Library */}
         <Node x={545} y={185} w={210} title="ExecutionKit" sub="consensus · ReAct · budget" kind="library" featured href="https://tafreeman.github.io/executionkit/" />
 
-        {/* L0 — R&D */}
-        <Node x={420} y={290} w={210} title="Agentic Systems Lab" sub="security · evals · prototypes" kind="lab" href="https://github.com/tafreeman/agentic-systems-lab" />
-
         {/* Connections — primitives flow up */}
         <Edge from={[400, 215]} to={[400, 122]} />
         <Edge from={[650, 215]} to={[400, 122]} />
         <Edge from={[650, 215]} to={[525, 122]} />
         <Edge from={[650, 215]} to={[775, 122]} />
         <Edge from={[400, 215]} to={[775, 122]} />
-        <Edge from={[525, 290]} to={[400, 215]} />
-        <Edge from={[525, 290]} to={[650, 215]} />
       </svg>
     </section>
   );
