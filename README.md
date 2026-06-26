@@ -72,15 +72,14 @@ Most repositories have their own styled GitHub Pages site, and the QA Automation
 | **[Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/)** · `PLATFORM` | Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across five model backends (plus any OpenAI-compatible endpoint), failover, [evaluation](https://github.com/tafreeman/agentic-runtime-platform/blob/main/docs/architecture-eval.md), and [live observability](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml). | Python | [docs ↗](https://tafreeman.github.io/agentic-runtime-platform/) · [repo ↗](https://github.com/tafreeman/agentic-runtime-platform) |
 | **[ExecutionKit](https://tafreeman.github.io/executionkit/)** · `LIBRARY` | Provider-agnostic LLM execution primitives — consensus, refinement, ReAct tool loops, structured output, budget-aware calls. Zero runtime dependencies. | Python | [docs ↗](https://tafreeman.github.io/executionkit/) · [repo ↗](https://github.com/tafreeman/executionkit) |
 | **[Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/)** · `APPLIED AI` | Local-first project finance — a deterministic TypeScript engine produces every number; the LLM only parses intent and narrates. SQLite-backed, GitHub Models or local Ollama. | TypeScript | [site ↗](https://tafreeman.github.io/financial-scenario-engine/) · [repo ↗](https://github.com/tafreeman/financial-scenario-engine) |
-| **[Architecture Deck System](https://tafreeman.github.io/architecture-deck-system/)** · `COMMUNICATION` | React 19 + Vite presentation platform — 39 layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export. <!-- last-verified: 2026-06-11 from architecture-deck-system@main --> | TypeScript | [site ↗](https://tafreeman.github.io/architecture-deck-system/) · [repo ↗](https://github.com/tafreeman/architecture-deck-system) |
-| **QA Automation Academy** · `ENABLEMENT` | Playwright + GitHub Copilot training — a guided curriculum of interactive modules, a practice app with intentional bugs, and a growing library of reference specs moving QA teams from manual to automated testing. | TypeScript | _private — public release planned_ |
+
 
 <sub>Live repo signal (updates automatically — no hardcoded counts):</sub>
 
 [![arp last commit](https://img.shields.io/github/last-commit/tafreeman/agentic-runtime-platform?label=arp&color=d97757&style=flat-square)](https://github.com/tafreeman/agentic-runtime-platform)
 [![ek last commit](https://img.shields.io/github/last-commit/tafreeman/executionkit?label=executionkit&color=d97757&style=flat-square)](https://github.com/tafreeman/executionkit)
 [![fse last commit](https://img.shields.io/github/last-commit/tafreeman/financial-scenario-engine?label=fse&color=d97757&style=flat-square)](https://github.com/tafreeman/financial-scenario-engine)
-[![ads last commit](https://img.shields.io/github/last-commit/tafreeman/architecture-deck-system?label=deck-system&color=d97757&style=flat-square)](https://github.com/tafreeman/architecture-deck-system)
+
 
 ## How they compose
 
