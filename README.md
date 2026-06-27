@@ -59,7 +59,7 @@ flowchart LR
 <sub>Observability: workflow and agent spans are emitted through [OpenTelemetry](https://github.com/tafreeman/agentic-runtime-platform/blob/main/agentic-workflows-v2/agentic_v2/integrations/otel.py) and exported via an [OTLP collector to Jaeger](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml), with structured logs and reproducible run artifacts.</sub>
 
 
-## System 
+## Systems
 
 | System | What it is | Stack | Live |
 |---|---|---|---|
