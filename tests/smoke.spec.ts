@@ -48,8 +48,7 @@ test('hub renders', async ({ page }) => {
 // Test 2 — outbound link health checks (requires network access)
 // ---------------------------------------------------------------------------
 test('outbound links respond', { tag: '@network' }, async () => {
-  // Five verified outbound URLs from profile.jsx.
-  // agentic-systems-lab has no Pages site — checked as a github.com repo URL.
+  // Four verified outbound URLs from profile.jsx.
   // qa-automation-academy is private (no public Pages or repo URL), so it is
   // intentionally absent until its public release.
   const outboundUrls: string[] = [
@@ -57,7 +56,6 @@ test('outbound links respond', { tag: '@network' }, async () => {
     'https://tafreeman.github.io/executionkit/',
     'https://tafreeman.github.io/financial-scenario-engine/',
     'https://tafreeman.github.io/architecture-deck-system/',
-    'https://github.com/tafreeman/agentic-systems-lab',
   ];
 
   // Use a fresh APIRequestContext so these checks run independently of the

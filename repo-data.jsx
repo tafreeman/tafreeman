@@ -37,7 +37,7 @@ window.PORTFOLIO = {
       name: "agentic-runtime-platform",
       eyebrow: "PLATFORM",
       title: "Agentic Runtime Platform",
-      desc: "Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across five model backends (plus any OpenAI-compatible endpoint), failover, evaluation, and live observability.",
+      desc: "Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across 8 model backends (plus any OpenAI-compatible endpoint), failover, evaluation, and live observability.",
       lang: "Python", langClass: "lang-py",
       status: "ACTIVE", statusClass: "",
       url: "https://tafreeman.github.io/agentic-runtime-platform/",

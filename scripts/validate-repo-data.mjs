@@ -5,6 +5,11 @@ import { transform } from "esbuild";
 const GH_OWNER = "tafreeman";
 const REPO_DATA_FILE = "repo-data.jsx";
 const SOCIAL_CARDS_FILE = "social-cards.jsx";
+// Public-facing JSX surfaces that hardcode repo links but are NOT derived from
+// PORTFOLIO.REPOS. Stale references here (e.g. a link to an archived/removed
+// repo) slip past the repo-data and social-card checks, so we scan their raw
+// source for owner-repo references too.
+const SURFACE_FILES = ["landing.jsx", "profile.jsx"];
 // social-cards.jsx carries a self-referential portfolio-hub card that has no
 // matching entry in PORTFOLIO.REPOS; it is the only id allowed to be absent.
 const SOCIAL_ONLY_IDS = new Set(["tafreeman"]);
@@ -150,6 +155,44 @@ function validateLanguageSplit(portfolio, repos) {
   }
 }
 
+// Scan the public-facing JSX surfaces for hardcoded owner-repo references —
+// both GitHub repo URLs (github.com/<owner>/<id>) and Pages URLs
+// (<owner>.github.io/<id>). Every referenced id must be a current portfolio
+// repo (or the owner's own profile repo). This catches links to archived,
+// renamed, or deleted repos on surfaces that are NOT generated from
+// PORTFOLIO.REPOS, which the checks above never inspect.
+async function validateSurfaceRepoReferences(repos) {
+  const validRepoIds = new Set(repos.map((repo) => repo.id));
+  // The owner's own profile/Pages repo (github.com/<owner>/<owner> and
+  // <owner>.github.io/<owner>) is canonical and self-referential.
+  validRepoIds.add(GH_OWNER);
+
+  const referencePattern = new RegExp(
+    `(?:github\\.com/${GH_OWNER}/|${GH_OWNER}\\.github\\.io/)([A-Za-z0-9._-]+)`,
+    "g",
+  );
+
+  for (const file of SURFACE_FILES) {
+    let source;
+    try {
+      source = await readFile(file, "utf8");
+    } catch (error) {
+      failures.push(
+        `${file}: could not read surface for repo-reference scan (${error instanceof Error ? error.message : String(error)})`,
+      );
+      continue;
+    }
+
+    for (const match of source.matchAll(referencePattern)) {
+      const referencedId = match[1];
+      assert(
+        validRepoIds.has(referencedId),
+        `${file}: references repo "${referencedId}" (${match[0]}) which is not a current portfolio repo — remove the stale/archived reference or add the repo to ${REPO_DATA_FILE}`,
+      );
+    }
+  }
+}
+
 async function fetchGithubRepo(repoId) {
   const headers = {
     Accept: "application/vnd.github+json",
@@ -198,6 +241,8 @@ if (portfolio && repos.length > 0) {
   const socialSource = await readFile(SOCIAL_CARDS_FILE, "utf8");
   const socialRepos = await evaluateSocialCards(socialSource);
   validateSocialCardsConsistency(portfolio, socialRepos);
+
+  await validateSurfaceRepoReferences(repos);
 
   await validatePublicGithubState(portfolio, repos);
 }
