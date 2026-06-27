@@ -14,7 +14,7 @@
 
 [![tafreeman — AI engineering portfolio](social-previews/hero-vector.png)](https://tafreeman.github.io/tafreeman/)
 
-# Andy Freeman · `@tafreeman`
+# AFreeman · `@tafreeman`
 
 [![Validate](https://github.com/tafreeman/tafreeman/actions/workflows/validate.yml/badge.svg)](https://github.com/tafreeman/tafreeman/actions/workflows/validate.yml)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-andy--freeman--architect-d97757?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andy-freeman-architect/)
@@ -24,12 +24,11 @@
 
 ---
 
-Five repositories (four public, one forthcoming): reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, and architecture comms. Each pairs a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path.
+Five repositories (four public, one forthcoming): reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI tooling
 
 **Start here:** [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform that consumes it) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
 
-AI-assisted development appears across the portfolio where it accelerates implementation; architecture, tests, and public releases remain under my review.
-
+Yes the ai solutions were developed using AI-assisted development it appears across the portfolio where it accelerates implementation; architecture, tests, and public releases. All ddecisions had human decsion makers before being merged
 
 ## The architecture, in one diagram
 
