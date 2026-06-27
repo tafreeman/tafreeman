@@ -24,7 +24,7 @@
 
 ---
 
-reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces 
+Reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces
 
 [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform that consumes it) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
 
