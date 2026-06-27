@@ -184,7 +184,14 @@ async function validateSurfaceRepoReferences(repos) {
     }
 
     for (const match of source.matchAll(referencePattern)) {
-      const referencedId = match[1];
+      // The character class can absorb a trailing ".git" (clone URLs) or a
+      // trailing "." / "-" from surrounding prose/punctuation, which would flag
+      // an otherwise-valid repo as stale (e.g. "executionkit." or
+      // "agentic-runtime-platform.git"). Normalize those off first; a genuinely
+      // stale id still fails after stripping.
+      let referencedId = match[1];
+      if (referencedId.endsWith(".git")) referencedId = referencedId.slice(0, -4);
+      referencedId = referencedId.replace(/[.-]+$/, "");
       assert(
         validRepoIds.has(referencedId),
         `${file}: references repo "${referencedId}" (${match[0]}) which is not a current portfolio repo — remove the stale/archived reference or add the repo to ${REPO_DATA_FILE}`,
