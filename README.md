@@ -111,6 +111,16 @@ python -m http.server 8099
 
 `index.html` is the canonical GitHub Pages entry (served at `https://tafreeman.github.io/tafreeman/`).
 
+### Commit-message hook
+
+A version-controlled `commit-msg` hook strips machine `Co-Authored-By:` trailers (AI assistants and automated bots) from new commits, leaving genuine human co-authors and the message body intact. Enable it once per clone:
+
+```sh
+git config core.hooksPath hooks
+```
+
+It only rewrites the in-progress message and never touches published history.
+
 ---
 
 <div align="center">

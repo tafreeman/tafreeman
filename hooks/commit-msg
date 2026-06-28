@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# commit-msg hook: strip machine AI co-author trailers from the commit message.
+#
+# Removes `Co-Authored-By:` trailer lines that attribute a commit to an AI
+# assistant or automated bot, while leaving genuine human co-authors and the
+# message body untouched. This keeps published history free of AI-process
+# provenance tells without rewriting any past commits.
+#
+# Enable once per clone:
+#   git config core.hooksPath hooks
+#
+# A line is treated as an AI/bot co-author when it is a Co-Authored-By trailer
+# AND matches (case-insensitively) one of:
+#   - an AI tool name: claude, gemini, gpt, copilot
+#   - an AI vendor address: noreply@anthropic
+#   - a generic bot address: bot@  or  a -bot suffix on the name/handle
+#   - a github noreply address, but ONLY when paired with an AI tool name on the
+#     same line (so a human using their @users.noreply.github.com address is kept)
+
+set -e
+
+msg_file="$1"
+[ -n "$msg_file" ] || exit 0
+[ -f "$msg_file" ] || exit 0
+
+awk '
+function lower(s) { return tolower(s) }
+
+{
+    line = $0
+    low = lower(line)
+
+    is_trailer = (low ~ /^[[:space:]]*co-authored-by:[[:space:]]*/)
+
+    if (is_trailer) {
+        ai = 0
+        if (low ~ /claude/)          ai = 1
+        if (low ~ /gemini/)          ai = 1
+        if (low ~ /gpt/)             ai = 1
+        if (low ~ /copilot/)         ai = 1
+        if (low ~ /noreply@anthropic/) ai = 1
+        if (low ~ /bot@/)            ai = 1
+        if (low ~ /-bot[ \t]*</)     ai = 1   # "-bot" suffix on the author name
+        if (low ~ /-bot@/)           ai = 1   # "-bot" suffix on the handle/local-part
+
+        # github noreply: only strip when an AI tool name appears on the same line
+        if (low ~ /users\.noreply\.github\.com/) {
+            if (low ~ /claude/ || low ~ /gemini/ || low ~ /gpt/ || low ~ /copilot/) ai = 1
+        }
+
+        if (ai) next   # drop this trailer line
+    }
+
+    print line
+}
+' "$msg_file" > "$msg_file.stripped"
+
+mv "$msg_file.stripped" "$msg_file"
+
+exit 0
