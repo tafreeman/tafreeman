@@ -163,7 +163,7 @@ function ArchitectureMap() {
               <span><span className="ld lr"></span> Surface</span>
             </div>
           </div>
-          <svg viewBox="0 0 1000 360" className="map-svg">
+          <svg viewBox="0 0 1000 280" className="map-svg">
             <defs>
               <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                 <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)" />
@@ -176,21 +176,17 @@ function ArchitectureMap() {
               <line x1="20" y1="163" x2="980" y2="163" stroke="var(--border)" strokeDasharray="2 4" />
               <text x="20" y="250">L1 · PRIMITIVES</text>
               <line x1="20" y1="258" x2="980" y2="258" stroke="var(--border)" strokeDasharray="2 4" />
-              <text x="20" y="340">L0 · R&amp;D</text>
             </g>
             <Node x={170} y={90} w={210} title="Architecture Deck System" sub="React · Storybook · export" kind="surface" href="https://tafreeman.github.io/architecture-deck-system/" />
             <Node x={420} y={90} w={210} title="Financial Scenario Engine" sub="TS · local-first · SQLite" kind="surface" href="https://tafreeman.github.io/financial-scenario-engine/" />
             <Node x={670} y={90} w={210} title="QA Automation Academy" sub="Playwright · Copilot · private" kind="surface" />
             <Node x={295} y={185} w={210} title="Agentic Runtime Platform" sub="DAG · routing · failover" kind="platform" featured href="https://tafreeman.github.io/agentic-runtime-platform/" />
             <Node x={545} y={185} w={210} title="ExecutionKit" sub="consensus · ReAct · budget" kind="library" featured href="https://tafreeman.github.io/executionkit/" />
-            <Node x={420} y={290} w={210} title="Agentic Systems Lab" sub="security · evals · prototypes" kind="lab" href="https://github.com/tafreeman/agentic-systems-lab" />
             <Edge from={[400, 215]} to={[400, 122]} />
             <Edge from={[650, 215]} to={[400, 122]} />
             <Edge from={[650, 215]} to={[525, 122]} />
             <Edge from={[650, 215]} to={[775, 122]} />
             <Edge from={[400, 215]} to={[775, 122]} />
-            <Edge from={[525, 290]} to={[400, 215]} />
-            <Edge from={[525, 290]} to={[650, 215]} />
           </svg>
         </div>
       </div>
