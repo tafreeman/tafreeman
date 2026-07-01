@@ -196,7 +196,7 @@ function ReadmeBanner() {
         </div>
         {/* Single source of truth: window.DECK_LAYOUT_COUNT (repo-data.jsx) */}
         <div className="r-stat">
-          <span className="v">{window.DECK_LAYOUT_COUNT}</span>
+          <span className="v">{window.DECK_LAYOUT_COUNT ?? 39}</span>
           <span className="l">Deck layouts · deck-system</span>
         </div>
         <div className="r-stat">
