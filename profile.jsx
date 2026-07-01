@@ -2,7 +2,8 @@
    REAL DATA ONLY. Every repo, link, and label below is verified against the
    live GitHub account (gh repo list tafreeman) and each repo's own README.
    No star/fork/contribution/achievement metrics are shown because none are
-   real (all six repos currently sit at 0 stars / 0 forks / no releases). */
+   real (all five repos currently sit at 0 stars / 0 forks; see repo-data.jsx
+   for per-repo release status). */
 
 // Repo + language data is the single source of truth in repo-data.jsx, which
 // MUST be loaded (as <script src="repo-data.jsx">) BEFORE

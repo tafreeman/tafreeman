@@ -51,7 +51,7 @@ window.PORTFOLIO = {
       title: "ExecutionKit",
       desc: "Provider-agnostic Python library for composable LLM execution patterns — consensus, refinement, ReAct tool loops, structured output, and budget-aware calls. Zero runtime deps.",
       lang: "Python", langClass: "lang-py",
-      status: "v0.1.0", statusClass: "",
+      status: "v0.2.0", statusClass: "",
       url: "https://tafreeman.github.io/executionkit/",
       repo: GH + "/executionkit",
       img: "social-previews/executionkit.png",

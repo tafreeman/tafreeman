@@ -200,7 +200,38 @@ async function validateSurfaceRepoReferences(repos) {
   }
 }
 
-async function fetchGithubRepo(repoId) {
+// Guard against the "Interconnected repos" hero stat regressing to a bare
+// integer literal (e.g. `<div className="v accent">6</div>`) instead of the
+// live REPOS.length expression. Scoped to the single labeled stat block —
+// not a blanket ban on digits in landing.jsx, which legitimately displays
+// other static figures (deck layout count, provider count, etc.).
+async function validateSurfaceRepoCountLiteral() {
+  const file = "landing.jsx";
+  let source;
+  try {
+    source = await readFile(file, "utf8");
+  } catch (error) {
+    failures.push(
+      `${file}: could not read surface for repo-count literal scan (${error instanceof Error ? error.message : String(error)})`,
+    );
+    return;
+  }
+
+  // Match the stat block immediately preceding the "Interconnected repos"
+  // label, capturing whatever sits inside the value <div>.
+  const statPattern = /<div className="v accent">([^<]*)<\/div>\s*<div className="l">Interconnected repos<\/div>/;
+  const match = source.match(statPattern);
+  assert(match, `${file}: could not locate the "Interconnected repos" hero stat to check for a hardcoded count`);
+  if (!match) return;
+
+  const value = match[1].trim();
+  assert(
+    /^\{.*REPOS\??\.length.*\}$/.test(value),
+    `${file}: "Interconnected repos" stat must render a live REPOS.length expression, found "${value}" — use {REPOS.length} instead of a static number`,
+  );
+}
+
+function githubApiHeaders() {
   const headers = {
     Accept: "application/vnd.github+json",
     "User-Agent": "tafreeman-profile-validator",
@@ -208,8 +239,26 @@ async function fetchGithubRepo(repoId) {
   };
   const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
   if (token) headers.Authorization = `Bearer ${token}`;
+  return headers;
+}
 
-  const response = await fetch(`https://api.github.com/repos/${GH_OWNER}/${repoId}`, { headers });
+async function fetchGithubRepo(repoId) {
+  const response = await fetch(`https://api.github.com/repos/${GH_OWNER}/${repoId}`, { headers: githubApiHeaders() });
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} ${response.statusText}`);
+  }
+  return response.json();
+}
+
+// Returns the latest release payload, or null when the repo has no releases
+// (GitHub reports that as a 404 on this endpoint — not an error condition,
+// just "nothing to compare against yet"). Any other non-OK status is a real
+// failure and is thrown, matching fetchGithubRepo's error style.
+async function fetchLatestRelease(repoId) {
+  const response = await fetch(`https://api.github.com/repos/${GH_OWNER}/${repoId}/releases/latest`, {
+    headers: githubApiHeaders(),
+  });
+  if (response.status === 404) return null;
   if (!response.ok) {
     throw new Error(`HTTP ${response.status} ${response.statusText}`);
   }
@@ -227,6 +276,22 @@ async function validatePublicGithubState(portfolio, repos) {
       assert(githubRepo.private === false, `${repo.id}: public portfolio repo is private on GitHub`);
       assert(githubRepo.archived === false, `${repo.id}: portfolio repo is archived on GitHub`);
       assert(githubRepo.language === repo.lang, `${repo.id}: language is ${repo.lang}, GitHub reports ${githubRepo.language}`);
+
+      // Only repos that *display* a version tag as their status (e.g.
+      // executionkit's "v0.1.0") are checked against the latest release.
+      // Others intentionally show a lifecycle label (ACTIVE/BETA/LIVE) that
+      // is not meant to track the release tag 1:1 — exempt those, same as
+      // PRIVATE_IDS are exempt from the block above.
+      if (/^v\d/.test(repo.status)) {
+        const latestRelease = await fetchLatestRelease(repo.id);
+        // No releases yet: exempt — nothing to drift-check against.
+        if (latestRelease !== null) {
+          assert(
+            repo.status === latestRelease.tag_name,
+            `${repo.id}: displayed status "${repo.status}" does not match latest GitHub release "${latestRelease.tag_name}"`,
+          );
+        }
+      }
     } catch (error) {
       failures.push(`${repo.id}: GitHub metadata check failed (${error instanceof Error ? error.message : String(error)})`);
     }
@@ -250,6 +315,7 @@ if (portfolio && repos.length > 0) {
   validateSocialCardsConsistency(portfolio, socialRepos);
 
   await validateSurfaceRepoReferences(repos);
+  await validateSurfaceRepoCountLiteral();
 
   await validatePublicGithubState(portfolio, repos);
 }

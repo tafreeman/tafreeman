@@ -93,7 +93,7 @@ function Hero() {
         </div>
 
         <div className="hero-stats">
-          <div className="hs"><div className="v accent">6</div><div className="l">Interconnected repos</div></div>
+          <div className="hs"><div className="v accent">{REPOS?.length || 0}</div><div className="l">Interconnected repos</div></div>
           {/* last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry) */}
           <div className="hs"><div className="v">39</div><div className="l">Deck layouts</div></div>
           <div className="hs"><div className="v">8+</div><div className="l">LLM providers routed</div></div>
@@ -105,7 +105,7 @@ function Hero() {
 }
 
 // ===================================================================
-// WORK — six repo social cards as imagery
+// WORK — repo social cards as imagery
 // ===================================================================
 function Work() {
   return (
