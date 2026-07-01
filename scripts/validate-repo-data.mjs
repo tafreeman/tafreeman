@@ -219,14 +219,14 @@ async function validateSurfaceRepoCountLiteral() {
 
   // Match the stat block immediately preceding the "Interconnected repos"
   // label, capturing whatever sits inside the value <div>.
-  const statPattern = /<div className="v accent">([^<]*)<\/div><div className="l">Interconnected repos<\/div>/;
+  const statPattern = /<div className="v accent">([^<]*)<\/div>\s*<div className="l">Interconnected repos<\/div>/;
   const match = source.match(statPattern);
   assert(match, `${file}: could not locate the "Interconnected repos" hero stat to check for a hardcoded count`);
   if (!match) return;
 
   const value = match[1].trim();
   assert(
-    /^\{.*REPOS\.length.*\}$/.test(value),
+    /^\{.*REPOS\??\.length.*\}$/.test(value),
     `${file}: "Interconnected repos" stat must render a live REPOS.length expression, found "${value}" — use {REPOS.length} instead of a static number`,
   );
 }
