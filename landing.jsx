@@ -94,8 +94,8 @@ function Hero() {
 
         <div className="hero-stats">
           <div className="hs"><div className="v accent">{REPOS?.length || 0}</div><div className="l">Interconnected repos</div></div>
-          {/* last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry) */}
-          <div className="hs"><div className="v">39</div><div className="l">Deck layouts</div></div>
+          {/* Single source of truth: window.DECK_LAYOUT_COUNT (repo-data.jsx) */}
+          <div className="hs"><div className="v">{window.DECK_LAYOUT_COUNT ?? 39}</div><div className="l">Deck layouts</div></div>
           <div className="hs"><div className="v">8+</div><div className="l">LLM providers routed</div></div>
           <div className="hs"><div className="v">DAG</div><div className="l">+ ReAct + Consensus</div></div>
         </div>

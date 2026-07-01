@@ -24,7 +24,7 @@
 
 ---
 
-Five repositories (four public, one forthcoming): reusable LLM execution primitives, multi-agent orchestration, deterministic business apps with AI interfaces, and architecture comms. Each pairs a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path.
+Five repositories (four public, one forthcoming): reusable LLM execution primitives, multi-agent orchestration, a deterministic business app with an AI interface, a presentation/tooling platform, and a testing-enablement curriculum. The three LLM-facing systems (ExecutionKit, Agentic Runtime Platform, Financial Scenario Engine) pair a deterministic, fully-tested core with an LLM interface layer rather than putting the model in the critical path; the Architecture Deck System and QA Automation Academy are evaluated on their own terms — a rendering/export platform and a training curriculum — rather than against that same pattern.
 
 **Start here:** [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform that consumes it) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
 
@@ -33,7 +33,7 @@ AI-assisted development appears across the portfolio where it accelerates implem
 
 ## The architecture, in one diagram
 
-Every project follows the same pattern — a deterministic, fully-tested core insulated from the non-determinism of LLMs, which sit at the interface boundary rather than in the critical path:
+The three LLM-facing systems — ExecutionKit, Agentic Runtime Platform, and Financial Scenario Engine — follow the same pattern: a deterministic, fully-tested core insulated from the non-determinism of LLMs, which sit at the interface boundary rather than in the critical path. The Architecture Deck System (a React/Vite presentation and export platform) and QA Automation Academy (a Playwright + Copilot testing curriculum) don't put an LLM in their runtime path at all, so this diagram doesn't describe them:
 
 ```mermaid
 flowchart LR

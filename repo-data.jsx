@@ -7,6 +7,15 @@
 
 const GH = "https://github.com/tafreeman";
 
+// Single source of truth for the architecture-deck-system layout count,
+// referenced by landing.jsx, profile.jsx, and social-cards.jsx so the number
+// only needs updating in one place. This is a MANUAL-SYNC value — nothing
+// fetches it live from the deck-system repo (see repo-data.jsx header) — so
+// bump the count AND the last-verified date together whenever the deck
+// registry changes.
+// last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry)
+window.DECK_LAYOUT_COUNT = 39;
+
 // Gate the dev/edit TweaksPanel: only on localhost or with an explicit ?tweaks
 // flag. Hidden on the public github.io site. Exposed ONLY as a window.PORTFOLIO
 // property (computed inline below) — deliberately NOT a top-level binding,
@@ -74,7 +83,8 @@ window.PORTFOLIO = {
       eyebrow: "COMMUNICATION",
       title: "Architecture Deck System",
       // last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry, theme config)
-      desc: "React 19 + Vite presentation platform — 39 registered layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.",
+      // Layout count is interpolated from window.DECK_LAYOUT_COUNT (defined above).
+      desc: `React 19 + Vite presentation platform — ${window.DECK_LAYOUT_COUNT} registered layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.`,
       lang: "TypeScript", langClass: "lang-ts",
       status: "LIVE", statusClass: "live",
       url: "https://tafreeman.github.io/architecture-deck-system/",

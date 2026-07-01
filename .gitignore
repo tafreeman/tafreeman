@@ -25,6 +25,10 @@ review/
 heroreview/
 assetcap/
 cardpng/
+# Scratch audit doc — a point-in-time design review, not maintained docs;
+# content goes stale quickly (e.g. references to already-fixed findings), so
+# it stays local instead of being tracked.
+DESIGN-SYSTEM-AUDIT.md
 
 # Design-tool outputs & local dev artifacts
 GitHub ID Images.html
@@ -33,3 +37,4 @@ Landing Page.html
 avatars/
 design-canvas.jsx
 export.html
+export-card.html

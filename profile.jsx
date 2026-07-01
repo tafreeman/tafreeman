@@ -194,9 +194,9 @@ function ReadmeBanner() {
           <span className="v accent">{REPOS.filter(r => r.status !== 'PRIVATE').length}</span>
           <span className="l">Public repos (1 forthcoming)</span>
         </div>
-        {/* last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry) */}
+        {/* Single source of truth: window.DECK_LAYOUT_COUNT (repo-data.jsx) */}
         <div className="r-stat">
-          <span className="v">39</span>
+          <span className="v">{window.DECK_LAYOUT_COUNT ?? 39}</span>
           <span className="l">Deck layouts · deck-system</span>
         </div>
         <div className="r-stat">
