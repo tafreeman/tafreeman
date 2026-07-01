@@ -6,6 +6,14 @@
    earlier fabricated counts (142/18, 88/9, …) must never reappear (G2).
    ===================================================================== */
 
+// Single source of truth is window.DECK_LAYOUT_COUNT (repo-data.jsx). This
+// file is also loaded standalone by export.html / export-card.html, which do
+// NOT load repo-data.jsx, so the `?? 39` fallback keeps those export tools
+// working; when both scripts ARE present (they aren't on any shared page
+// today, but keep this safe), the shared constant wins.
+// last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry, theme config)
+const DECK_LAYOUT_COUNT = window.DECK_LAYOUT_COUNT ?? 39;
+
 const REPOS = [
   {
     id: "agentic-runtime-platform",
@@ -41,8 +49,7 @@ const REPOS = [
     id: "architecture-deck-system",
     eyebrow: "COMMUNICATION",
     name: "architecture-deck-system",
-    // last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry, theme config)
-    tagline: "React 19 + Vite presentation platform — 39 layouts, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.",
+    tagline: `React 19 + Vite presentation platform — ${DECK_LAYOUT_COUNT} layouts, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.`,
     cmd: "npm run dev",
     glyph: "deck",
     lang: "TypeScript", langColor: "#3178c6",
