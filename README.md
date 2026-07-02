@@ -31,6 +31,17 @@ Five repositories (four public, one forthcoming): reusable LLM execution primiti
 AI-assisted development appears across the portfolio where it accelerates implementation; architecture, tests, and public releases remain under my review.
 
 
+## How they compose
+
+Primitives flow upward into platforms; platforms emit telemetry into research and communication surfaces:
+
+- **L1 · Primitives** — `ExecutionKit` (consensus · ReAct · budget-aware calls)
+- **L2 · Platform** — `Agentic Runtime Platform` (DAG · routing · failover · observability)
+- **L3 · Communication + Applied** — `Architecture Deck System`, `Financial Scenario Engine`, `QA Automation Academy`
+
+The interactive, fully-styled version of this graph lives on the portfolio site → **[tafreeman.github.io/tafreeman](https://tafreeman.github.io/tafreeman/)**
+
+
 ## The architecture, in one diagram
 
 The three LLM-facing systems — ExecutionKit, Agentic Runtime Platform, and Financial Scenario Engine — follow the same pattern: a deterministic, fully-tested core insulated from the non-determinism of LLMs, which sit at the interface boundary rather than in the critical path. The Architecture Deck System (a React/Vite presentation and export platform) and QA Automation Academy (a Playwright + Copilot testing curriculum) don't put an LLM in their runtime path at all, so this diagram doesn't describe them:
@@ -79,17 +90,6 @@ Most repositories have their own styled GitHub Pages site, and the QA Automation
 [![arp last commit](https://img.shields.io/github/last-commit/tafreeman/agentic-runtime-platform?label=arp&color=d97757&style=flat-square)](https://github.com/tafreeman/agentic-runtime-platform)
 [![ek last commit](https://img.shields.io/github/last-commit/tafreeman/executionkit?label=executionkit&color=d97757&style=flat-square)](https://github.com/tafreeman/executionkit)
 [![fse last commit](https://img.shields.io/github/last-commit/tafreeman/financial-scenario-engine?label=fse&color=d97757&style=flat-square)](https://github.com/tafreeman/financial-scenario-engine)
-
-
-## How they compose
-
-Primitives flow upward into platforms; platforms emit telemetry into research and communication surfaces:
-
-- **L1 · Primitives** — `ExecutionKit` (consensus · ReAct · budget-aware calls)
-- **L2 · Platform** — `Agentic Runtime Platform` (DAG · routing · failover · observability)
-- **L3 · Communication + Applied** — `Architecture Deck System`, `Financial Scenario Engine`, `QA Automation Academy`
-
-The interactive, fully-styled version of this graph lives on the portfolio site → **[tafreeman.github.io/tafreeman](https://tafreeman.github.io/tafreeman/)**
 
 ---
 
