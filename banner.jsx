@@ -12,7 +12,7 @@ function hbStars(seed, n) {
 const HBStars = ({ seed, n, cls }) => (
   <div className={cls}>
     {hbStars(seed, n).map((st, i) => (
-      <span key={i} className="sc-star" style={{ position: "absolute", left: `${st.left}%`, top: `${st.top}%`, width: st.size, height: st.size, background: "#ececde", borderRadius: "50%", opacity: st.op }} />
+      <span key={i} className="sc-star" style={{ position: "absolute", left: `${st.left}%`, top: `${st.top}%`, width: st.size, height: st.size, background: "#f4f4f4", borderRadius: "50%", opacity: st.op }} />
     ))}
   </div>
 );

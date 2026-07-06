@@ -1,21 +1,25 @@
 <!doctype html>
-<html lang="en" data-mode="dark" data-accent="ember">
+<html lang="en" data-mode="dark" data-accent="console">
 <head>
   <meta charset="utf-8" />
-  <title>tafreeman — GitHub profile · redesign</title>
-  <meta name="viewport" content="width=1380" />
-  <meta name="description" content="Andy Freeman (tafreeman) — AI engineering portfolio: five public repositories (one forthcoming) spanning LLM execution primitives, multi-agent orchestration, deterministic business apps, and architecture comms." />
+  <title>console — Andy Freeman</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Andy Freeman (tafreeman) — AI engineering portfolio: five systems layered L1→L3, from zero-dependency LLM execution primitives to applied engines. Deterministic core, LLM at the boundary." />
 
   <!-- Open Graph / social preview -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Andy Freeman — AI engineering portfolio" />
-  <meta property="og:description" content="AI engineering systems: LLM execution primitives, multi-agent orchestration, deterministic business apps." />
+  <meta property="og:title" content="console — Andy Freeman" />
+  <meta property="og:description" content="Deterministic core. LLM at the boundary. Five systems, layered L1→L3." />
   <meta property="og:image" content="https://tafreeman.github.io/tafreeman/social-previews/hero-vector.png" />
   <meta property="og:url" content="https://tafreeman.github.io/tafreeman/" />
   <meta name="twitter:card" content="summary_large_image" />
 
+  <!-- console-ds/styles.css defines the Console tokens (new names) used by the
+       _ds_bundle.js primitives; tokens.css re-maps the profile's legacy token
+       names (--fg-1, --font-display, --sp-*, --tracking-*, --radius-*) onto the
+       same Console values so profile.jsx's inline styles resolve. Load both. -->
+  <link rel="stylesheet" href="console-ds/styles.css" />
   <link rel="stylesheet" href="tokens.css" />
-  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div id="root"></div>
@@ -28,6 +32,7 @@
        GitHub Pages enforces HTTPS, so same-origin scripts are already
        protected by TLS — adding integrity= hashes to local files would
        require re-hashing on every save with no security benefit. -->
+  <script src="console-ds/_ds_bundle.js"></script>
   <script type="text/babel" src="tweaks-panel.jsx"></script>
   <script src="repo-data.jsx"></script>
   <script type="text/babel" src="profile.jsx"></script>
@@ -35,7 +40,7 @@
   <script type="text/babel">
     window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       "mode": "dark",
-      "accent": "ember",
+      "accent": "console",
       "showMap": true
     }/*EDITMODE-END*/;
 

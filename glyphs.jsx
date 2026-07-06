@@ -1,13 +1,13 @@
 /* =====================================================================
-   Repo glyphs — clay + cream line-art, viewBox 0 0 200 200.
+   Repo glyphs — horizon-cyan + cream line-art, viewBox 0 0 200 200.
    Drawn crisp (not sketchy) so they export sharp at any size and stay
    consistent across the set.
    ===================================================================== */
 
-const C = "#d97757";       // clay
-const CB = "#e8954a";      // clay-bright
-const CR = "#ececde";      // cream
-const DM = "#50504a";      // dim
+const C = "#33b1ff";       // horizon (primary accent)
+const CB = "#82cfff";      // horizon-bright
+const CR = "#f4f4f4";      // text-primary
+const DM = "#6f6f6f";      // dim
 
 // little reusable 4-point sparkle
 function Spark({ x, y, s = 7, c = CB }) {
@@ -26,7 +26,7 @@ function GlyphBlackHole() {
         <ellipse cx="100" cy="100" rx="62" ry="19" fill="none" stroke={CB} strokeWidth="5" opacity="0.95" />
         <ellipse cx="100" cy="100" rx="46" ry="13" fill="none" stroke={CB} strokeWidth="3.5" opacity="0.7" />
       </g>
-      <circle cx="100" cy="100" r="30" fill="#08080c" />
+      <circle cx="100" cy="100" r="30" fill="#000000" />
       <circle cx="100" cy="100" r="30" fill="none" stroke={C} strokeWidth="3.5" />
       <circle cx="100" cy="100" r="30" fill="none" stroke={CB} strokeWidth="6" opacity="0.35" />
       <Spark x={168} y={48} s={6} />
@@ -51,7 +51,7 @@ function GlyphCube() {
       {/* play primitive on the front-left face */}
       <path d="M70 96 L70 122 L92 109 Z" fill={C} />
       {/* orbit node */}
-      <circle cx="182" cy="88" r="7" fill={CB} stroke="#08080c" strokeWidth="2" />
+      <circle cx="182" cy="88" r="7" fill={CB} stroke="#000000" strokeWidth="2" />
       <Spark x={28} y={150} s={5} />
     </svg>
   );
@@ -89,8 +89,8 @@ function GlyphPlanetChart() {
       {/* rising chart */}
       <polyline points="60,128 82,108 100,118 124,88 146,66" fill="none" stroke={CB} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M138 66 L150 62 L146 76 Z" fill={CB} />
-      <circle cx="82" cy="108" r="4.5" fill="#08080c" stroke={CB} strokeWidth="3" />
-      <circle cx="124" cy="88" r="4.5" fill="#08080c" stroke={CB} strokeWidth="3" />
+      <circle cx="82" cy="108" r="4.5" fill="#000000" stroke={CB} strokeWidth="3" />
+      <circle cx="124" cy="88" r="4.5" fill="#000000" stroke={CB} strokeWidth="3" />
       <Spark x={36} y={52} s={5} />
     </svg>
   );
@@ -102,7 +102,7 @@ function GlyphDeck() {
     <svg viewBox="0 0 200 200">
       {/* eclipse corona behind */}
       <g transform="translate(126 78)">
-        <circle r="40" fill="#08080c" stroke={DM} strokeWidth="2" />
+        <circle r="40" fill="#000000" stroke={DM} strokeWidth="2" />
         <path d="M0 -40 A40 40 0 0 1 0 40" fill="none" stroke={CB} strokeWidth="5" />
         <path d="M0 -40 A40 40 0 0 1 0 40" fill="none" stroke={C} strokeWidth="11" opacity="0.3" />
         {[...Array(7)].map((_, i) => {
@@ -112,7 +112,7 @@ function GlyphDeck() {
       </g>
       {/* presentation board */}
       <g>
-        <rect x="36" y="92" width="104" height="74" rx="6" fill="#08080c" stroke={CR} strokeWidth="4" />
+        <rect x="36" y="92" width="104" height="74" rx="0" fill="#000000" stroke={CR} strokeWidth="4" />
         <polyline points="48,150 70,128 86,138 110,112 128,124" fill="none" stroke={C} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="48" cy="106" r="3" fill={CR} opacity="0.7" />
         <line x1="58" y1="106" x2="104" y2="106" stroke={CR} strokeWidth="3" opacity="0.5" strokeLinecap="round" />
@@ -160,17 +160,17 @@ function GlyphAstroCat() {
       <Spark x={44} y={66} s={5} />
       <Spark x={176} y={104} s={4} />
       {/* moon ground */}
-      <path d="M2 168 A150 150 0 0 1 198 168 L198 200 L2 200 Z" fill="#0d0d14" stroke={DM} strokeWidth="3" />
+      <path d="M2 168 A150 150 0 0 1 198 168 L198 200 L2 200 Z" fill="#000000" stroke={DM} strokeWidth="3" />
       <ellipse cx="58" cy="170" rx="9" ry="4" fill="none" stroke={DM} strokeWidth="2" />
       <ellipse cx="150" cy="176" rx="7" ry="3" fill="none" stroke={DM} strokeWidth="2" />
       {/* astronaut — back view, seated */}
       <g fill="none" stroke={CR} strokeWidth="4" strokeLinejoin="round" strokeLinecap="round">
         <circle cx="74" cy="96" r="22" />
         <path d="M56 112 C50 132 52 150 56 164 L96 164 C98 150 98 130 92 112" />
-        <rect x="66" y="120" width="16" height="26" rx="4" />
+        <rect x="66" y="120" width="16" height="26" rx="0" />
       </g>
       {/* cat — back view, seated, tail curl */}
-      <g fill="#0d0d14" stroke={CR} strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round">
+      <g fill="#000000" stroke={CR} strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round">
         <path d="M118 164 C112 144 120 122 134 122 C148 122 156 144 150 164 Z" />
         <path d="M122 128 L118 112 L130 122 Z" />
         <path d="M146 128 L150 112 L138 122 Z" />

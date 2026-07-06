@@ -1,30 +1,30 @@
 /* =====================================================================
-   GitHub social preview cards — "Console" aesthetic
-   Lifted from the Prompts UI / Direction B style: near-black void,
-   clay-orange accent, cream text, mono everywhere, hairline borders.
+   GitHub social preview cards — Console aesthetic
+   IBM Carbon g100 near-black canvas, horizon-cyan accent, IBM Plex Mono
+   everywhere, hairline borders, square corners.
    ===================================================================== */
 
 :root {
-  --void:      #08080c;   /* deepest ground */
-  --panel:     #101018;   /* card surface */
-  --panel-2:   #16161e;   /* header / inset bars */
-  --line:      #2c2c36;   /* hairline border */
-  --line-soft: #1d1d26;
+  --void:      #000000;   /* deepest ground */
+  --panel:     #161616;   /* card surface */
+  --panel-2:   #262626;   /* header / inset bars */
+  --line:      #393939;   /* hairline border */
+  --line-soft: #262626;
 
-  --clay:        #d97757;  /* primary accent */
-  --clay-bright: #e8954a;  /* warm highlight for glyph fills */
-  --clay-dim:    rgba(217,119,87,0.14);
-  --cream:       #ececde;  /* primary text */
-  --muted:       #8a8a82;  /* supporting */
-  --dim:         #50504a;  /* decorative / ticks */
-  --dimmer:      #34343c;
+  --clay:        #33b1ff;  /* primary accent — horizon cyan */
+  --clay-bright: #82cfff;  /* highlight for glyph fills */
+  --clay-dim:    rgba(51,177,255,0.14);
+  --cream:       #f4f4f4;  /* primary text */
+  --muted:       #c6c6c6;  /* supporting */
+  --dim:         #6f6f6f;  /* decorative / ticks */
+  --dimmer:      #393939;
 
-  --green: #4ade80;
-  --amber: #fbbf24;
-  --red:   #f87171;
-  --blue:  #6ea8d8;
+  --green: #42be65;
+  --amber: #f1c21b;
+  --red:   #fa4d56;
+  --blue:  #4589ff;
 
-  --mono: "JetBrains Mono", ui-monospace, "SF Mono", "Berkeley Mono", Consolas, monospace;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", "Berkeley Mono", Consolas, monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,14 +58,14 @@
           mask-image: radial-gradient(120% 120% at 70% 40%, #000 30%, transparent 78%);
   z-index: 0;
 }
-/* warm glow under the glyph zone */
+/* Console forbids glow-as-decoration — the glyph zone has no radial wash. */
 .sc-card::after {
   content: "";
   position: absolute;
   right: -120px; top: 50%;
   width: 720px; height: 720px;
   transform: translateY(-50%);
-  background: radial-gradient(circle, rgba(217,119,87,0.16) 0%, rgba(217,119,87,0.05) 32%, transparent 60%);
+  background: none;
   z-index: 0;
   pointer-events: none;
 }
@@ -91,7 +91,7 @@
 .sc-tb-mark {
   width: 12px; height: 12px;
   background: var(--clay);
-  box-shadow: 0 0 0 1px rgba(236,236,222,0.12), 0 0 14px rgba(217,119,87,0.55);
+  box-shadow: 0 0 0 1px rgba(244,244,244,0.12);
 }
 .sc-tb-path { font-size: 17px; letter-spacing: 0.5px; color: var(--muted); white-space: nowrap; }
 .sc-tb-path b { color: var(--cream); font-weight: 700; }
@@ -200,11 +200,11 @@
   color: var(--cream);
   padding: 7px 16px;
   border: 1px solid var(--line);
-  border-radius: 2px;
+  border-radius: 0;
   background: var(--panel);
 }
 .sc-status .sdot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px currentColor; }
-.sc-status.flagship { color: var(--clay); border-color: rgba(217,119,87,0.4); background: var(--clay-dim); }
+.sc-status.flagship { color: var(--clay); border-color: rgba(51,177,255,0.4); background: var(--clay-dim); }
 .sc-status.flagship .sdot { background: var(--clay); }
 .sc-status.beta .sdot { background: var(--amber); }
 .sc-status.live .sdot { background: var(--green); }
@@ -240,7 +240,7 @@
 .hb::after {
   content: ""; position: absolute; right: -80px; top: 50%;
   width: 620px; height: 620px; transform: translateY(-50%);
-  background: radial-gradient(circle, rgba(217,119,87,0.16) 0%, rgba(217,119,87,0.05) 34%, transparent 62%);
+  background: none;
   z-index: 0; pointer-events: none;
 }
 .hb > * { position: relative; z-index: 1; }
@@ -264,7 +264,7 @@
 .hb-chips { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
 .hb-chip {
   font-size: 13px; letter-spacing: .5px; color: var(--cream);
-  padding: 7px 13px; border: 1px solid var(--line); border-radius: 3px;
+  padding: 7px 13px; border: 1px solid var(--line); border-radius: 0;
   background: var(--panel); display: inline-flex; align-items: center; gap: 8px;
 }
 .hb-chip .cdot { width: 7px; height: 7px; border-radius: 50%; background: var(--clay); }
@@ -272,8 +272,8 @@
 .hb-glyph svg { width: 300px; height: 300px; overflow: visible; }
 .hb-art {
   position: relative; width: 320px; height: 320px; justify-self: center;
-  border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
-  box-shadow: 0 0 40px rgba(217,119,87,0.12);
+  border: 1px solid var(--line); border-radius: 0; overflow: hidden;
+  box-shadow: none;
 }
 .hb-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
@@ -306,7 +306,7 @@
    ===================================================================== */
 .av {
   width: 460px; height: 460px;
-  background: radial-gradient(circle at 50% 42%, #14141c 0%, var(--void) 68%);
+  background: radial-gradient(circle at 50% 42%, #262626 0%, var(--void) 68%);
   color: var(--cream); font-family: var(--mono);
   position: relative; overflow: hidden;
   display: grid; place-items: center; isolation: isolate;
@@ -317,7 +317,7 @@
 }
 .av-stars { position: absolute; inset: 0; }
 .av-mono { display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 1; }
-.av-mark { width: 26px; height: 26px; background: var(--clay); box-shadow: 0 0 24px rgba(217,119,87,.6); }
+.av-mark { width: 26px; height: 26px; background: var(--clay); box-shadow: none; }
 .av-letters { font-size: 180px; font-weight: 700; line-height: .9; letter-spacing: -6px; }
 .av-letters .a { color: var(--cream); }
 .av-letters .f { color: var(--clay); }
