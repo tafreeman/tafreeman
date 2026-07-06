@@ -32,9 +32,9 @@ test('hub renders', async ({ page }) => {
   const root = page.locator('#root');
   await expect(root).not.toBeEmpty({ timeout: 45_000 });
 
-  // Verify recognisable profile content is visible.  "tafreeman" appears in
-  // the top-bar search label and "Andy Freeman" in the profile sidebar — both
-  // are baked into profile.jsx's static REPOS/component data.
+  // Verify recognisable profile content is visible. "tafreeman" appears in
+  // the Console hero eyebrow ("@TAFREEMAN", matched case-insensitively) and
+  // "Andy Freeman" in the footer line — both are baked into profile.jsx.
   await expect(
     page.getByText('tafreeman', { exact: false }).first()
   ).toBeVisible({ timeout: 45_000 });

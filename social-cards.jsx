@@ -73,7 +73,7 @@ const REPOS = [
     tagline: "AI engineering systems — LLM primitives, multi-agent orchestration, deterministic apps.",
     cmd: "whoami → tafreeman",
     glyph: "astro-cat",
-    lang: "Andy Freeman", langColor: "#d97757", langPlain: true,
+    lang: "Andy Freeman", langColor: "#33b1ff", langPlain: true,
     status: "PROFILE", statusClass: "flagship",
     isHub: true,
   },
