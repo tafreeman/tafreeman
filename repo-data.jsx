@@ -13,7 +13,8 @@ const GH = "https://github.com/tafreeman";
 // fetches it live from the deck-system repo (see repo-data.jsx header) — so
 // bump the count AND the last-verified date together whenever the deck
 // registry changes.
-// last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry)
+// last-verified: 2026-07-06 from architecture-deck-system@main (layouts registry,
+// CI-gated there by `npm run verify:layouts`)
 window.DECK_LAYOUT_COUNT = 39;
 
 // Gate the dev/edit TweaksPanel: only on localhost or with an explicit ?tweaks
@@ -24,11 +25,16 @@ window.DECK_LAYOUT_COUNT = 39;
 // make profile.jsx fail with "SHOW_TWEAKS has already been declared").
 // landing.jsx reads window.PORTFOLIO.SHOW_TWEAKS. Mirrors profile.jsx detection.
 
-// Five real, non-archived repositories (four public, one private). `url` is
+// Five repositories listed (four public, one private). `url` is
 // the primary destination (live Pages where published, repo otherwise; null
 // while a repo is private — cards render without a link); `repo` is the
 // GitHub source where public; `img` is the on-brand social card.
 // Descriptions and language are pulled from each repo.
+// NOTE 2026-07-06: qa-automation-academy is ARCHIVED on GitHub while private
+// (live-verified via `gh repo view`). The validator's live checks skip private
+// repos, so that state is recorded here and in README's Status column.
+// agentic-evalkit (private) is named on README's verification axis but is
+// deliberately NOT listed here until its visibility decision ships.
 window.PORTFOLIO = {
   GH,
   SHOW_TWEAKS: (() => {
@@ -82,9 +88,12 @@ window.PORTFOLIO = {
       name: "architecture-deck-system",
       eyebrow: "COMMUNICATION",
       title: "Architecture Deck System",
-      // last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry, theme config)
+      // last-verified: 2026-07-06 from architecture-deck-system@main (layouts registry, theme config)
       // Layout count is interpolated from window.DECK_LAYOUT_COUNT (defined above).
-      desc: `React 19 + Vite presentation platform — ${window.DECK_LAYOUT_COUNT} registered layouts across 8 families, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.`,
+      // Theme count is MANUAL-SYNC against src/tokens/themes.ts in the deck repo
+      // (16 as of 2026-07-06; was stale at 15 while the deck shipped 16 — the
+      // agreeing-but-stale case documented in docs/conventions/doc-fact-check.md).
+      desc: `React 19 + Vite presentation platform — ${window.DECK_LAYOUT_COUNT} registered layouts across 8 families, 16 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.`,
       lang: "TypeScript", langClass: "lang-ts",
       status: "LIVE", statusClass: "live",
       url: "https://tafreeman.github.io/architecture-deck-system/",
@@ -99,8 +108,8 @@ window.PORTFOLIO = {
       desc: "Playwright + GitHub Copilot training platform — a guided curriculum of interactive modules, a practice app with intentional bugs, and a growing library of reference specs that move manual QA engineers to automated testing.",
       lang: "TypeScript", langClass: "lang-ts",
       status: "PRIVATE", statusClass: "",
-      // Repo is private ahead of its public release — no public links yet,
-      // so the card renders without navigation (null href is omitted).
+      // Repo is private (and archived on GitHub as of 2026-07-06) — no public
+      // links, so the card renders without navigation (null href is omitted).
       url: null,
       repo: null,
       img: "social-previews/qa-automation-academy.png",

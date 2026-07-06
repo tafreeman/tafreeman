@@ -11,7 +11,7 @@
 // NOT load repo-data.jsx, so the `?? 39` fallback keeps those export tools
 // working; when both scripts ARE present (they aren't on any shared page
 // today, but keep this safe), the shared constant wins.
-// last-verified: 2026-06-11 from architecture-deck-system@main (layouts registry, theme config)
+// last-verified: 2026-07-06 from architecture-deck-system@main (layouts registry, theme config)
 const DECK_LAYOUT_COUNT = window.DECK_LAYOUT_COUNT ?? 39;
 
 const REPOS = [
@@ -33,7 +33,7 @@ const REPOS = [
     cmd: "pip install executionkit",
     glyph: "cube",
     lang: "Python", langColor: "#3776ab",
-    status: "v0.1.0", statusClass: "",
+    status: "v0.2.0", statusClass: "",
   },
   {
     id: "financial-scenario-engine",
@@ -49,7 +49,7 @@ const REPOS = [
     id: "architecture-deck-system",
     eyebrow: "COMMUNICATION",
     name: "architecture-deck-system",
-    tagline: `React 19 + Vite presentation platform — ${DECK_LAYOUT_COUNT} layouts, 15 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.`,
+    tagline: `React 19 + Vite presentation platform — ${DECK_LAYOUT_COUNT} layouts, 16 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.`,
     cmd: "npm run dev",
     glyph: "deck",
     lang: "TypeScript", langColor: "#3178c6",
@@ -142,7 +142,7 @@ function SocialCard({ r }) {
 
       <div className="sc-footer">
         {r.isPrivate
-          ? <span className="sc-url"><span className="at">↳</span> private — public release planned</span>
+          ? <span className="sc-url"><span className="at">↳</span> private repository</span>
           : <span className="sc-url"><span className="at">↳</span> github.com/tafreeman/{r.name}</span>
         }
         <span className={`sc-status ${r.statusClass}`}>
