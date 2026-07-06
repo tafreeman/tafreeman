@@ -1,5 +1,5 @@
-<!--
-  Profile README for tafreeman/tafreeman.
+
+<!--  Profile README for tafreeman/tafreeman.
   CONSTRAINTS (GitHub-Flavored Markdown): no <style>, external CSS, JSX, or JS
   executes here, and custom fonts (JetBrains Mono) do NOT render. The design
   system is therefore applied through (1) shields.io badge colors (?color=d97757,
@@ -12,7 +12,7 @@
 
 <div align="center">
 
-[![tafreeman — AI engineering portfolio](social-previews/hero-vector.png)](https://tafreeman.github.io/tafreeman/)
+<!--[![tafreeman — AI engineering portfolio](social-previews/hero-vector.png)](https://tafreeman.github.io/tafreeman/)-->
 
 # Andy Freeman · `@tafreeman`
 
