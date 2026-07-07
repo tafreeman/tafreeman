@@ -98,6 +98,21 @@ function validateSocialCardsConsistency(portfolio, socialRepos) {
       `${repo.id}: private flag drift — PORTFOLIO ${portfolioPrivate ? "PRIVATE" : "public"} vs social-cards ${socialPrivate ? "PRIVATE" : "public"}`,
     );
   }
+
+  // 4. The FULL status label must agree across both sources — social-cards is
+  //    a hand-maintained copy, and a stale version tag slips through every
+  //    other check (ExecutionKit shipped v0.1.0 on cards against a released
+  //    v0.2.0, uncaught; career-signal audit 2026-07-06, TAF ship-now #8).
+  //    PORTFOLIO.REPOS.status is itself checked against the latest GitHub
+  //    release above, so transitively the cards now track live state too.
+  for (const repo of portfolioRepos) {
+    const card = socialById.get(repo.id);
+    if (!card) continue;
+    assert(
+      card.status === repo.status,
+      `${repo.id}: status drift — PORTFOLIO "${repo.status}" vs social-cards "${card.status}"`,
+    );
+  }
 }
 
 function validateStaticShape(portfolio) {
