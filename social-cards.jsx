@@ -6,14 +6,6 @@
    earlier fabricated counts (142/18, 88/9, …) must never reappear (G2).
    ===================================================================== */
 
-// Single source of truth is window.DECK_LAYOUT_COUNT (repo-data.jsx). This
-// file is also loaded standalone by export.html / export-card.html, which do
-// NOT load repo-data.jsx, so the `?? 39` fallback keeps those export tools
-// working; when both scripts ARE present (they aren't on any shared page
-// today, but keep this safe), the shared constant wins.
-// last-verified: 2026-07-06 from architecture-deck-system@main (layouts registry, theme config)
-const DECK_LAYOUT_COUNT = window.DECK_LAYOUT_COUNT ?? 39;
-
 const REPOS = [
   {
     id: "agentic-runtime-platform",
@@ -33,7 +25,9 @@ const REPOS = [
     cmd: "pip install executionkit",
     glyph: "cube",
     lang: "Python", langColor: "#3776ab",
-    status: "v0.2.0", statusClass: "",
+    // Kept in lockstep with repo-data.jsx (validator asserts card.status ===
+    // repo.status); executionkit's latest GitHub release is v0.3.0.
+    status: "v0.3.0", statusClass: "",
   },
   {
     id: "financial-scenario-engine",
@@ -46,14 +40,14 @@ const REPOS = [
     status: "BETA", statusClass: "beta",
   },
   {
-    id: "architecture-deck-system",
-    eyebrow: "COMMUNICATION",
-    name: "architecture-deck-system",
-    tagline: `React 19 + Vite presentation platform — ${DECK_LAYOUT_COUNT} layouts, 16 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.`,
-    cmd: "npm run dev",
-    glyph: "deck",
-    lang: "TypeScript", langColor: "#3178c6",
-    status: "LIVE", statusClass: "live",
+    id: "agentic-evalkit",
+    eyebrow: "EVALUATION",
+    name: "agentic-evalkit",
+    tagline: "Evaluation toolkit for agentic systems — typed contracts, benchmark-valid grading, calibrated judges, and statistical reporting through callable/subprocess/HTTP targets.",
+    cmd: "pip install agentic-evalkit",
+    glyph: "flask",
+    lang: "Python", langColor: "#3776ab",
+    status: "v0.1.1", statusClass: "",
   },
   {
     id: "qa-automation-academy",

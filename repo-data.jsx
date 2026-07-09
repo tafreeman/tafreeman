@@ -1,21 +1,12 @@
 // repo-data.jsx — single source of truth for portfolio repo + language data.
-// Loaded as <script type="text/babel"> BEFORE profile.jsx / landing.jsx.
+// Loaded as <script type="text/babel"> BEFORE profile.jsx.
 // REAL DATA ONLY. Every repo, link, and label below is verified against the
 // live GitHub account (gh repo list tafreeman) and each repo's own README.
-// No star/fork/contribution/achievement metrics are shown because none are
-// real (all five repos currently sit at 0 stars / 0 forks / no releases).
+// No fork/contribution/achievement metrics are shown; star counts are also
+// omitted because they are not meaningfully differentiated across the five
+// repos as of 2026-07-09 (0-3 stars each, live-verified via the GitHub API).
 
 const GH = "https://github.com/tafreeman";
-
-// Single source of truth for the architecture-deck-system layout count,
-// referenced by landing.jsx, profile.jsx, and social-cards.jsx so the number
-// only needs updating in one place. This is a MANUAL-SYNC value — nothing
-// fetches it live from the deck-system repo (see repo-data.jsx header) — so
-// bump the count AND the last-verified date together whenever the deck
-// registry changes.
-// last-verified: 2026-07-06 from architecture-deck-system@main (layouts registry,
-// CI-gated there by `npm run verify:layouts`)
-window.DECK_LAYOUT_COUNT = 39;
 
 // Gate the dev/edit TweaksPanel: only on localhost or with an explicit ?tweaks
 // flag. Hidden on the public github.io site. Exposed ONLY as a window.PORTFOLIO
@@ -23,7 +14,7 @@ window.DECK_LAYOUT_COUNT = 39;
 // because profile.jsx declares its own top-level `const SHOW_TWEAKS` and both
 // scripts share global lexical scope on index.html (a top-level const here would
 // make profile.jsx fail with "SHOW_TWEAKS has already been declared").
-// landing.jsx reads window.PORTFOLIO.SHOW_TWEAKS. Mirrors profile.jsx detection.
+// profile.jsx reads window.PORTFOLIO.SHOW_TWEAKS directly.
 
 // Five repositories listed (four public, one private). `url` is
 // the primary destination (live Pages where published, repo otherwise; null
@@ -33,8 +24,15 @@ window.DECK_LAYOUT_COUNT = 39;
 // NOTE 2026-07-06: qa-automation-academy is ARCHIVED on GitHub while private
 // (live-verified via `gh repo view`). The validator's live checks skip private
 // repos, so that state is recorded here and in README's Status column.
-// agentic-evalkit (private) is named on README's verification axis but is
-// deliberately NOT listed here until its visibility decision ships.
+// agentic-evalkit went public 2026-07-08 (career-signal audit) and is listed
+// below as a normal public repo — live-verified 2026-07-09 (private: false,
+// archived: false, has_pages: false, latest release v0.1.1). It has no
+// GitHub Pages site, so `url` points at the repo itself (see the `url`
+// convention above: "repo otherwise").
+// NOTE 2026-07-09: architecture-deck-system was DROPPED from the portfolio by
+// owner decision — the repo is private (recruiters would 404 on its links),
+// and unlike QAA it is removed entirely rather than shown as a private/
+// unlinked entry. Do not re-add it here without a new owner decision.
 window.PORTFOLIO = {
   GH,
   SHOW_TWEAKS: (() => {
@@ -66,7 +64,10 @@ window.PORTFOLIO = {
       title: "ExecutionKit",
       desc: "Provider-agnostic Python library for composable LLM execution patterns — consensus, refinement, ReAct tool loops, structured output, and budget-aware calls. Zero runtime deps.",
       lang: "Python", langClass: "lang-py",
-      status: "v0.2.0", statusClass: "",
+      // v0.3.0 is the latest GitHub release (live-verified 2026-07-09); the
+      // validator checks this literal against the release tag, so bump both
+      // together. Was stale at v0.2.0 through the 0.3.0 ship.
+      status: "v0.3.0", statusClass: "",
       url: "https://tafreeman.github.io/executionkit/",
       repo: GH + "/executionkit",
       img: "social-previews/executionkit.png",
@@ -84,21 +85,18 @@ window.PORTFOLIO = {
       img: "social-previews/financial-scenario-engine.png",
     },
     {
-      id: "architecture-deck-system",
-      name: "architecture-deck-system",
-      eyebrow: "COMMUNICATION",
-      title: "Architecture Deck System",
-      // last-verified: 2026-07-06 from architecture-deck-system@main (layouts registry, theme config)
-      // Layout count is interpolated from window.DECK_LAYOUT_COUNT (defined above).
-      // Theme count is MANUAL-SYNC against src/tokens/themes.ts in the deck repo
-      // (16 as of 2026-07-06; was stale at 15 while the deck shipped 16 — the
-      // agreeing-but-stale case documented in docs/conventions/doc-fact-check.md).
-      desc: `React 19 + Vite presentation platform — ${window.DECK_LAYOUT_COUNT} registered layouts across 8 families, 16 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export.`,
-      lang: "TypeScript", langClass: "lang-ts",
-      status: "LIVE", statusClass: "live",
-      url: "https://tafreeman.github.io/architecture-deck-system/",
-      repo: GH + "/architecture-deck-system",
-      img: "social-previews/architecture-deck-system.png",
+      id: "agentic-evalkit",
+      name: "agentic-evalkit",
+      eyebrow: "EVALUATION",
+      title: "agentic-evalkit",
+      desc: "Evaluation toolkit for agentic systems — structurally independent of the runtimes it evaluates (a contract test forbids importing them); evaluates through public execution targets only.",
+      lang: "Python", langClass: "lang-py",
+      status: "v0.1.1", statusClass: "",
+      // No GitHub Pages site (has_pages: false, live-verified) — url points at
+      // the repo itself per the `url` convention above ("repo otherwise").
+      url: GH + "/agentic-evalkit",
+      repo: GH + "/agentic-evalkit",
+      img: "social-previews/agentic-evalkit.png",
     },
     {
       id: "qa-automation-academy",
@@ -115,9 +113,11 @@ window.PORTFOLIO = {
       img: "social-previews/qa-automation-academy.png",
     },
   ],
-  // Real primary-language split across the five pinned repos (2 Python, 3 TypeScript).
+  // Real primary-language split across the five pinned repos (3 Python, 2 TypeScript).
+  // Percentages are validated against these counts by validate-repo-data.mjs
+  // (round(count/total*100)), so they must track the REPOS list above.
   LANGS: [
-    { name: "Python",     pct: 40, color: "#3776ab" },
-    { name: "TypeScript", pct: 60, color: "#3178c6" },
+    { name: "Python",     pct: 60, color: "#3776ab" },
+    { name: "TypeScript", pct: 40, color: "#3178c6" },
   ],
 };
