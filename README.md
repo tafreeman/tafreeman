@@ -24,7 +24,7 @@
 
 ---
 
-Independently versioned systems on two axes. The **runtime axis** composes upward — reusable LLM execution primitives, multi-agent orchestration, and applied systems (a deterministic business app with an AI interface; a presentation/tooling platform). The **verification axis** deliberately stands outside that call graph — an evaluation toolkit and a testing-enablement curriculum that prove the runtime work rather than join it. Each repo's live visibility is stated in the Status column under [The systems](#the-systems). The three LLM-facing systems (ExecutionKit, Agentic Runtime Platform, Financial Scenario Engine) pair a deterministic, tested core with an LLM interface layer rather than putting the model in the critical path; the Architecture Deck System is evaluated on its own terms — a rendering/export platform.
+Independently versioned systems on two axes. The **runtime axis** composes upward — reusable LLM execution primitives, multi-agent orchestration, and an applied system (a deterministic business app with an AI interface). The **verification axis** deliberately stands outside that call graph — an evaluation toolkit and a testing-enablement curriculum that prove the runtime work rather than join it. Each repo's live visibility is stated in the Status column under [The systems](#the-systems). The three LLM-facing systems (ExecutionKit, Agentic Runtime Platform, Financial Scenario Engine) pair a deterministic, tested core with an LLM interface layer rather than putting the model in the critical path.
 
 **Start here:** [ExecutionKit](https://tafreeman.github.io/executionkit/) (the primitive layer) → [Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/) (the platform that consumes it) → [Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/) (an applied example).
 
@@ -33,13 +33,13 @@ AI-assisted development appears across the portfolio where it accelerates implem
 
 ## How they compose
 
-Two orthogonal axes, not one list. The **runtime axis** is composition — primitives flow upward into the platform, the platform into applied and communication systems. The **verification axis** never joins that call graph: it proves the runtime work from outside.
+Two orthogonal axes, not one list. The **runtime axis** is composition — primitives flow upward into the platform, the platform into the applied system. The **verification axis** never joins that call graph: it proves the runtime work from outside.
 
 ```mermaid
 flowchart LR
     subgraph runtime["Runtime composition — what calls what"]
         direction LR
-        L1["L1 · Primitives<br/>ExecutionKit"] --> L2["L2 · Platform<br/>Agentic Runtime Platform"] --> L3["L3 · Applied + Communication<br/>Financial Scenario Engine · Architecture Deck System"]
+        L1["L1 · Primitives<br/>ExecutionKit"] --> L2["L2 · Platform<br/>Agentic Runtime Platform"] --> L3["L3 · Applied<br/>Financial Scenario Engine"]
     end
 
     subgraph verification["Verification — how the work is proven"]
@@ -58,7 +58,7 @@ The interactive, fully-styled version of this graph lives on the portfolio site 
 
 ## The architecture, in one diagram
 
-The three LLM-facing systems — ExecutionKit, Agentic Runtime Platform, and Financial Scenario Engine — follow the same pattern: a deterministic, fully-tested core insulated from the non-determinism of LLMs, which sit at the interface boundary rather than in the critical path. The Architecture Deck System (a React/Vite presentation and export platform) and QA Automation Academy (a Playwright + Copilot testing curriculum) don't put an LLM in their runtime path at all, so this diagram doesn't describe them:
+The three LLM-facing systems — ExecutionKit, Agentic Runtime Platform, and Financial Scenario Engine — follow the same pattern: a deterministic, fully-tested core insulated from the non-determinism of LLMs, which sit at the interface boundary rather than in the critical path. QA Automation Academy (a Playwright + Copilot testing curriculum) doesn't put an LLM in its runtime path at all, so this diagram doesn't describe it:
 
 ```mermaid
 flowchart LR
@@ -97,8 +97,7 @@ Most repositories have their own styled GitHub Pages site. The **Status** column
 | **[Agentic Runtime Platform](https://tafreeman.github.io/agentic-runtime-platform/)** · `PLATFORM` | Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing across 8 model backends (plus any OpenAI-compatible endpoint), failover, [evaluation](https://github.com/tafreeman/agentic-runtime-platform/blob/main/docs/architecture-eval.md), and [live observability](https://github.com/tafreeman/agentic-runtime-platform/blob/main/otel/otel-collector-config.yaml). | Python | Public | [docs ↗](https://tafreeman.github.io/agentic-runtime-platform/) · [repo ↗](https://github.com/tafreeman/agentic-runtime-platform) |
 | **[ExecutionKit](https://tafreeman.github.io/executionkit/)** · `LIBRARY` | Provider-agnostic LLM execution primitives — consensus, refinement, ReAct tool loops, structured output, budget-aware calls. Zero runtime dependencies. | Python | Public | [docs ↗](https://tafreeman.github.io/executionkit/) · [repo ↗](https://github.com/tafreeman/executionkit) |
 | **[Financial Scenario Engine](https://tafreeman.github.io/financial-scenario-engine/)** · `APPLIED AI` | Local-first project finance — a deterministic TypeScript engine produces every number; the LLM only parses intent and narrates. SQLite-backed, GitHub Models or local Ollama. | TypeScript | Public | [site ↗](https://tafreeman.github.io/financial-scenario-engine/) · [repo ↗](https://github.com/tafreeman/financial-scenario-engine) |
-| **[Architecture Deck System](https://tafreeman.github.io/architecture-deck-system/)** · `COMMUNICATION` | React 19 + Vite presentation platform — 39 registered layouts across 8 families, 16 themes × 4 style modes, runtime content-pack swapping, Storybook, and HTML/image/PDF export. | TypeScript | Public | [site ↗](https://tafreeman.github.io/architecture-deck-system/) · [repo ↗](https://github.com/tafreeman/architecture-deck-system) |
-| **agentic-evalkit** · `EVALUATION` | Evaluation toolkit for agentic systems — structurally independent of the runtimes it evaluates (a contract test forbids importing them); evaluates through public execution targets only. | Python | Private | — |
+| **[agentic-evalkit](https://github.com/tafreeman/agentic-evalkit)** · `EVALUATION` | Evaluation toolkit for agentic systems — structurally independent of the runtimes it evaluates (a contract test forbids importing them); evaluates through public execution targets only. | Python | Public | [repo ↗](https://github.com/tafreeman/agentic-evalkit) |
 | **QA Automation Academy** · `ENABLEMENT` | Playwright + GitHub Copilot training platform — guided curriculum, practice app with intentional bugs, and reference specs that move manual QA engineers to automated testing. | TypeScript | Private · archived | — |
 
 
@@ -107,17 +106,29 @@ Most repositories have their own styled GitHub Pages site. The **Status** column
 [![arp last commit](https://img.shields.io/github/last-commit/tafreeman/agentic-runtime-platform?label=arp&color=d97757&style=flat-square)](https://github.com/tafreeman/agentic-runtime-platform)
 [![ek last commit](https://img.shields.io/github/last-commit/tafreeman/executionkit?label=executionkit&color=d97757&style=flat-square)](https://github.com/tafreeman/executionkit)
 [![fse last commit](https://img.shields.io/github/last-commit/tafreeman/financial-scenario-engine?label=fse&color=d97757&style=flat-square)](https://github.com/tafreeman/financial-scenario-engine)
-[![deck last commit](https://img.shields.io/github/last-commit/tafreeman/architecture-deck-system?label=deck&color=d97757&style=flat-square)](https://github.com/tafreeman/architecture-deck-system)
+[![evk last commit](https://img.shields.io/github/last-commit/tafreeman/agentic-evalkit?label=evk&color=d97757&style=flat-square)](https://github.com/tafreeman/agentic-evalkit)
 
 ---
 
 ## Develop / run locally
 
-Reproduce the CI validation gate (JSX-syntax check + HTML validation) in under two minutes:
+Reproduce the CI validation gate (JSX-syntax check + repo-metadata check + HTML validation) in
+under two minutes:
 
 ```sh
 npm ci
 npm run validate
+```
+
+`npm run validate` includes `validate:repos`, which calls the live GitHub API
+(`api.github.com`) to confirm each public repo's visibility, language, and release tag against
+`repo-data.jsx`. It needs outbound network access and **exits 1 when run offline** (or if an
+unauthenticated caller hits GitHub's 60-requests/hour rate limit) — this is expected, not a bug
+in the repo. Set `GITHUB_TOKEN` (or `GH_TOKEN`) in the environment to raise that limit. To
+validate offline, run the two static checks on their own instead:
+
+```sh
+npm run validate:jsx && npm run validate:html
 ```
 
 Serve the site locally and open the canonical portfolio entry:

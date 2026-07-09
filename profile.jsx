@@ -39,19 +39,42 @@ const TIER_TAG_COLOR = { l1: 'gray', l2: 'teal', l3: 'green' };
    the adoption spec; name/url/repo/lang are read live from PORTFOLIO so
    this list never drifts from repo-data.jsx.
    --------------------------------------------------------------------- */
+// Two independent axes (see README "How they compose"): the RUNTIME axis
+// composes upward L1 -> L2 -> L3; the VERIFICATION axis deliberately stands
+// outside that call graph and proves the runtime work rather than joining
+// it. `tier` is only set for runtime-axis systems — it drives the L1/L2/L3
+// Tile color; verification systems render tier-less (neutral) on purpose,
+// not "unranked by omission". `arch` is the per-system Architecture-tab
+// claim: only text the repo actually supports — the three LLM-interface
+// systems share the deterministic-core/LLM-boundary paragraph because the
+// architecture diagram in README backs it for exactly those three; every
+// other system gets its own true claim instead of that paragraph by default.
+const ARCH_LLM_BOUNDARY = 'Deterministic, fully-tested core. The LLM sits at the interface boundary — parsing intent on the way in, narrating results on the way out — and never in the critical path.';
+
+// architecture-deck-system was dropped from the portfolio (owner decision,
+// 2026-07-09 — private repo, links would 404). It is intentionally absent
+// from SYSTEM_META and repo-data.jsx; do not re-add without a new decision.
 const SYSTEM_META = {
-  'executionkit': { tier: 'l1', eyebrow: 'L1 · PRIMITIVES', order: 0 },
-  'agentic-runtime-platform': { tier: 'l2', eyebrow: 'L2 · PLATFORM', order: 1 },
-  'financial-scenario-engine': { tier: 'l3', eyebrow: 'L3 · APPLIED', order: 2 },
-  'architecture-deck-system': { tier: 'l3', eyebrow: 'L3 · COMMS', order: 3 },
-  'qa-automation-academy': { tier: 'l3', eyebrow: 'L3 · COMMS', order: 4 },
+  'executionkit': { tier: 'l1', axis: 'runtime', eyebrow: 'L1 · PRIMITIVES', order: 0, arch: ARCH_LLM_BOUNDARY },
+  'agentic-runtime-platform': { tier: 'l2', axis: 'runtime', eyebrow: 'L2 · PLATFORM', order: 1, arch: ARCH_LLM_BOUNDARY },
+  'financial-scenario-engine': { tier: 'l3', axis: 'runtime', eyebrow: 'L3 · APPLIED', order: 2, arch: ARCH_LLM_BOUNDARY },
+  'agentic-evalkit': {
+    axis: 'verification', eyebrow: 'VERIFICATION · EVALUATION', order: 3,
+    arch: "An evaluation toolkit, not a runtime. It reaches a system under test only through its ExecutionTarget protocol (callable, subprocess, or HTTP) — a contract test forbids importing the runtimes it evaluates, so it can never join their call graph.",
+  },
+  'qa-automation-academy': {
+    axis: 'verification', eyebrow: 'VERIFICATION · ENABLEMENT', order: 4,
+    arch: "A Playwright + GitHub Copilot training curriculum and practice app, not a runtime system. It builds the testing skills the runtime repos' CI gates assume, rather than sharing their architecture.",
+  },
 };
 
 const SYSTEMS = REPOS
   .map((r) => ({
     id: r.id,
-    tier: SYSTEM_META[r.id]?.tier || 'l3',
+    tier: SYSTEM_META[r.id]?.tier,
+    axis: SYSTEM_META[r.id]?.axis || 'runtime',
     eyebrow: SYSTEM_META[r.id]?.eyebrow || r.eyebrow,
+    arch: SYSTEM_META[r.id]?.arch,
     name: r.title,
     blurb: r.desc,
     lang: r.lang,
@@ -147,24 +170,56 @@ function HorizonRule() {
   return <div style={{ height: 1, background: 'var(--gradient-brand)', margin: '0 var(--sp-xl)' }}></div>;
 }
 
+function SystemTile({ s, onOpen }) {
+  return (
+    <Tile tier={s.tier} eyebrow={s.eyebrow} onClick={() => onOpen(s.id)}
+          style={s.tier ? undefined : { borderTop: '3px solid var(--border)' }}>
+      <h3 style={{ font: '400 1.25rem/1.4 var(--font-display)', margin: '0 0 var(--sp-xs)' }}>{s.name}</h3>
+      <p style={{ margin: '0 0 var(--sp-sm)', color: 'var(--fg-2)' }}>{s.blurb}</p>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        <Tag color={TIER_TAG_COLOR[s.tier]}>{s.lang.toLowerCase()}</Tag>
+        {s.status && <Tag color={TIER_TAG_COLOR[s.tier]}>{s.status.toLowerCase()}</Tag>}
+      </div>
+    </Tile>
+  );
+}
+
+function AxisLabel({ children }) {
+  return (
+    <div style={{ font: 'var(--fw-regular) 0.75rem/1.33333 var(--font-mono)', letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--fg-2)', margin: '0 0 var(--sp-sm)' }}>
+      {children}
+    </div>
+  );
+}
+
 function SystemsIndex({ onOpen }) {
+  // Two axes, not one list — see the ARCH_LLM_BOUNDARY comment above
+  // SYSTEM_META. Filtering here (rather than a single flat grid) is what
+  // makes the axis split visible on the page, not just in README prose.
+  const runtime = SYSTEMS.filter((s) => s.axis === 'runtime');
+  const verification = SYSTEMS.filter((s) => s.axis === 'verification');
   return (
     <section style={{ background: 'var(--bg)', padding: 'var(--sp-3xl) var(--sp-xl)' }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'var(--sp-lg)' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 'var(--sp-sm)' }}>
         <h2 style={{ font: '400 1.25rem/1.4 var(--font-display)', margin: 0 }}>Systems</h2>
-        <span style={{ font: 'var(--fw-regular) 0.875rem/1.42857 var(--font-mono)', color: 'var(--fg-2)' }}>{SYSTEMS.length} systems · 3 tiers · one language per repo</span>
+        <span style={{ font: 'var(--fw-regular) 0.875rem/1.42857 var(--font-mono)', color: 'var(--fg-2)' }}>{runtime.length} runtime · {verification.length} verification · one language per repo</span>
       </div>
+      <p style={{ margin: '0 0 var(--sp-lg)', color: 'var(--fg-2)', maxWidth: '68ch' }}>
+        Two independent axes, not one list. Runtime composes upward — primitives into the platform,
+        the platform into applied and communication systems. Verification never joins that call
+        graph; it proves the runtime work from outside.
+      </p>
+
+      <AxisLabel>Runtime axis</AxisLabel>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-sm)' }}>
-        {SYSTEMS.map((s) => (
-          <Tile key={s.id} tier={s.tier} eyebrow={s.eyebrow} onClick={() => onOpen(s.id)}>
-            <h3 style={{ font: '400 1.25rem/1.4 var(--font-display)', margin: '0 0 var(--sp-xs)' }}>{s.name}</h3>
-            <p style={{ margin: '0 0 var(--sp-sm)', color: 'var(--fg-2)' }}>{s.blurb}</p>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              <Tag color={TIER_TAG_COLOR[s.tier]}>{s.lang.toLowerCase()}</Tag>
-              {s.status && <Tag color={TIER_TAG_COLOR[s.tier]}>{s.status.toLowerCase()}</Tag>}
-            </div>
-          </Tile>
-        ))}
+        {runtime.map((s) => <SystemTile key={s.id} s={s} onOpen={onOpen} />)}
+      </div>
+
+      <div style={{ marginTop: 'var(--sp-xl)' }}>
+        <AxisLabel>Verification axis</AxisLabel>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--sp-sm)' }}>
+          {verification.map((s) => <SystemTile key={s.id} s={s} onOpen={onOpen} />)}
+        </div>
       </div>
     </section>
   );
@@ -216,7 +271,7 @@ function SystemDetail({ system, onBack, onOpen }) {
         </button>
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginTop: 'var(--sp-md)' }}>
           <div>
-            <div style={{ font: 'var(--fw-regular) 0.75rem/1.33333 var(--font-mono)', letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: `var(--tier-${s.tier})`, marginBottom: 'var(--sp-xs)' }}>{s.eyebrow}</div>
+            <div style={{ font: 'var(--fw-regular) 0.75rem/1.33333 var(--font-mono)', letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: s.tier ? `var(--tier-${s.tier})` : 'var(--fg-2)', marginBottom: 'var(--sp-xs)' }}>{s.eyebrow}</div>
             <h1 style={{ font: '300 2.625rem/1.199 var(--font-display)', margin: 0 }}>{s.name}</h1>
           </div>
           <div style={{ display: 'flex', gap: 'var(--sp-sm)' }}>
@@ -260,8 +315,7 @@ function SystemDetail({ system, onBack, onOpen }) {
             label: 'Architecture',
             content: (
               <p style={{ margin: 0, paddingTop: 'var(--sp-md)', color: 'var(--fg-2)', maxWidth: '64ch' }}>
-                Deterministic, fully-tested core. The LLM sits at the interface boundary — parsing intent on the way in,
-                narrating results on the way out — and never in the critical path.
+                {s.arch}
               </p>
             ),
           },

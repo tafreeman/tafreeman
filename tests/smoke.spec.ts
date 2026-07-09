@@ -13,10 +13,24 @@
  * External-link checks in "outbound links respond" require network access.
  * That test is tagged @network. To skip it offline:
  *   npx playwright test --grep-invert @network
- * (or run only the DOM test: npx playwright test --grep "hub renders")
+ * (or run only the DOM tests: npx playwright test --grep "hub renders")
  */
 
+import { readFile } from 'node:fs/promises';
+import vm from 'node:vm';
 import { test, expect, request as playwrightRequest } from '@playwright/test';
+
+// Loads repo-data.jsx the same way scripts/validate-repo-data.mjs does — the
+// single source of truth for portfolio systems — so the expected system set
+// below is always derived from real data, never a hand-maintained literal
+// (list or count) that can silently drift from what profile.jsx renders.
+async function loadPortfolioRepos(): Promise<Array<{ id: string; title: string; url: string | null }>> {
+  const source = await readFile('repo-data.jsx', 'utf8');
+  const sandbox = { window: {} as any };
+  vm.createContext(sandbox);
+  vm.runInContext(source, sandbox, { filename: 'repo-data.jsx' });
+  return sandbox.window.PORTFOLIO.REPOS;
+}
 
 // ---------------------------------------------------------------------------
 // Test 1 — DOM / render smoke test
@@ -45,18 +59,63 @@ test('hub renders', async ({ page }) => {
 });
 
 // ---------------------------------------------------------------------------
-// Test 2 — outbound link health checks (requires network access)
+// Test 2 — every portfolio system renders, on the correct composition axis
+// ---------------------------------------------------------------------------
+// Guards the "two-axis front door" (README #25/#26, T2-B): the Systems
+// section must render every repo-data.jsx system (whatever the set happens
+// to be — no hardcoded count) AND must visibly split them into the runtime
+// and verification axes described in README, not just mention the split in
+// prose. Both assertions are derived from the live source of truth so this
+// test does not need updating (and cannot silently go stale) when a system
+// is added, removed, or renamed.
+test('hub renders every system and both composition axes', async ({ page }) => {
+  const repos = await loadPortfolioRepos();
+  expect(repos.length).toBeGreaterThan(0);
+
+  // Owner decision (2026-07-09): architecture-deck-system is dropped from the
+  // portfolio entirely (private repo — its links would 404), not shown as a
+  // private/unlinked entry the way qa-automation-academy is. This guard
+  // fails if it is ever re-added to repo-data.jsx without a new decision.
+  const ids = repos.map((r) => r.id);
+  expect(ids, 'architecture-deck-system must stay dropped from the portfolio').not.toContain(
+    'architecture-deck-system'
+  );
+
+  await page.goto('/');
+  const root = page.locator('#root');
+  await expect(root).not.toBeEmpty({ timeout: 45_000 });
+
+  for (const repo of repos) {
+    await expect(
+      page.getByText(repo.title, { exact: false }).first(),
+      `expected system "${repo.title}" (${repo.id}) from repo-data.jsx to render on the hub`
+    ).toBeVisible({ timeout: 45_000 });
+  }
+
+  // The runtime/verification split has to be visible in the DOM, not just
+  // documented in README — these are the axis labels SystemsIndex renders
+  // in profile.jsx.
+  await expect(
+    page.getByText('Runtime axis', { exact: false }).first()
+  ).toBeVisible({ timeout: 45_000 });
+  await expect(
+    page.getByText('Verification axis', { exact: false }).first()
+  ).toBeVisible({ timeout: 45_000 });
+});
+
+// ---------------------------------------------------------------------------
+// Test 3 — outbound link health checks (requires network access)
 // ---------------------------------------------------------------------------
 test('outbound links respond', { tag: '@network' }, async () => {
-  // Four verified outbound URLs from profile.jsx.
-  // qa-automation-academy is private (no public Pages or repo URL), so it is
-  // intentionally absent until its public release.
-  const outboundUrls: string[] = [
-    'https://tafreeman.github.io/agentic-runtime-platform/',
-    'https://tafreeman.github.io/executionkit/',
-    'https://tafreeman.github.io/financial-scenario-engine/',
-    'https://tafreeman.github.io/architecture-deck-system/',
-  ];
+  // Every public repo's primary URL, derived from repo-data.jsx rather than
+  // a hand-maintained list — a repo add/remove/URL change is caught here
+  // automatically instead of silently going stale. Private repos (currently
+  // qa-automation-academy) carry url: null and are filtered out.
+  const repos = await loadPortfolioRepos();
+  const outboundUrls = repos
+    .map((r) => r.url)
+    .filter((url): url is string => typeof url === 'string' && url.length > 0);
+  expect(outboundUrls.length).toBeGreaterThan(0);
 
   // Use a fresh APIRequestContext so these checks run independently of the
   // browser page and do not affect the DOM test above.

@@ -96,32 +96,9 @@ function GlyphPlanetChart() {
   );
 }
 
-// 5 — ECLIPSE + DECK · architecture-deck-system
-function GlyphDeck() {
-  return (
-    <svg viewBox="0 0 200 200">
-      {/* eclipse corona behind */}
-      <g transform="translate(126 78)">
-        <circle r="40" fill="#000000" stroke={DM} strokeWidth="2" />
-        <path d="M0 -40 A40 40 0 0 1 0 40" fill="none" stroke={CB} strokeWidth="5" />
-        <path d="M0 -40 A40 40 0 0 1 0 40" fill="none" stroke={C} strokeWidth="11" opacity="0.3" />
-        {[...Array(7)].map((_, i) => {
-          const a = (-60 + i * 22) * Math.PI / 180;
-          return <line key={i} x1={Math.cos(a) * 46} y1={Math.sin(a) * 46} x2={Math.cos(a) * 60} y2={Math.sin(a) * 60} stroke={CB} strokeWidth="2.5" opacity="0.7" />;
-        })}
-      </g>
-      {/* presentation board */}
-      <g>
-        <rect x="36" y="92" width="104" height="74" rx="0" fill="#000000" stroke={CR} strokeWidth="4" />
-        <polyline points="48,150 70,128 86,138 110,112 128,124" fill="none" stroke={C} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="48" cy="106" r="3" fill={CR} opacity="0.7" />
-        <line x1="58" y1="106" x2="104" y2="106" stroke={CR} strokeWidth="3" opacity="0.5" strokeLinecap="round" />
-      </g>
-      <line x1="88" y1="166" x2="88" y2="176" stroke={CR} strokeWidth="4" />
-      <line x1="70" y1="178" x2="106" y2="178" stroke={CR} strokeWidth="4" strokeLinecap="round" />
-    </svg>
-  );
-}
+// (removed) 5 — ECLIPSE + DECK · architecture-deck-system — the deck repo was
+// dropped from the portfolio (owner decision, 2026-07-09), so its glyph is
+// gone with it. Later glyph numbers are left unchanged for history continuity.
 
 // 6 — ROCKET + CHECKLIST · qa-automation-academy
 function GlyphRocketCheck() {
@@ -185,7 +162,6 @@ const GLYPHS = {
   "cube": GlyphCube,
   "flask": GlyphFlask,
   "planet-chart": GlyphPlanetChart,
-  "deck": GlyphDeck,
   "rocket-check": GlyphRocketCheck,
   "astro-cat": GlyphAstroCat,
 };

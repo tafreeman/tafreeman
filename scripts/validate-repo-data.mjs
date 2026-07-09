@@ -9,15 +9,23 @@ const SOCIAL_CARDS_FILE = "social-cards.jsx";
 // PORTFOLIO.REPOS. Stale references here (e.g. a link to an archived/removed
 // repo) slip past the repo-data and social-card checks, so we scan their raw
 // source for owner-repo references too.
-const SURFACE_FILES = ["landing.jsx", "profile.jsx"];
+// landing.jsx was retired (T2-B, 2026-07-09): it was never loaded by index.html
+// (the canonical Pages entry uses profile.jsx + the Console design system) and
+// its own entry points, landing.html / "Landing Page.html", were removed along
+// with it. profile.jsx is the only live surface left to scan.
+const SURFACE_FILES = ["profile.jsx"];
 // social-cards.jsx carries a self-referential portfolio-hub card that has no
 // matching entry in PORTFOLIO.REPOS; it is the only id allowed to be absent.
 const SOCIAL_ONLY_IDS = new Set(["tafreeman"]);
+// architecture-deck-system was dropped from the portfolio (owner decision,
+// 2026-07-09): it is a private repo, so its links would 404 for visitors —
+// and unlike qa-automation-academy it is removed entirely rather than shown
+// as a private/unlinked entry. It is intentionally NOT expected here.
 const EXPECTED_IDS = new Set([
   "agentic-runtime-platform",
   "executionkit",
   "financial-scenario-engine",
-  "architecture-deck-system",
+  "agentic-evalkit",
   "qa-automation-academy",
 ]);
 const PRIVATE_IDS = new Set(["qa-automation-academy"]);
@@ -215,36 +223,14 @@ async function validateSurfaceRepoReferences(repos) {
   }
 }
 
-// Guard against the "Interconnected repos" hero stat regressing to a bare
-// integer literal (e.g. `<div className="v accent">6</div>`) instead of the
-// live REPOS.length expression. Scoped to the single labeled stat block —
-// not a blanket ban on digits in landing.jsx, which legitimately displays
-// other static figures (deck layout count, provider count, etc.).
-async function validateSurfaceRepoCountLiteral() {
-  const file = "landing.jsx";
-  let source;
-  try {
-    source = await readFile(file, "utf8");
-  } catch (error) {
-    failures.push(
-      `${file}: could not read surface for repo-count literal scan (${error instanceof Error ? error.message : String(error)})`,
-    );
-    return;
-  }
-
-  // Match the stat block immediately preceding the "Interconnected repos"
-  // label, capturing whatever sits inside the value <div>.
-  const statPattern = /<div className="v accent">([^<]*)<\/div>\s*<div className="l">Interconnected repos<\/div>/;
-  const match = source.match(statPattern);
-  assert(match, `${file}: could not locate the "Interconnected repos" hero stat to check for a hardcoded count`);
-  if (!match) return;
-
-  const value = match[1].trim();
-  assert(
-    /^\{.*REPOS\??\.length.*\}$/.test(value),
-    `${file}: "Interconnected repos" stat must render a live REPOS.length expression, found "${value}" — use {REPOS.length} instead of a static number`,
-  );
-}
+// NOTE: this file used to also guard landing.jsx's "Interconnected repos"
+// hero stat against regressing to a bare integer literal instead of a live
+// REPOS.length expression (validateSurfaceRepoCountLiteral). landing.jsx was
+// retired (T2-B, 2026-07-09) — it was never loaded by index.html and had no
+// equivalent labeled stat block on the live surface (profile.jsx's "Systems"
+// header already renders {runtime.length}/{verification.length}, which are
+// live expressions, not literals, by construction). The check was removed
+// rather than retargeted at a pattern that no longer exists.
 
 function githubApiHeaders() {
   const headers = {
@@ -330,7 +316,6 @@ if (portfolio && repos.length > 0) {
   validateSocialCardsConsistency(portfolio, socialRepos);
 
   await validateSurfaceRepoReferences(repos);
-  await validateSurfaceRepoCountLiteral();
 
   await validatePublicGithubState(portfolio, repos);
 }
