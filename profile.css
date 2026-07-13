@@ -1,0 +1,51 @@
+/* Responsive composition for the live profile. Colors, type, and spacing
+   continue to come from the vendored Console design system. */
+
+.profile-hero-title {
+  text-wrap: balance;
+}
+
+.profile-project-heading,
+.profile-detail-heading,
+.profile-footer {
+  min-width: 0;
+}
+
+@media (max-width: 700px) {
+  .profile-hero-title {
+    font-size: 3.25rem !important;
+    line-height: 1.08 !important;
+  }
+
+  .profile-project-heading,
+  .profile-detail-heading,
+  .profile-footer {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: var(--spacing-04) !important;
+  }
+
+  .profile-approach {
+    grid-template-columns: 1fr !important;
+  }
+
+  .profile-approach-item {
+    flex-direction: column;
+  }
+
+  .profile-approach-label {
+    width: auto !important;
+  }
+
+  .profile-detail-actions {
+    flex-wrap: wrap;
+  }
+
+  .profile-header-actions {
+    display: none !important;
+  }
+
+  .profile-footer {
+    padding-block: var(--spacing-05) !important;
+  }
+}

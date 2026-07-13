@@ -34,9 +34,9 @@ function HeroBanner({ mode = "vector", art }) {
           <span className="hb-eyebrow">AI ENGINEERING · MOBILE, AL</span>
           <h1 className="hb-name">Andy <span className="accent">Freeman</span></h1>
           <p className="hb-handle"><span className="at">$</span> whoami → @tafreeman</p>
-          <p className="hb-tagline">AI engineering systems — LLM primitives, multi-agent orchestration, deterministic apps.</p>
+          <p className="hb-tagline">Reliable software that uses AI for real workflows, with clear controls and practical testing.</p>
           <div className="hb-chips">
-            <span className="hb-chip"><span className="cdot" />6 interconnected repos</span>
+            <span className="hb-chip"><span className="cdot" />4 public projects</span>
             <span className="hb-chip"><span className="cdot" style={{ background: "#3776ab" }} />Python</span>
             <span className="hb-chip"><span className="cdot" style={{ background: "#3178c6" }} />TypeScript</span>
           </div>
@@ -60,9 +60,9 @@ function HeroBanner({ mode = "vector", art }) {
           <span className="hb-eyebrow">AI ENGINEERING · MOBILE, AL</span>
           <h1 className="hb-name">Andy <span className="accent">Freeman</span></h1>
           <p className="hb-handle"><span className="at">$</span> whoami → @tafreeman · he/him</p>
-          <p className="hb-tagline">AI engineering systems — LLM primitives, multi-agent orchestration, deterministic apps.</p>
+          <p className="hb-tagline">Reliable software that uses AI for real workflows, with clear controls and practical testing.</p>
           <div className="hb-chips">
-            <span className="hb-chip"><span className="cdot" />6 interconnected repos</span>
+            <span className="hb-chip"><span className="cdot" />4 public projects</span>
             <span className="hb-chip"><span className="cdot" style={{ background: "#3776ab" }} />Python</span>
             <span className="hb-chip"><span className="cdot" style={{ background: "#3178c6" }} />TypeScript</span>
           </div>

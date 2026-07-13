@@ -1,17 +1,26 @@
 /* =====================================================================
    SocialCard — a 1280×640 GitHub social-preview card, console style.
    REAL DATA ONLY. Languages, statuses, and commands are verified against
-   each repo's README. Star/fork counts are intentionally omitted because
-   every repo is currently at 0/0 — showing them would be noise, and the
-   earlier fabricated counts (142/18, 88/9, …) must never reappear (G2).
+   each public repository. Star and fork counts are intentionally omitted;
+   this is a profile introduction, not a popularity dashboard.
    ===================================================================== */
 
 const REPOS = [
   {
+    id: "agentic-evalkit",
+    eyebrow: "FEATURED · EVALUATION",
+    name: "agentic-evalkit",
+    tagline: "Measure agent performance, compare runs, and produce evidence that teams can review.",
+    cmd: "pip install agentic-evalkit",
+    glyph: "flask",
+    lang: "Python", langColor: "#3776ab",
+    status: "v0.1.1", statusClass: "",
+  },
+  {
     id: "agentic-runtime-platform",
     eyebrow: "PLATFORM",
     name: "agentic-runtime-platform",
-    tagline: "Multi-agent orchestration — declarative YAML workflows compiled to executable DAGs, tiered model routing, provider failover, and live observability.",
+    tagline: "Coordinate AI agents with human approvals, safety controls, and automatic fallback between AI services.",
     cmd: "agentic run test_deterministic",
     glyph: "black-hole",
     lang: "Python", langColor: "#3776ab",
@@ -21,7 +30,7 @@ const REPOS = [
     id: "executionkit",
     eyebrow: "LIBRARY",
     name: "executionkit",
-    tagline: "Provider-agnostic LLM primitives: consensus, refinement, ReAct loops, structured output, and budget-aware calls. Zero runtime dependencies.",
+    tagline: "Repeatable AI workflows in Python, including tool use, structured data, and cost controls.",
     cmd: "pip install executionkit",
     glyph: "cube",
     lang: "Python", langColor: "#3776ab",
@@ -33,38 +42,17 @@ const REPOS = [
     id: "financial-scenario-engine",
     eyebrow: "APPLIED AI",
     name: "financial-scenario-engine",
-    tagline: "Local-first project finance — a deterministic TypeScript engine produces every number; the LLM only parses intent and narrates results.",
+    tagline: "Local-first financial planning with tested calculations and AI-assisted requests and explanations.",
     cmd: "npm start",
     glyph: "planet-chart",
     lang: "TypeScript", langColor: "#3178c6",
     status: "BETA", statusClass: "beta",
   },
   {
-    id: "agentic-evalkit",
-    eyebrow: "EVALUATION",
-    name: "agentic-evalkit",
-    tagline: "Evaluation toolkit for agentic systems — typed contracts, benchmark-valid grading, calibrated judges, and statistical reporting through callable/subprocess/HTTP targets.",
-    cmd: "pip install agentic-evalkit",
-    glyph: "flask",
-    lang: "Python", langColor: "#3776ab",
-    status: "v0.1.1", statusClass: "",
-  },
-  {
-    id: "qa-automation-academy",
-    eyebrow: "ENABLEMENT",
-    name: "qa-automation-academy",
-    tagline: "Playwright + Copilot training platform — interactive modules and reference specs that move QA teams from manual to automated testing.",
-    cmd: "pnpm dev",
-    glyph: "rocket-check",
-    lang: "TypeScript", langColor: "#3178c6",
-    status: "PRIVATE", statusClass: "",
-    isPrivate: true,
-  },
-  {
     id: "tafreeman",
     eyebrow: "PORTFOLIO HUB",
     name: "tafreeman",
-    tagline: "AI engineering systems — LLM primitives, multi-agent orchestration, deterministic apps.",
+    tagline: "Public work in AI evaluation, agent platforms, reusable Python tools, and applied AI software.",
     cmd: "whoami → tafreeman",
     glyph: "astro-cat",
     lang: "Andy Freeman", langColor: "#33b1ff", langPlain: true,
@@ -105,7 +93,7 @@ function SocialCard({ r }) {
           <span className="sc-tb-path">tafreeman&nbsp;/&nbsp;<b>{r.name}</b></span>
         </div>
         <div className="sc-tb-right">
-          <span className="sc-tb-tag">{r.isHub ? "OVERVIEW" : r.isPrivate ? "PRIVATE" : "PUBLIC"}</span>
+          <span className="sc-tb-tag">{r.isHub ? "OVERVIEW" : "PUBLIC"}</span>
         </div>
       </div>
 
@@ -135,10 +123,7 @@ function SocialCard({ r }) {
       </div>
 
       <div className="sc-footer">
-        {r.isPrivate
-          ? <span className="sc-url"><span className="at">↳</span> private repository</span>
-          : <span className="sc-url"><span className="at">↳</span> github.com/tafreeman/{r.name}</span>
-        }
+        <span className="sc-url"><span className="at">↳</span> github.com/tafreeman/{r.name}</span>
         <span className={`sc-status ${r.statusClass}`}>
           <span className="sdot" />{r.status}
         </span>
