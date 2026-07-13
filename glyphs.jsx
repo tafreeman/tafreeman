@@ -96,39 +96,7 @@ function GlyphPlanetChart() {
   );
 }
 
-// (removed) 5 — ECLIPSE + DECK · architecture-deck-system — the deck repo was
-// dropped from the portfolio (owner decision, 2026-07-09), so its glyph is
-// gone with it. Later glyph numbers are left unchanged for history continuity.
-
-// 6 — ROCKET + CHECKLIST · qa-automation-academy
-function GlyphRocketCheck() {
-  return (
-    <svg viewBox="0 0 200 200">
-      <circle cx="100" cy="100" r="84" fill="none" stroke={DM} strokeWidth="2.5" strokeDasharray="2 7" />
-      {/* rocket */}
-      <g transform="rotate(-12 78 100)">
-        <path d="M78 36 C96 52 100 80 96 104 H60 C56 80 60 52 78 36 Z" fill="none" stroke={CR} strokeWidth="4.5" strokeLinejoin="round" />
-        <circle cx="78" cy="74" r="9" fill="none" stroke={C} strokeWidth="4" />
-        <path d="M60 92 L44 112 L60 104 Z" fill="none" stroke={CR} strokeWidth="4" strokeLinejoin="round" />
-        <path d="M96 92 L112 112 L96 104 Z" fill="none" stroke={CR} strokeWidth="4" strokeLinejoin="round" />
-        <path d="M70 104 L70 118 M78 104 L78 124 M86 104 L86 118" stroke={C} strokeWidth="4.5" strokeLinecap="round" />
-      </g>
-      {/* checklist */}
-      <g stroke={C} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
-        <path d="M128 78 l6 6 l11 -13" />
-        <path d="M128 104 l6 6 l11 -13" />
-        <path d="M128 130 l6 6 l11 -13" />
-      </g>
-      <g stroke={CR} strokeWidth="3.5" strokeLinecap="round" opacity="0.5">
-        <line x1="150" y1="82" x2="170" y2="82" />
-        <line x1="150" y1="108" x2="170" y2="108" />
-        <line x1="150" y1="134" x2="168" y2="134" />
-      </g>
-    </svg>
-  );
-}
-
-// 7 — ASTRONAUT + CAT · tafreeman (hub)
+// ASTRONAUT + CAT · tafreeman (hub)
 function GlyphAstroCat() {
   return (
     <svg viewBox="0 0 200 200">
@@ -162,7 +130,6 @@ const GLYPHS = {
   "cube": GlyphCube,
   "flask": GlyphFlask,
   "planet-chart": GlyphPlanetChart,
-  "rocket-check": GlyphRocketCheck,
   "astro-cat": GlyphAstroCat,
 };
 

@@ -17,18 +17,13 @@ const SURFACE_FILES = ["profile.jsx"];
 // social-cards.jsx carries a self-referential portfolio-hub card that has no
 // matching entry in PORTFOLIO.REPOS; it is the only id allowed to be absent.
 const SOCIAL_ONLY_IDS = new Set(["tafreeman"]);
-// architecture-deck-system was dropped from the portfolio (owner decision,
-// 2026-07-09): it is a private repo, so its links would 404 for visitors —
-// and unlike qa-automation-academy it is removed entirely rather than shown
-// as a private/unlinked entry. It is intentionally NOT expected here.
+// The profile intentionally lists only selected public, active repositories.
 const EXPECTED_IDS = new Set([
+  "agentic-evalkit",
   "agentic-runtime-platform",
   "executionkit",
   "financial-scenario-engine",
-  "agentic-evalkit",
-  "qa-automation-academy",
 ]);
-const PRIVATE_IDS = new Set(["qa-automation-academy"]);
 
 const failures = [];
 
@@ -58,10 +53,6 @@ async function evaluateSocialCards(source) {
   vm.createContext(sandbox);
   vm.runInContext(code, sandbox, { filename: SOCIAL_CARDS_FILE });
   return sandbox.window.REPOS;
-}
-
-function isPrivateSocialCard(card) {
-  return card.isPrivate === true || card.status === "PRIVATE";
 }
 
 function validateSocialCardsConsistency(portfolio, socialRepos) {
@@ -95,19 +86,7 @@ function validateSocialCardsConsistency(portfolio, socialRepos) {
     );
   }
 
-  // 3. Private status must agree across both sources.
-  for (const repo of portfolioRepos) {
-    const card = socialById.get(repo.id);
-    if (!card) continue;
-    const portfolioPrivate = repo.status === "PRIVATE";
-    const socialPrivate = isPrivateSocialCard(card);
-    assert(
-      portfolioPrivate === socialPrivate,
-      `${repo.id}: private flag drift — PORTFOLIO ${portfolioPrivate ? "PRIVATE" : "public"} vs social-cards ${socialPrivate ? "PRIVATE" : "public"}`,
-    );
-  }
-
-  // 4. The FULL status label must agree across both sources — social-cards is
+  // 3. The FULL status label must agree across both sources — social-cards is
   //    a hand-maintained copy, and a stale version tag slips through every
   //    other check (ExecutionKit shipped v0.1.0 on cards against a released
   //    v0.2.0, uncaught; career-signal audit 2026-07-06, TAF ship-now #8).
@@ -147,13 +126,6 @@ function validateStaticShape(portfolio) {
     assert(typeof repo.desc === "string" && repo.desc.length > 0, `${repo.id}: desc is required`);
     assert(typeof repo.lang === "string" && repo.lang.length > 0, `${repo.id}: lang is required`);
     assert(typeof repo.img === "string" && repo.img.startsWith("social-previews/"), `${repo.id}: img must point at social-previews/`);
-
-    if (PRIVATE_IDS.has(repo.id)) {
-      assert(repo.status === "PRIVATE", `${repo.id}: private repo must be labeled PRIVATE`);
-      assert(repo.repo === null, `${repo.id}: private repo must not expose a source URL`);
-      assert(repo.url === null, `${repo.id}: private repo must not expose a public URL`);
-      continue;
-    }
 
     assert(repo.repo === `${portfolio.GH}/${repo.id}`, `${repo.id}: repo URL must match PORTFOLIO.GH/id`);
     assert(typeof repo.url === "string" && repo.url.length > 0, `${repo.id}: public repos need a destination URL`);
@@ -268,8 +240,6 @@ async function fetchLatestRelease(repoId) {
 
 async function validatePublicGithubState(portfolio, repos) {
   for (const repo of repos) {
-    if (PRIVATE_IDS.has(repo.id)) continue;
-
     try {
       const githubRepo = await fetchGithubRepo(repo.id);
       assert(githubRepo.full_name === `${GH_OWNER}/${repo.id}`, `${repo.id}: GitHub full_name mismatch`);
@@ -296,10 +266,6 @@ async function validatePublicGithubState(portfolio, repos) {
     } catch (error) {
       failures.push(`${repo.id}: GitHub metadata check failed (${error instanceof Error ? error.message : String(error)})`);
     }
-  }
-
-  for (const repo of repos.filter((entry) => PRIVATE_IDS.has(entry.id))) {
-    assert(repo.url === null && repo.repo === null, `${repo.id}: private repo must remain linkless without authenticated metadata`);
   }
 
   assert(portfolio.GH === `https://github.com/${GH_OWNER}`, "Portfolio owner URL drifted during GitHub checks");

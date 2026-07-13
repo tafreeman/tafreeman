@@ -59,27 +59,18 @@ test('hub renders', async ({ page }) => {
 });
 
 // ---------------------------------------------------------------------------
-// Test 2 — every portfolio system renders, on the correct composition axis
+// Test 2 — every selected public project renders and private work stays absent
 // ---------------------------------------------------------------------------
-// Guards the "two-axis front door" (README #25/#26, T2-B): the Systems
-// section must render every repo-data.jsx system (whatever the set happens
-// to be — no hardcoded count) AND must visibly split them into the runtime
-// and verification axes described in README, not just mention the split in
-// prose. Both assertions are derived from the live source of truth so this
-// test does not need updating (and cannot silently go stale) when a system
-// is added, removed, or renamed.
-test('hub renders every system and both composition axes', async ({ page }) => {
+// The displayed project set comes from repo-data.jsx, while explicit guards
+// prevent previously listed private repositories from returning unnoticed.
+test('hub renders every selected public project', async ({ page }) => {
   const repos = await loadPortfolioRepos();
   expect(repos.length).toBeGreaterThan(0);
 
-  // Owner decision (2026-07-09): architecture-deck-system is dropped from the
-  // portfolio entirely (private repo — its links would 404), not shown as a
-  // private/unlinked entry the way qa-automation-academy is. This guard
-  // fails if it is ever re-added to repo-data.jsx without a new decision.
   const ids = repos.map((r) => r.id);
-  expect(ids, 'architecture-deck-system must stay dropped from the portfolio').not.toContain(
-    'architecture-deck-system'
-  );
+  expect(ids).not.toContain('architecture-deck-system');
+  expect(ids).not.toContain('qa-automation-academy');
+  expect(repos.every((repo) => typeof repo.url === 'string' && repo.url.length > 0)).toBe(true);
 
   await page.goto('/');
   const root = page.locator('#root');
@@ -88,19 +79,12 @@ test('hub renders every system and both composition axes', async ({ page }) => {
   for (const repo of repos) {
     await expect(
       page.getByText(repo.title, { exact: false }).first(),
-      `expected system "${repo.title}" (${repo.id}) from repo-data.jsx to render on the hub`
+      `expected public project "${repo.title}" (${repo.id}) from repo-data.jsx to render on the hub`
     ).toBeVisible({ timeout: 45_000 });
   }
 
-  // The runtime/verification split has to be visible in the DOM, not just
-  // documented in README — these are the axis labels SystemsIndex renders
-  // in profile.jsx.
-  await expect(
-    page.getByText('Runtime axis', { exact: false }).first()
-  ).toBeVisible({ timeout: 45_000 });
-  await expect(
-    page.getByText('Verification axis', { exact: false }).first()
-  ).toBeVisible({ timeout: 45_000 });
+  await expect(page.getByText('Selected public work', { exact: true })).toBeVisible();
+  await expect(page.getByText('Private repo', { exact: false })).toHaveCount(0);
 });
 
 // ---------------------------------------------------------------------------
@@ -109,8 +93,7 @@ test('hub renders every system and both composition axes', async ({ page }) => {
 test('outbound links respond', { tag: '@network' }, async () => {
   // Every public repo's primary URL, derived from repo-data.jsx rather than
   // a hand-maintained list — a repo add/remove/URL change is caught here
-  // automatically instead of silently going stale. Private repos (currently
-  // qa-automation-academy) carry url: null and are filtered out.
+  // automatically instead of silently going stale.
   const repos = await loadPortfolioRepos();
   const outboundUrls = repos
     .map((r) => r.url)
