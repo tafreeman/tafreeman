@@ -24,10 +24,11 @@ and alignment with real business needs.
 
 ## How I approach AI systems
 
-- **Start with the problem.** AI should improve a real workflow, decision, or user experience.
-- **Keep control visible.** Approvals, limits, failure handling, and costs should be clear to operators.
-- **Test what matters.** Core behavior should be repeatable, and AI output should be assessed using evidence.
-- **Design for change.** AI models and services will evolve, so the surrounding software should remain maintainable.
+ 
+- perofmance metrics and costs should be clear to operators.
+- Core behavior should be repeatable
+- AI output should be assessed.
+- AI models and services will evolve, so the surrounding software should remain maintainable.
 
 The [portfolio site](https://tafreeman.github.io/tafreeman/) provides a visual overview of these projects. Each project links to public source code, documentation, or a working application.
 
