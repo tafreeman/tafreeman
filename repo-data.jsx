@@ -37,7 +37,7 @@ window.PORTFOLIO = {
       title: "agentic-evalkit",
       desc: "Tools for measuring how well AI agents perform, comparing runs, and producing evidence that teams can review.",
       lang: "Python", langClass: "lang-py",
-      status: "v0.1.1", statusClass: "",
+      status: "v0.2.0", statusClass: "",
       url: GH + "/agentic-evalkit",
       repo: GH + "/agentic-evalkit",
       img: "social-previews/agentic-evalkit.png",
