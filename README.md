@@ -24,13 +24,12 @@ and alignment with real business needs.
 
 ## How I approach AI systems
 
- 
-- perofmance metrics and costs should be clear to operators.
-- Core behavior should be repeatable
+- Performance metrics and costs should be clear to operators.
+- Core behavior should be repeatable.
 - AI output should be assessed.
 - AI models and services will evolve, so the surrounding software should remain maintainable.
 
-The [portfolio site](https://tafreeman.github.io/tafreeman/) provides a visual overview of these projects. Each project links to public source code, documentation, or a working application.
+The [portfolio site](https://tafreeman.github.io/tafreeman/) visualizes these projects; each links to source, docs, or a live app.
 
 ---
 

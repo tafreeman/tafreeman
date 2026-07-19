@@ -40,19 +40,19 @@ const TIER_TAG_COLOR = { l1: 'gray', l2: 'teal', l3: 'green' };
 const SYSTEM_META = {
   'agentic-evalkit': {
     eyebrow: 'FEATURED · EVALUATION', order: 0,
-    arch: 'Measures agent behavior, compares results, and records the evidence needed to understand whether a change improved the system.',
+    arch: 'Measures agent behavior, compares results, and records evidence of whether a change improved the system.',
   },
   'agentic-runtime-platform': {
     tier: 'l2', eyebrow: 'PLATFORM', order: 1,
-    arch: 'Coordinates multiple AI agents while keeping human approvals, safety checks, service choices, and issues visible to operators.',
+    arch: 'Coordinates AI agents while keeping human approvals, safety checks, service choices, and issues visible to operators.',
   },
   'executionkit': {
     tier: 'l1', eyebrow: 'PYTHON LIBRARY', order: 2,
-    arch: 'Provides reusable Python building blocks for comparing responses, improving drafts, using tools, returning structured data, and managing cost.',
+    arch: 'Offers reusable Python building blocks for comparing responses, improving drafts, using tools, returning structured data, and managing cost.',
   },
   'financial-scenario-engine': {
     tier: 'l3', eyebrow: 'APPLIED AI', order: 3,
-    arch: 'Keeps financial calculations in tested application code while using AI to make the workflow easier to use and understand.',
+    arch: 'Keeps financial calculations in tested application code while AI interprets requests and explains results.',
   },
 };
 
@@ -139,7 +139,7 @@ function Hero({ onNav }) {
           Building reliable<br />AI systems.
         </h1>
         <p style={{ fontSize: '1rem', lineHeight: 1.5, fontFamily: 'var(--font-display)', color: 'var(--fg-2)', maxWidth: 560, margin: 'var(--sp-md) 0 var(--sp-lg)' }}>
-          I design and build software that uses AI with clear controls, practical testing,
+          I build software that uses AI with clear controls, practical testing,
           and alignment with real business needs.
         </p>
         <div style={{ display: 'flex', gap: 'var(--sp-sm)' }}>
@@ -180,7 +180,7 @@ function SystemsIndex({ onOpen }) {
       </div>
       <p style={{ margin: '0 0 var(--sp-lg)', color: 'var(--fg-2)', maxWidth: '68ch' }}>
         Evaluation, agent coordination, reusable Python tools, and an applied financial product.
-        Each project links to public source code and supporting documentation where available.
+        Each project links to source code and docs where available.
       </p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 'var(--sp-sm)' }}>
