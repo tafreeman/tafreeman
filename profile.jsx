@@ -326,7 +326,7 @@ function Footer() {
   return (
     <footer className="profile-footer" style={{ background: 'var(--bg-deep)', borderTop: '1px solid var(--border-soft)', padding: 'var(--sp-md) var(--sp-xl)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <Wordmark />
-      <span style={{ font: 'var(--fw-regular) 0.75rem/1.33333 var(--font-mono)', color: 'var(--fg-2)' }}>© 2026 Andy Freeman · public AI engineering portfolio</span>
+      <span style={{ font: 'var(--fw-regular) 0.75rem/1.33333 var(--font-mono)', color: 'var(--fg-2)' }}>© {new Date().getFullYear()} Andy Freeman · public AI engineering portfolio</span>
     </footer>
   );
 }

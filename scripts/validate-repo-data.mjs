@@ -5,6 +5,7 @@ import { transform } from "esbuild";
 const GH_OWNER = "tafreeman";
 const REPO_DATA_FILE = "repo-data.jsx";
 const SOCIAL_CARDS_FILE = "social-cards.jsx";
+const README_FILE = "README.md";
 // Public-facing JSX surfaces that hardcode repo links but are NOT derived from
 // PORTFOLIO.REPOS. Stale references here (e.g. a link to an archived/removed
 // repo) slip past the repo-data and social-card checks, so we scan their raw
@@ -195,6 +196,50 @@ async function validateSurfaceRepoReferences(repos) {
   }
 }
 
+// README.md's "Selected public work" table hand-types a description column
+// that is meant to mirror repo-data.jsx's REPOS[].desc (the file's own header
+// calls itself the "single source of truth"). Nothing generates the table
+// from repo-data.jsx, so the two copies can silently diverge. Match each
+// table row to its repo by the repo link URL in the row (not the display
+// name, which differs from repo.id for some rows, e.g. "Agentic Runtime
+// Platform" vs "agentic-runtime-platform") and assert the description cells
+// are byte-for-byte equal.
+function extractReadmeTableRows(readmeSource) {
+  const rows = [];
+  for (const line of readmeSource.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed.startsWith("|")) continue;
+    if (/^\|[\s:-]+\|[\s:-|]*$/.test(trimmed)) continue; // separator row, e.g. |---|---|---|
+    const cells = trimmed.slice(1, -1).split("|").map((cell) => cell.trim());
+    if (cells.length < 3) continue;
+    rows.push(cells);
+  }
+  return rows;
+}
+
+function validateReadmeDescriptions(readmeSource, repos) {
+  const rows = extractReadmeTableRows(readmeSource);
+  assert(rows.length > 0, `${README_FILE}: found no "Selected public work" table rows to validate`);
+
+  for (const repo of repos) {
+    const row = rows.find((cells) => {
+      const linksCell = cells[2] ?? "";
+      const index = linksCell.indexOf(repo.repo);
+      if (index === -1) return false;
+      const nextChar = linksCell[index + repo.repo.length];
+      return nextChar === undefined || !/[A-Za-z0-9._-]/.test(nextChar);
+    });
+    assert(row, `${README_FILE}: no table row links to ${repo.repo} (expected a row for portfolio repo "${repo.id}")`);
+    if (!row) continue;
+
+    const readmeDesc = row[1];
+    assert(
+      readmeDesc === repo.desc,
+      `${repo.id}: ${README_FILE} description column does not match ${REPO_DATA_FILE} desc — README: "${readmeDesc}" | ${REPO_DATA_FILE}: "${repo.desc}"`,
+    );
+  }
+}
+
 // NOTE: this file used to also guard landing.jsx's "Interconnected repos"
 // hero stat against regressing to a bare integer literal instead of a live
 // REPOS.length expression (validateSurfaceRepoCountLiteral). landing.jsx was
@@ -282,6 +327,9 @@ if (portfolio && repos.length > 0) {
   validateSocialCardsConsistency(portfolio, socialRepos);
 
   await validateSurfaceRepoReferences(repos);
+
+  const readmeSource = await readFile(README_FILE, "utf8");
+  validateReadmeDescriptions(readmeSource, repos);
 
   await validatePublicGithubState(portfolio, repos);
 }
