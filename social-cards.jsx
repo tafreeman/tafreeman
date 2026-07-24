@@ -14,7 +14,7 @@ const REPOS = [
     cmd: "pip install agentic-evalkit",
     glyph: "flask",
     lang: "Python", langColor: "#3776ab",
-    status: "v0.2.0", statusClass: "",
+    status: "v0.3.0", statusClass: "",
   },
   {
     id: "agentic-runtime-platform",
