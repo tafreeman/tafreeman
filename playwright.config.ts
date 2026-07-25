@@ -8,6 +8,7 @@ import { defineConfig, devices } from '@playwright/test';
  *
  * Before first run the orchestrator must execute:
  *   npm install
+ *   npm run build:js      # index.html loads dist/ + vendor/, both generated
  *   npx playwright install chromium
  */
 export default defineConfig({
@@ -28,7 +29,8 @@ export default defineConfig({
     baseURL: 'http://127.0.0.1:8099',
     /* Headless on CI, headed locally when PWDEBUG is set */
     headless: !process.env.PWDEBUG,
-    /* Extra timeout for actions — generous to allow @babel/standalone compile */
+    /* Generous action timeout. The page is precompiled and same-origin now, so
+       nothing here should be slow — this only absorbs a loaded CI runner. */
     actionTimeout: 30_000,
   },
 

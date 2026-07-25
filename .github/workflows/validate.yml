@@ -31,6 +31,12 @@ jobs:
           cache: npm
       - name: Install validators
         run: npm ci
+      # dist/ and vendor/ are committed because Pages serves this repo as-is,
+      # which means they can go stale against profile.jsx / tweaks-panel.jsx /
+      # the pinned React without anything noticing. Rebuild and compare before
+      # the rest of the suite runs against them.
+      - name: Verify compiled JS matches its sources
+        run: npm run verify:build
       - name: Validate JSX/JS syntax
         run: npm run validate:jsx
       - name: Validate portfolio repo metadata

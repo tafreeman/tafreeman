@@ -2,12 +2,14 @@
   "name": "tafreeman-profile",
   "version": "1.0.0",
   "private": true,
-  "description": "GitHub profile + portfolio landing (static, Babel-in-browser JSX).",
+  "description": "GitHub profile + portfolio landing (static, precompiled JSX, no CDN at runtime).",
   "scripts": {
+    "build:js": "node scripts/build-js.mjs",
+    "verify:build": "node scripts/build-js.mjs --check",
     "validate:jsx": "node scripts/validate-jsx.mjs",
     "validate:repos": "node scripts/validate-repo-data.mjs",
     "validate:html": "html-validate *.html",
-    "validate": "npm run validate:jsx && npm run validate:repos && npm run validate:html",
+    "validate": "npm run verify:build && npm run validate:jsx && npm run validate:repos && npm run validate:html",
     "cards": "node scripts/render-cards.mjs",
     "test:e2e": "playwright test",
     "test": "playwright test"
@@ -15,6 +17,8 @@
   "devDependencies": {
     "@playwright/test": "^1.49.0",
     "esbuild": "0.25.0",
-    "html-validate": "9.5.3"
+    "html-validate": "9.5.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   }
 }

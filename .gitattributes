@@ -1,0 +1,6 @@
+# dist/ and vendor/ are generated build output that `npm run verify:build`
+# compares byte for byte against a fresh rebuild. Pin them to LF in the working
+# tree: on a Windows checkout with core.autocrlf=true git hands back CRLF, and
+# the drift check would then fail locally against a tree CI considers clean.
+dist/*.js text eol=lf
+vendor/*.js text eol=lf

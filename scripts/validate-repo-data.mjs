@@ -19,6 +19,11 @@ const README_SECTION = "Selected public work";
 // (the canonical Pages entry uses profile.jsx + the Console design system) and
 // its own entry points, landing.html / "Landing Page.html", were removed along
 // with it. profile.jsx is the only live surface left to scan.
+// dist/profile.js — the compiled copy index.html actually loads — is
+// deliberately NOT listed: scripts/build-js.mjs generates it from profile.jsx
+// and `npm run verify:build` proves the two match, so scanning it could only
+// report the same reference a second time, while a genuinely stale link would
+// still have to pass through the source scanned here to reach the page.
 const SURFACE_FILES = ["profile.jsx"];
 // social-cards.jsx carries a self-referential portfolio-hub card that has no
 // matching entry in PORTFOLIO.REPOS; it is the only id allowed to be absent.
