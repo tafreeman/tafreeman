@@ -77,7 +77,11 @@ window.PORTFOLIO = {
       desc: "A local-first financial planning application that keeps calculations in tested code and uses AI to interpret requests and explain results.",
       lang: "TypeScript", langClass: "lang-ts",
       status: "BETA", statusClass: "beta",
-      url: "https://tafreeman.github.io/financial-scenario-engine/",
+      // The Pages root serves the VitePress docs; the product overview site is
+      // nested at /overview/ (one composed artifact, see the repo's
+      // deploy-pages.yml). Linking the bare root lands visitors on docs, not
+      // the project site this card advertises. Keep in sync with README.md.
+      url: "https://tafreeman.github.io/financial-scenario-engine/overview/",
       repo: GH + "/financial-scenario-engine",
       img: "social-previews/financial-scenario-engine.png",
     },
