@@ -159,7 +159,7 @@ function HorizonRule() {
 
 function SystemTile({ s, onOpen }) {
   return (
-    <Tile tier={s.tier} eyebrow={s.eyebrow} onClick={() => onOpen(s.id)}
+    <Tile tier={s.tier} eyebrow={s.eyebrow} onClick={() => onOpen(s.id)} actionLabel={s.name}
           style={s.tier ? undefined : { borderTop: '3px solid var(--border)' }}>
       <h3 style={{ font: '400 1.25rem/1.4 var(--font-display)', margin: '0 0 var(--sp-xs)' }}>{s.name}</h3>
       <p style={{ margin: '0 0 var(--sp-sm)', color: 'var(--fg-2)' }}>{s.blurb}</p>

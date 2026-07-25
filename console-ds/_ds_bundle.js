@@ -260,6 +260,19 @@ const css = `
               border-color var(--duration-fast-02) var(--ease-productive);
 }
 a.con-tile:hover, .con-tile--clickable:hover { background: var(--layer-hover-01); text-decoration: none; color: var(--text-primary); cursor: pointer; }
+/* A tile driven by onClick (rather than href) carries a real <button> stretched
+   over the tile's padding box, so the whole card is reachable with Tab and
+   activated by Enter/Space with native button semantics. The tile itself stays
+   a <div> because <button> may not contain flow content (h3/p), while <a> may. */
+.con-tile--clickable { position: relative; }
+.con-tile__action {
+  position: absolute; inset: 0; appearance: none; -webkit-appearance: none;
+  background: transparent; border: 0; padding: 0; margin: 0;
+  font: inherit; color: inherit; cursor: pointer;
+}
+/* Stated explicitly rather than left to the global :focus-visible in
+   tokens/base.css, so a later reset cannot silently remove the card's ring. */
+.con-tile__action:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
 .con-tile--selected { border-left: 3px solid var(--horizon-40); padding-left: calc(var(--spacing-05) - 2px); }
 .con-tile--tier-l1 { border-top: 3px solid var(--tier-l1); }
 .con-tile--tier-l2 { border-top: 3px solid var(--tier-l2); }
@@ -288,6 +301,7 @@ function Tile({
   selected = false,
   href,
   onClick,
+  actionLabel,
   style
 }) {
   useInjectedCss('con-tile-css', css);
@@ -300,9 +314,20 @@ function Tile({
     href: href,
     style: style
   }, inner);
+  // onClick tiles: the click target is the stretched button, not the div, so
+  // the handler fires once and keyboard users get it for free. actionLabel is
+  // required whenever onClick is set — it names the button for assistive tech.
+  if (onClick) return /*#__PURE__*/React.createElement("div", {
+    className: cls,
+    style: style
+  }, inner, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "con-tile__action",
+    onClick: onClick,
+    "aria-label": actionLabel
+  }));
   return /*#__PURE__*/React.createElement("div", {
     className: cls,
-    onClick: onClick,
     style: style
   }, inner);
 }
