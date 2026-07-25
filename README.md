@@ -20,7 +20,7 @@ and alignment with real business needs.
 | **agentic-evalkit** | Tools for measuring how well AI agents perform, comparing runs, and producing evidence that teams can review. | [Repository](https://github.com/tafreeman/agentic-evalkit) · [Latest release](https://github.com/tafreeman/agentic-evalkit/releases/latest) |
 | **Agentic Runtime Platform** | A platform for coordinating AI agents with human approval steps, safety controls, and automatic fallback when an AI service is unavailable. | [Documentation](https://tafreeman.github.io/agentic-runtime-platform/) · [Repository](https://github.com/tafreeman/agentic-runtime-platform) |
 | **ExecutionKit** | A Python library for repeatable AI workflows such as comparing responses, improving drafts, using tools, returning structured data, and managing cost. | [Documentation](https://tafreeman.github.io/executionkit/) · [Repository](https://github.com/tafreeman/executionkit) |
-| **Financial Scenario Engine** | A local-first financial planning application that keeps calculations in tested code and uses AI to interpret requests and explain results. | [Live site](https://tafreeman.github.io/financial-scenario-engine/) · [Repository](https://github.com/tafreeman/financial-scenario-engine) |
+| **Financial Scenario Engine** | A local-first financial planning application that keeps calculations in tested code and uses AI to interpret requests and explain results. | [Live site](https://tafreeman.github.io/financial-scenario-engine/overview/) · [Repository](https://github.com/tafreeman/financial-scenario-engine) |
 
 ## How I approach AI systems
 
