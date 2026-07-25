@@ -17,7 +17,7 @@
  * The Python static server is started automatically by playwright.config.ts.
  */
 
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import { test, expect, type Page } from '@playwright/test';
 
@@ -95,11 +95,21 @@ test('the hub renders with every third-party host blocked', async ({ page }) => 
   ).toEqual([]);
 
   // The webfont stylesheet still goes off-origin (tokens.css and
-  // console-ds/tokens/fonts.css @import Google Fonts). That degrades to a
-  // fallback face, which is exactly why the content assertions above hold with
-  // it blocked — a script would not degrade. Pinned as an equality so a NEW
-  // third-party dependency of any kind has to be acknowledged here rather than
-  // arriving unnoticed.
+  // console-ds/tokens/fonts.css @import Google Fonts). Aborting it degrades to
+  // a fallback face, which is why the content assertions above hold — a script
+  // would not degrade.
+  //
+  // Read that narrowly: `route.abort()` simulates a host that REFUSES, which is
+  // the benign shape. Those two @imports are render-blocking and sit ahead of
+  // every script, so a host that HANGS instead blocks the scripts as well and
+  // #root stays empty until the socket times out. This test cannot see that,
+  // and adding a delayed-route case would fail today — self-hosting the
+  // webfonts is the fix, and this comment is here so the gap is not mistaken
+  // for coverage.
+  //
+  // Pinned as an equality so a NEW third-party dependency of any kind has to be
+  // acknowledged here rather than arriving unnoticed. Self-hosting the fonts
+  // will make this list empty; that edit is the fix landing, not a regression.
   expect(
     [...new Set(attempted.map(a => a.host))].sort(),
     'the only third-party host on this page should be the webfont stylesheet'
@@ -111,19 +121,73 @@ test('the hub renders with every third-party host blocked', async ({ page }) => 
 // ---------------------------------------------------------------------------
 // Test 1 would also pass if someone re-added the CDN tags behind a working
 // local fallback. This pins the arrangement itself: no remote script, no
-// in-browser compiler, and the same-origin replacements actually referenced —
-// so it cannot be satisfied by deleting the script tags outright either.
+// in-browser compiler, and the same-origin replacements actually referenced.
+//
+// It reads the SCRIPT TAGS, not the file text. A raw substring search over
+// index.html also matches its own prose comments, which made this test a pair
+// of false readings in both directions: deleting `<script src="dist/profile.js">`
+// — the tag that loads the whole application — left it green because the path
+// is also named in the comment above the tags; and tightening that comment to
+// name unpkg would have failed the `not.toContain('unpkg')` line and turned a
+// documentation edit into a red build.
+function scriptSources(html: string): string[] {
+  return [...html.matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)].map(m => m[1]);
+}
+
+function scriptTypes(html: string): string[] {
+  return [...html.matchAll(/<script\b[^>]*\btype\s*=\s*["']([^"']+)["']/gi)].map(m => m[1]);
+}
+
 test('index.html loads no CDN script and no in-browser compiler', async () => {
   const html = await readFile('index.html', 'utf8');
+  const sources = scriptSources(html);
 
-  expect(html, 'index.html must not reference unpkg at all').not.toContain('unpkg');
+  expect(sources, 'index.html must load no script from an absolute URL').toEqual(
+    sources.filter(src => !/^(https?:)?\/\//.test(src))
+  );
   expect(
-    html,
+    scriptTypes(html),
     'index.html must not defer compilation to @babel/standalone'
   ).not.toContain('text/babel');
 
-  expect(html).toContain('vendor/react.production.min.js');
-  expect(html).toContain('vendor/react-dom.production.min.js');
-  expect(html).toContain('dist/tweaks-panel.js');
-  expect(html).toContain('dist/profile.js');
+  // The same-origin replacements must actually be loaded — deleting a tag and
+  // leaving the comment behind has to fail here.
+  expect(sources).toEqual(
+    expect.arrayContaining([
+      'vendor/react.production.min.js',
+      'vendor/react-dom.production.min.js',
+      'dist/tweaks-panel.js',
+      'dist/profile.js',
+    ])
+  );
+});
+
+// ---------------------------------------------------------------------------
+// Test 3 — the file that keeps the design system reachable once published
+// ---------------------------------------------------------------------------
+// index.html loads console-ds/_ds_bundle.js. GitHub Pages runs Jekyll by
+// default, and Jekyll does not copy underscore-prefixed paths into the built
+// site — so that script 404s in production unless the repo root carries a
+// .nojekyll file. Nothing else in this repo references it: it is a tracked,
+// zero-byte dotfile that a tidy-up could delete without noticing.
+//
+// Losing it is not a degraded page, it is a blank one. profile.jsx destructures
+// its primitives off window.ConsoleDesignSystem_* at top level, so a 404 there
+// throws "Cannot destructure property 'Button' of undefined" and #root stays
+// empty. The local static server has no Jekyll, so every other test here — and
+// the link check — stays green while the published site is broken.
+test('.nojekyll exists, so Pages serves the underscore-prefixed bundle', async () => {
+  const html = await readFile('index.html', 'utf8');
+  const underscored = scriptSources(html).filter(src =>
+    src.split('/').some(segment => segment.startsWith('_'))
+  );
+  expect(
+    underscored.length,
+    'expected index.html to still load an underscore-prefixed path'
+  ).toBeGreaterThan(0);
+
+  await expect(
+    access('.nojekyll'),
+    `index.html loads ${underscored.join(', ')}, which Jekyll strips without .nojekyll`
+  ).resolves.toBeUndefined();
 });

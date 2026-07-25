@@ -10,7 +10,14 @@
 // page that is otherwise a handful of static files, a permanently blank #root
 // whenever unpkg is slow, unreachable, or blocked (corporate proxy, extension,
 // strict CSP), and a standing obstacle to ever setting a script-src policy.
-// Everything index.html loads is now same-origin and already compiled.
+// Every SCRIPT index.html loads is now same-origin and already compiled.
+//
+// Its stylesheets are not. tokens.css and console-ds/tokens/fonts.css still
+// @import fonts.googleapis.com, render-blocking, ahead of every script on the
+// page. A font host that REFUSES a connection costs nothing — measured, the
+// page renders in ~130ms on its fallback face — but one that HANGS holds the
+// scripts too, and #root stays empty until the socket times out. This narrows
+// the blank-page mode; self-hosting the webfonts is what would close it.
 //
 // COMPILE, DON'T BUNDLE: these files are classic global scripts, not ES
 // modules — profile.jsx reads window.PORTFOLIO, window.TweaksPanel and the

@@ -34,11 +34,19 @@ export default defineConfig({
     actionTimeout: 30_000,
   },
 
-  /* Launch the Python static file server before the test suite starts */
+  /* Launch the Python static file server before the test suite starts.
+     `python -m http.server` serves its own working directory, and Playwright's
+     reuse check is a liveness probe of the URL only — it cannot tell WHAT a
+     server that is already listening is serving. With reuse enabled, a
+     leftover server from another worktree, branch or session silently supplies
+     a different index.html, dist/ and vendor/, and the suite reports a green
+     run against a tree it never loaded. That is not hypothetical: a stray
+     server on this port did outlive a concurrent session in this workspace.
+     So: never reuse. A port already in use now fails loudly instead. */
   webServer: {
     command: 'python -m http.server 8099',
     url: 'http://127.0.0.1:8099',
-    reuseExistingServer: true,
+    reuseExistingServer: false,
     timeout: 30_000,
   },
 

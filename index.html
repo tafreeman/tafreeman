@@ -35,6 +35,14 @@
        plus an in-page compiler, and #root stayed blank forever whenever any of
        them was slow, blocked or down.
 
+       NOT the whole of that failure mode, though: the two stylesheets above
+       still @import fonts.googleapis.com, they are render-blocking, and they
+       sit ahead of every script here. A font host that REFUSES a connection
+       fails fast and the page renders on its fallback face — but one that
+       hangs holds the whole page, scripts included, until the socket times
+       out. Removing those imports (self-host the woff2 files) is what would
+       actually finish this job.
+
        SRI is intentionally omitted for these same-origin assets: GitHub Pages
        enforces HTTPS, so they are already protected by TLS — integrity=
        hashes on local files would need re-hashing on every build with no
