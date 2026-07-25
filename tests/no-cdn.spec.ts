@@ -35,11 +35,14 @@ async function loadProjectTitles(): Promise<string[]> {
   return sandbox.window.PORTFOLIO.REPOS.map((r: { title: string }) => r.title);
 }
 
-// Abort every request that leaves the origin, recording the hosts attempted so
-// a test can assert on what the page still reaches for. Non-http schemes
-// (data: favicon, blob:) are left alone — they never touch a network.
-async function blockThirdPartyHosts(page: Page): Promise<string[]> {
-  const attempted: string[] = [];
+// Abort every request that leaves the origin, recording what was attempted so
+// a test can assert on it. The resource TYPE is recorded alongside the host,
+// because the property that matters is "no off-origin script", not "not this
+// one CDN" — naming a host would let a swap to jsdelivr or esm.sh walk past.
+// Non-http schemes (data: favicon, blob:) are left alone — they never touch a
+// network.
+async function blockThirdPartyHosts(page: Page): Promise<Attempt[]> {
+  const attempted: Attempt[] = [];
   await page.route('**/*', async (route) => {
     const url = new URL(route.request().url());
     const isNetwork = url.protocol === 'http:' || url.protocol === 'https:';
@@ -47,10 +50,15 @@ async function blockThirdPartyHosts(page: Page): Promise<string[]> {
       await route.continue();
       return;
     }
-    attempted.push(url.hostname);
+    attempted.push({ host: url.hostname, type: route.request().resourceType() });
     await route.abort();
   });
   return attempted;
+}
+
+interface Attempt {
+  host: string;
+  type: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -79,14 +87,23 @@ test('the hub renders with every third-party host blocked', async ({ page }) => 
     ).toBeVisible();
   }
 
-  // Nothing on the critical path may even be attempted off-origin. The webfont
-  // stylesheet still is (tokens.css and console-ds/tokens/fonts.css @import
-  // Google Fonts) — that degrades to a fallback face, which is exactly why the
-  // assertions above hold with it blocked. A script does not degrade.
+  // No off-origin SCRIPT may even be attempted — asserted on resource type, not
+  // on a host name, so swapping unpkg for jsdelivr or esm.sh cannot slip past.
   expect(
-    attempted,
-    'index.html must not request its JavaScript from a CDN'
-  ).not.toContain('unpkg.com');
+    attempted.filter(a => a.type === 'script'),
+    'index.html must not request any JavaScript from a third-party host'
+  ).toEqual([]);
+
+  // The webfont stylesheet still goes off-origin (tokens.css and
+  // console-ds/tokens/fonts.css @import Google Fonts). That degrades to a
+  // fallback face, which is exactly why the content assertions above hold with
+  // it blocked — a script would not degrade. Pinned as an equality so a NEW
+  // third-party dependency of any kind has to be acknowledged here rather than
+  // arriving unnoticed.
+  expect(
+    [...new Set(attempted.map(a => a.host))].sort(),
+    'the only third-party host on this page should be the webfont stylesheet'
+  ).toEqual(['fonts.googleapis.com']);
 });
 
 // ---------------------------------------------------------------------------

@@ -2,7 +2,7 @@
   "name": "tafreeman-profile",
   "version": "1.0.0",
   "private": true,
-  "description": "GitHub profile + portfolio landing (static, precompiled JSX, no CDN at runtime).",
+  "description": "GitHub profile + portfolio landing (static; index.html loads precompiled JSX and self-hosted React, no CDN).",
   "scripts": {
     "build:js": "node scripts/build-js.mjs",
     "verify:build": "node scripts/build-js.mjs --check",

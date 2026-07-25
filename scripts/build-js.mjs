@@ -53,10 +53,14 @@ const VENDOR_FILES = [
 // actually use (optional chaining, nullish coalescing), so nothing is
 // downleveled: each output file is its source with JSX lowered and comments
 // dropped (esbuild reprints from the AST), and nothing else. That is what keeps
-// a `git diff` over dist/ reviewable — and it is an explicit floor rather than
-// whatever @babel/standalone's default preset happened to emit, which nobody
-// here ever chose. The explanatory comments stay where they belong, in the
-// .jsx sources.
+// a `git diff` over dist/ reviewable.
+//
+// This IS a browser-floor change, not a no-op. @babel/standalone's default
+// preset was transpiling to ES5 — its _slicedToArray / _objectSpread / _typeof
+// helpers were visible as globals on the old page — so the shipped bundle went
+// from ES5-parseable to requiring roughly Chrome 80 / Safari 13.1 / Firefox 72
+// (all early 2020). Deliberate: it is an explicit floor someone chose, rather
+// than whatever a CDN preset happened to emit. Raise or lower it here.
 const TARGET = "es2020";
 
 const rel = (file) => path.relative(REPO_ROOT, file).split(path.sep).join("/");
