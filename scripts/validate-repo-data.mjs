@@ -6,6 +6,11 @@ const GH_OWNER = "tafreeman";
 const REPO_DATA_FILE = "repo-data.jsx";
 const SOCIAL_CARDS_FILE = "social-cards.jsx";
 const README_FILE = "README.md";
+// The table this validator mirrors lives under exactly this README heading.
+// Rows are parsed from that section only: the orphan check below rejects any
+// row it cannot map to a repo, so an unrelated table elsewhere in the README
+// must not be read as portfolio rows.
+const README_SECTION = "Selected public work";
 // Public-facing JSX surfaces that hardcode repo links but are NOT derived from
 // PORTFOLIO.REPOS. Stale references here (e.g. a link to an archived/removed
 // repo) slip past the repo-data and social-card checks, so we scan their raw
@@ -206,29 +211,82 @@ async function validateSurfaceRepoReferences(repos) {
 // are byte-for-byte equal.
 function extractReadmeTableRows(readmeSource) {
   const rows = [];
+  let inSection = false;
+  let sectionLevel = 0;
+  // Tracks whether the previous line was a pushed data row, so the row sitting
+  // directly above a separator can be identified as the column-label header.
+  let previousLineWasRow = false;
+
   for (const line of readmeSource.split("\n")) {
     const trimmed = line.trim();
-    if (!trimmed.startsWith("|")) continue;
-    if (/^\|[\s:-]+\|[\s:-|]*$/.test(trimmed)) continue; // separator row, e.g. |---|---|---|
+
+    const heading = trimmed.match(/^(#{1,6})\s+(.*?)\s*$/);
+    if (heading) {
+      const level = heading[1].length;
+      if (heading[2] === README_SECTION) {
+        inSection = true;
+        sectionLevel = level;
+      } else if (inSection && level <= sectionLevel) {
+        inSection = false;
+      }
+      previousLineWasRow = false;
+      continue;
+    }
+
+    if (!inSection || !trimmed.startsWith("|")) {
+      previousLineWasRow = false;
+      continue;
+    }
+
+    // Separator row, e.g. |---|---|---|. The "-" MUST come last in the
+    // character class: written as [\s:-|] it parses as \s plus the RANGE
+    // ":".."|", which excludes "-" and so never matched a real separator at
+    // all — leaving the separator and header rows in `rows` as if they were
+    // data. Harmless while only the repo->row direction was checked; a
+    // false-positive generator for the row->repo direction added below.
+    if (/^\|[\s:|-]+\|[\s:|-]*$/.test(trimmed)) {
+      // A separator always follows the column-label row, so whatever was
+      // pushed immediately above it is a header, not data. Drop it — the
+      // orphan check would otherwise report "| Project | ... | Links |".
+      if (previousLineWasRow) rows.pop();
+      previousLineWasRow = false;
+      continue;
+    }
+
     const cells = trimmed.slice(1, -1).split("|").map((cell) => cell.trim());
-    if (cells.length < 3) continue;
+    if (cells.length < 3) {
+      previousLineWasRow = false;
+      continue;
+    }
     rows.push(cells);
+    previousLineWasRow = true;
   }
   return rows;
 }
 
+// Does this table row point at `repo`? Matched on the repo link URL in the
+// row's Links cell, never the display name. Shared by both directions of the
+// check below so the two can never disagree about what "this row is that
+// repo's row" means.
+function rowLinksToRepo(cells, repo) {
+  const linksCell = cells[2] ?? "";
+  const index = linksCell.indexOf(repo.repo);
+  if (index === -1) return false;
+  // Guard the boundary so ".../executionkit" does not match a row that only
+  // links ".../executionkit-archive". A trailing "/" or ")" is a real match
+  // (e.g. ".../agentic-evalkit/releases/latest").
+  const nextChar = linksCell[index + repo.repo.length];
+  return nextChar === undefined || !/[A-Za-z0-9._-]/.test(nextChar);
+}
+
 function validateReadmeDescriptions(readmeSource, repos) {
   const rows = extractReadmeTableRows(readmeSource);
-  assert(rows.length > 0, `${README_FILE}: found no "Selected public work" table rows to validate`);
+  assert(rows.length > 0, `${README_FILE}: found no "${README_SECTION}" table rows to validate`);
 
+  // 1. Every portfolio repo needs a row, and that row's description cell must
+  //    be byte-for-byte equal to its repo-data.jsx desc.
   for (const repo of repos) {
-    const row = rows.find((cells) => {
-      const linksCell = cells[2] ?? "";
-      const index = linksCell.indexOf(repo.repo);
-      if (index === -1) return false;
-      const nextChar = linksCell[index + repo.repo.length];
-      return nextChar === undefined || !/[A-Za-z0-9._-]/.test(nextChar);
-    });
+    const row = rows.find((cells) => rowLinksToRepo(cells, repo));
     assert(row, `${README_FILE}: no table row links to ${repo.repo} (expected a row for portfolio repo "${repo.id}")`);
     if (!row) continue;
 
@@ -236,6 +294,20 @@ function validateReadmeDescriptions(readmeSource, repos) {
     assert(
       readmeDesc === repo.desc,
       `${repo.id}: ${README_FILE} description column does not match ${REPO_DATA_FILE} desc — README: "${readmeDesc}" | ${REPO_DATA_FILE}: "${repo.desc}"`,
+    );
+  }
+
+  // 2. ...and the reverse: no row may outlive its repo. The loop above only
+  //    ever goes looking for rows it expects to find, so a row left behind
+  //    when a repo is dropped from PORTFOLIO.REPOS (archived, renamed,
+  //    de-listed) passed silently. The sibling social-cards check has been
+  //    bidirectional since it was written; this closes the same gap here.
+  //    If a row for a deliberately non-portfolio repo is ever wanted, exempt
+  //    it by id the way SOCIAL_ONLY_IDS exempts the self-referential hub card.
+  for (const cells of rows) {
+    assert(
+      repos.some((repo) => rowLinksToRepo(cells, repo)),
+      `${README_FILE}: table row "${cells[0]}" links to no current ${REPO_DATA_FILE} repo — remove the stale row or add the repo to ${REPO_DATA_FILE}`,
     );
   }
 }
