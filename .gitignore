@@ -12,6 +12,11 @@ Thumbs.db
 # Dependencies
 node_modules/
 
+# NOT ignored, deliberately: dist/ and vendor/ are build output that MUST be
+# committed. GitHub Pages serves this repo exactly as checked in — there is no
+# deploy step to build in — so an ignored dist/ means index.html 404s on its
+# own scripts. `npm run verify:build` (CI) fails if either drifts.
+
 # Playwright E2E artifacts
 playwright-report/
 test-results/

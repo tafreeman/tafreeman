@@ -1,11 +1,20 @@
 // Validate that every .jsx / .js source file parses (catches syntax errors).
-// These files are loaded in-browser via Babel (no build step), so this is the
+// index.html's own scripts are precompiled now (scripts/build-js.mjs), so a
+// syntax error in those fails the build first. But repo-data.jsx still ships to
+// browsers as raw source, and the local design/export tooling (social-cards,
+// banner, glyphs, design-canvas + their .html hosts) is still compiled
+// in-browser by Babel with no build step at all — for those this remains the
 // only automated guard against shipping a broken script.
 import { readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { transform } from "esbuild";
 
-const SKIP_DIRS = new Set(["node_modules", ".git", ".github"]);
+// dist/ and vendor/ hold generated output, not sources. dist/ is this repo's
+// own JSX after the esbuild transform — its input is parsed here already — and
+// vendor/ is minified third-party React, which has no business being fed to a
+// JSX parser. `npm run verify:build` proves both still match what produced
+// them, which is a stronger guarantee than re-parsing them here would be.
+const SKIP_DIRS = new Set(["node_modules", ".git", ".github", "dist", "vendor"]);
 
 function collect(dir) {
   const out = [];

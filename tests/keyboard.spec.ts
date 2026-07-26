@@ -8,6 +8,7 @@
  *
  * PRE-REQUISITES (same as smoke.spec.ts):
  *   npm install
+ *   npm run build:js
  *   npx playwright install chromium
  *
  * The Python static server is started automatically by playwright.config.ts.
@@ -34,8 +35,9 @@ async function loadProjectTitles(): Promise<string[]> {
   return sandbox.window.PORTFOLIO.REPOS.map((r: { title: string }) => r.title);
 }
 
-// @babel/standalone compiles the JSX in-browser, so wait for real content
-// rather than a fixed sleep — same approach as smoke.spec.ts.
+// Wait for real content rather than a fixed sleep — same approach as
+// smoke.spec.ts, and still the right one now that the page renders from
+// precompiled same-origin scripts instead of an in-browser Babel pass.
 async function gotoHub(page: Page): Promise<void> {
   await page.goto('/');
   await expect(page.locator('#root')).not.toBeEmpty({ timeout: 45_000 });

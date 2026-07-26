@@ -3,6 +3,7 @@
  *
  * PRE-REQUISITES (orchestrator must run these before the first execution):
  *   npm install
+ *   npm run build:js          # index.html loads dist/ + vendor/, not a CDN
  *   npx playwright install chromium
  *     -- OR --
  *   npm exec playwright install chromium
@@ -40,9 +41,10 @@ test('hub renders', async ({ page }) => {
   // so '/' resolves to index.html served by the Python static server.
   await page.goto('/');
 
-  // @babel/standalone compiles the JSX in-browser; give it generous time.
   // We wait until #root has at least one child element rather than using a
-  // fixed sleep or networkidle (CDN scripts may still be in-flight).
+  // fixed sleep or networkidle. The scripts are precompiled and same-origin
+  // now, so this resolves in one round trip — the generous timeout is kept
+  // only so a loaded CI runner cannot turn slowness into a false failure.
   const root = page.locator('#root');
   await expect(root).not.toBeEmpty({ timeout: 45_000 });
 

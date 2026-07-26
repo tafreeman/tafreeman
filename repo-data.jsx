@@ -1,5 +1,9 @@
 // repo-data.jsx — single source of truth for portfolio repo + language data.
-// Loaded as <script type="text/babel"> BEFORE profile.jsx.
+// Despite the extension this is plain JS with no JSX in it, and index.html
+// loads it as a plain <script src> BEFORE dist/profile.js — which destructures
+// window.PORTFOLIO at top level, so the order is not optional. It is also the
+// one script on the page that still ships to browsers as raw source rather
+// than through scripts/build-js.mjs; keep it JSX-free so it stays that way.
 // REAL DATA ONLY. Every repo, link, and label below is verified against the
 // live GitHub account (gh repo list tafreeman) and each repo's own README.
 // No fork, contribution, or achievement metrics are shown. The profile is a
@@ -9,11 +13,15 @@ const GH = "https://github.com/tafreeman";
 
 // Gate the dev/edit TweaksPanel: only on localhost or with an explicit ?tweaks
 // flag. Hidden on the public github.io site. Exposed ONLY as a window.PORTFOLIO
-// property (computed inline below) — deliberately NOT a top-level binding,
-// because profile.jsx declares its own top-level `const SHOW_TWEAKS` and both
-// scripts share global lexical scope on index.html (a top-level const here would
-// make profile.jsx fail with "SHOW_TWEAKS has already been declared").
-// profile.jsx reads window.PORTFOLIO.SHOW_TWEAKS directly.
+// property (computed inline below) — deliberately NOT a top-level binding.
+// Originally it could not be one: profile.jsx declares its own top-level
+// `const SHOW_TWEAKS` and both files shared a single global lexical scope on
+// index.html, so a top-level const of that name here failed the page outright
+// with "SHOW_TWEAKS has already been declared". profile.jsx now ships wrapped
+// in an IIFE (scripts/build-js.mjs), so that particular collision can no
+// longer fire — but this file is still loaded as raw source into the scope it
+// shares with index.html's inline block, so keep new values on
+// window.PORTFOLIO instead of finding out which name collides next.
 
 // Only public, active repositories are listed. `url` is the primary visitor
 // destination (a project site where available, otherwise the repository),
