@@ -43,7 +43,7 @@ window.PORTFOLIO = {
       name: "agentic-evalkit",
       eyebrow: "FEATURED · EVALUATION",
       title: "agentic-evalkit",
-      desc: "Tools for measuring how well AI agents perform, comparing runs, and producing evidence that teams can review.",
+      desc: "Grades AI agent output against checks you define, and writes up the evidence behind each score.",
       lang: "Python", langClass: "lang-py",
       status: "v0.3.0", statusClass: "",
       url: GH + "/agentic-evalkit",
@@ -55,7 +55,7 @@ window.PORTFOLIO = {
       name: "agentic-runtime-platform",
       eyebrow: "PLATFORM",
       title: "Agentic Runtime Platform",
-      desc: "A platform for coordinating AI agents with human approval steps, safety controls, and automatic fallback when an AI service is unavailable.",
+      desc: "Runs multi-agent LLM workflows defined in YAML, with human approval required before any tool call and automatic failover when a provider goes down.",
       lang: "Python", langClass: "lang-py",
       status: "ACTIVE", statusClass: "",
       url: "https://tafreeman.github.io/agentic-runtime-platform/",
@@ -67,7 +67,7 @@ window.PORTFOLIO = {
       name: "executionkit",
       eyebrow: "LIBRARY",
       title: "ExecutionKit",
-      desc: "A Python library for repeatable AI workflows such as comparing responses, improving drafts, using tools, returning structured data, and managing cost.",
+      desc: "A Python library of LLM calling patterns — voting, retry-and-refine, tool loops, structured output — with no dependencies outside the standard library.",
       lang: "Python", langClass: "lang-py",
       // v0.3.0 is the latest GitHub release (live-verified 2026-07-09); the
       // validator checks this literal against the release tag, so bump both
@@ -82,7 +82,7 @@ window.PORTFOLIO = {
       name: "financial-scenario-engine",
       eyebrow: "APPLIED AI",
       title: "Financial Scenario Engine",
-      desc: "A local-first financial planning application that keeps calculations in tested code and uses AI to interpret requests and explain results.",
+      desc: "A local what-if simulator for project budgets: an AI reads your question, and tested code does all the math.",
       lang: "TypeScript", langClass: "lang-ts",
       status: "BETA", statusClass: "beta",
       // The Pages root serves the VitePress docs; the product overview site is
