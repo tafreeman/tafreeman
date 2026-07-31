@@ -27,6 +27,8 @@ and alignment with real business needs.
 - Performance metrics and costs should be clear to operators.
 - Core behavior should be repeatable.
 - AI output should be assessed.
+- Changes to prompt, system, model can cause changed performance, develop and run evals before making any changes
+- Use deterministic tooling when possible and ai where it works.
 - AI models and services will evolve, so the surrounding software should remain maintainable.
 
 The [portfolio site](https://tafreeman.github.io/tafreeman/) visualizes these projects; each links to source, docs, or a live app.
