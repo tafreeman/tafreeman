@@ -63,15 +63,19 @@ test('hub renders', async ({ page }) => {
 // ---------------------------------------------------------------------------
 // Test 2 — every selected public project renders and private work stays absent
 // ---------------------------------------------------------------------------
-// The displayed project set comes from repo-data.jsx, while explicit guards
-// prevent previously listed private repositories from returning unnoticed.
+// The displayed project set comes from repo-data.jsx. Private/archived
+// repos are guarded generically, not by naming ids here: `npm run
+// validate:repos` (scripts/validate-repo-data.mjs, validatePublicGithubState)
+// live-checks *every* repo in PORTFOLIO.REPOS against the GitHub API and
+// fails if any is private or archived, so a future repo going private is
+// caught there without this spec needing a matching named guard. That check
+// needs network access to api.github.com, which this required (non-@network)
+// smoke spec must not depend on — see the file header. This spec only
+// verifies each listed repo actually renders on the page.
 test('hub renders every selected public project', async ({ page }) => {
   const repos = await loadPortfolioRepos();
   expect(repos.length).toBeGreaterThan(0);
 
-  const ids = repos.map((r) => r.id);
-  expect(ids).not.toContain('architecture-deck-system');
-  expect(ids).not.toContain('qa-automation-academy');
   expect(repos.every((repo) => typeof repo.url === 'string' && repo.url.length > 0)).toBe(true);
 
   await page.goto('/');

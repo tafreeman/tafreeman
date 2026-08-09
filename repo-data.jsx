@@ -94,9 +94,13 @@ window.PORTFOLIO = {
       img: "social-previews/financial-scenario-engine.png",
     },
   ],
-  // Real primary-language split across the four selected public repos.
-  // Percentages are validated against these counts by validate-repo-data.mjs
-  // (round(count/total*100)), so they must track the REPOS list above.
+  // Real primary-language split — a REPO-COUNT ratio across the selected
+  // public repos above (each repo counted once, by its one primary
+  // language), NOT a lines-of-code measure. profile.jsx renders this as
+  // "Primary language of {REPOS.length} featured repos" specifically so a
+  // reader can't mistake it for LOC. Percentages are validated against these
+  // counts by validate-repo-data.mjs (round(count/total*100)), so they must
+  // track the REPOS list above.
   LANGS: [
     { name: "Python",     pct: 75, color: "#3776ab" },
     { name: "TypeScript", pct: 25, color: "#3178c6" },

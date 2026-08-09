@@ -360,6 +360,15 @@ async function fetchLatestRelease(repoId) {
   return response.json();
 }
 
+// The private/archived checks below are the single guard against a listed
+// repo silently going private or archived — generic over whatever is in
+// PORTFOLIO.REPOS, not a per-id named guard. tests/smoke.spec.ts deliberately
+// does NOT duplicate this check (it used to hardcode two specific repo ids,
+// which only covered repos someone remembered to name): that spec is part of
+// the required, offline smoke suite and must not depend on network access to
+// api.github.com, whereas this script already does (validate:repos, run via
+// `npm run validate`). A repo going private or archived fails here, without
+// anyone adding a new named guard anywhere.
 async function validatePublicGithubState(portfolio, repos) {
   for (const repo of repos) {
     try {
