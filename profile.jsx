@@ -300,7 +300,7 @@ function LanguagesStrip() {
   return (
     <section style={{ background: 'var(--bg-deep)', padding: 'var(--sp-lg) var(--sp-xl)', borderTop: '1px solid var(--border-soft)' }}>
       <div style={{ font: 'var(--fw-regular) 0.75rem/1.33333 var(--font-mono)', letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--fg-2)', marginBottom: 'var(--sp-sm)' }}>
-        Primary project languages
+        Primary language of {REPOS.length} featured repos
       </div>
       <div style={{ display: 'flex', height: 8, overflow: 'hidden', background: 'var(--bg)', border: '1px solid var(--border-soft)', marginBottom: 'var(--sp-sm)' }}>
         {LANGS.map((l) => (
