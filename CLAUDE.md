@@ -36,5 +36,5 @@ npm run cards             # regenerate social PNGs — needs the gitignored expo
 - `repo-data.jsx` must stay JSX-free and export via `window.PORTFOLIO`: it ships to browsers as raw source and shares one global lexical scope with the inline block.
 - `index.html` has a machine-edited region `window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{…}/*EDITMODE-END*/;` rewritten on disk by the Tweaks panel's postMessage protocol — keep it inline and in that exact shape.
 - The Playwright link test is advisory, but the lychee "Check links" step blocks (`fail: true`) over `README.md '*.html' '*.jsx'` — a dead link in a `.jsx` source fails CI.
-- The smoke suite hardcodes negative guards: ids `architecture-deck-system` and `qa-automation-academy` must not appear, and no rendered text may say "Private repo".
+- The smoke suite asserts no rendered text says "Private repo" (`tests/smoke.spec.ts:93`). The two hardcoded repo-id guards (`architecture-deck-system`, `qa-automation-academy`) were removed in PR #45 as redundant and fragile — visibility and archived state are now enforced for every repo in `PORTFOLIO.REPOS` by `scripts/validate-repo-data.mjs` against the live API, not by the smoke suite.
 - `npm run validate:html` globs `*.html` at the repo root, so locally it also validates untracked files (`export.html`, the "GitHub ID Images" surfaces) that CI never sees.
