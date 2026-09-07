@@ -45,7 +45,10 @@ window.PORTFOLIO = {
       title: "agentic-evalkit",
       desc: "Grades AI agent output against checks you define, and writes up the evidence behind each score.",
       lang: "Python", langClass: "lang-py",
-      status: "v0.3.0", statusClass: "",
+      // v0.4.0 is the latest GitHub release (live-verified 2026-09-07); the
+      // validator checks this literal against the release tag, so bump both
+      // together. Was stale at v0.3.0 through the 0.4.0 ship.
+      status: "v0.4.0", statusClass: "",
       url: GH + "/agentic-evalkit",
       repo: GH + "/agentic-evalkit",
       img: "social-previews/agentic-evalkit.png",
@@ -55,7 +58,7 @@ window.PORTFOLIO = {
       name: "agentic-runtime-platform",
       eyebrow: "PLATFORM",
       title: "Agentic Runtime Platform",
-      desc: "Runs multi-agent LLM workflows defined in YAML, with human approval required before any tool call and automatic failover when a provider goes down.",
+      desc: "Runs multi-agent LLM workflows defined in YAML, with fail-closed approval checks on high-impact tool calls and automatic failover when a provider goes down.",
       lang: "Python", langClass: "lang-py",
       status: "ACTIVE", statusClass: "",
       url: "https://tafreeman.github.io/agentic-runtime-platform/",
