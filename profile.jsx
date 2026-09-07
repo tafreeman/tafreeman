@@ -125,11 +125,7 @@ function Header({ view, onNav }) {
 // ===================================================================
 function Hero({ onNav }) {
   return (
-    <section style={{ position: 'relative', minHeight: 520, display: 'flex', alignItems: 'flex-end', overflow: 'hidden' }}>
-      <img src="console-ds/assets/hero-cinematic.jpg" alt="" style={{
-        position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-      }} />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.72) 100%)' }}></div>
+    <section style={{ position: 'relative', minHeight: 520, display: 'flex', alignItems: 'flex-end', overflow: 'hidden', background: 'var(--void, #000000)' }}>
       <div style={{ position: 'relative', zIndex: 1, padding: 'var(--sp-2xl) var(--sp-xl) var(--sp-xl)', maxWidth: 900, width: '100%', boxSizing: 'border-box' }}>
         <div style={{
           font: 'var(--fw-regular) 0.75rem/1.33333 var(--font-mono)', letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase',

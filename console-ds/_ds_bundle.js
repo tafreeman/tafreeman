@@ -4477,25 +4477,10 @@ function Hero({
       minHeight: 520,
       display: 'flex',
       alignItems: 'flex-end',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      background: 'var(--void, #000000)'
     }
-  }, /*#__PURE__*/React.createElement("img", {
-    src: "../../assets/hero-cinematic.jpg",
-    alt: "",
-    style: {
-      position: 'absolute',
-      inset: 0,
-      width: '100%',
-      height: '100%',
-      objectFit: 'cover'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: 'absolute',
-      inset: 0,
-      background: 'var(--gradient-scrim)'
-    }
-  }), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     style: {
       position: 'relative',
       zIndex: 1,
