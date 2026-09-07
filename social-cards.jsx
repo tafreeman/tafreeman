@@ -51,6 +51,18 @@ const REPOS = [
     status: "BETA", statusClass: "beta",
   },
   {
+    id: "groundkit",
+    eyebrow: "RETRIEVAL",
+    name: "groundkit",
+    tagline: "A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation is checked against the source before it's returned.",
+    cmd: "pip install groundkit",
+    glyph: "lens",
+    lang: "Python", langColor: "#3776ab",
+    // Kept in lockstep with repo-data.jsx (validator asserts card.status ===
+    // repo.status); groundkit's latest GitHub release is v0.1.0.
+    status: "v0.1.0", statusClass: "",
+  },
+  {
     id: "tafreeman",
     eyebrow: "PORTFOLIO HUB",
     name: "tafreeman",

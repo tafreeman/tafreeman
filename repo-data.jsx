@@ -96,16 +96,32 @@ window.PORTFOLIO = {
       repo: GH + "/financial-scenario-engine",
       img: "social-previews/financial-scenario-engine.png",
     },
+    {
+      id: "groundkit",
+      name: "groundkit",
+      eyebrow: "RETRIEVAL",
+      title: "GroundKit",
+      desc: "A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation is checked against the source before it's returned.",
+      lang: "Python", langClass: "lang-py",
+      // v0.1.0 is the latest GitHub release (live-verified 2026-09-07); the
+      // validator checks this literal against the release tag, so bump both
+      // together.
+      status: "v0.1.0", statusClass: "",
+      url: "https://tafreeman.github.io/groundkit/",
+      repo: GH + "/groundkit",
+      img: "social-previews/groundkit.png",
+    },
   ],
   // Real primary-language split — a REPO-COUNT ratio across the selected
   // public repos above (each repo counted once, by its one primary
-  // language), NOT a lines-of-code measure. profile.jsx renders this as
-  // "Primary language of {REPOS.length} featured repos" specifically so a
-  // reader can't mistake it for LOC. Percentages are validated against these
-  // counts by validate-repo-data.mjs (round(count/total*100)), so they must
-  // track the REPOS list above.
+  // language), NOT a lines-of-code measure. Kept for validate-repo-data.mjs's
+  // internal consistency check (round(count/total*100) against the REPOS
+  // list above) even though profile.jsx no longer renders it as a bar — the
+  // rendered page replaced that section with evidence links (see
+  // EvidenceLinks in profile.jsx); a language-count ratio was judged less
+  // useful to a visitor than a link to a real, reproducible result.
   LANGS: [
-    { name: "Python",     pct: 75, color: "#3776ab" },
-    { name: "TypeScript", pct: 25, color: "#3178c6" },
+    { name: "Python",     pct: 80, color: "#3776ab" },
+    { name: "TypeScript", pct: 20, color: "#3178c6" },
   ],
 };
