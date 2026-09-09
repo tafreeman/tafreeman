@@ -14,13 +14,15 @@ const REPOS = [
     cmd: "pip install agentic-evalkit",
     glyph: "flask",
     lang: "Python", langColor: "#3776ab",
-    status: "v0.3.0", statusClass: "",
+    // Kept in lockstep with repo-data.jsx (validator asserts card.status ===
+    // repo.status); agentic-evalkit's latest GitHub release is v0.4.0.
+    status: "v0.4.0", statusClass: "",
   },
   {
     id: "agentic-runtime-platform",
     eyebrow: "PLATFORM",
     name: "agentic-runtime-platform",
-    tagline: "Runs multi-agent LLM workflows defined in YAML, with human approval required before any tool call and automatic failover when a provider goes down.",
+    tagline: "Runs multi-agent LLM workflows defined in YAML, with fail-closed approval checks on high-impact tool calls and automatic failover when a provider goes down.",
     cmd: "agentic run test_deterministic",
     glyph: "black-hole",
     lang: "Python", langColor: "#3776ab",
@@ -47,6 +49,18 @@ const REPOS = [
     glyph: "planet-chart",
     lang: "TypeScript", langColor: "#3178c6",
     status: "BETA", statusClass: "beta",
+  },
+  {
+    id: "groundkit",
+    eyebrow: "RETRIEVAL",
+    name: "groundkit",
+    tagline: "A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation is checked against the source before it's returned.",
+    cmd: "pip install groundkit",
+    glyph: "lens",
+    lang: "Python", langColor: "#3776ab",
+    // Kept in lockstep with repo-data.jsx (validator asserts card.status ===
+    // repo.status); groundkit's latest GitHub release is v0.1.0.
+    status: "v0.1.0", statusClass: "",
   },
   {
     id: "tafreeman",

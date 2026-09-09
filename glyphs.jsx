@@ -96,6 +96,25 @@ function GlyphPlanetChart() {
   );
 }
 
+// 5 — LENS + DOCUMENT · groundkit (citation-verified retrieval)
+function GlyphLens() {
+  return (
+    <svg viewBox="0 0 200 200">
+      {/* dog-eared document, cited lines fading toward the bottom */}
+      <path d="M62 40 H120 L146 66 V162 H62 Z" fill="none" stroke={CR} strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
+      <path d="M120 40 V66 H146" fill="none" stroke={CR} strokeWidth="4" strokeLinejoin="round" />
+      <path d="M76 92 H132" stroke={C} strokeWidth="3.5" strokeLinecap="round" opacity="0.85" />
+      <path d="M76 112 H132" stroke={C} strokeWidth="3.5" strokeLinecap="round" opacity="0.55" />
+      <path d="M76 132 H108" stroke={C} strokeWidth="3.5" strokeLinecap="round" opacity="0.35" />
+      {/* magnifying lens verifying the cited line */}
+      <circle cx="120" cy="118" r="34" fill="#000000" stroke={CB} strokeWidth="5" />
+      <circle cx="120" cy="118" r="34" fill="none" stroke={C} strokeWidth="2.5" opacity="0.5" />
+      <line x1="144" y1="142" x2="170" y2="168" stroke={CB} strokeWidth="7" strokeLinecap="round" />
+      <Spark x={36} y={54} s={6} />
+    </svg>
+  );
+}
+
 // ASTRONAUT + CAT · tafreeman (hub)
 function GlyphAstroCat() {
   return (
@@ -130,6 +149,7 @@ const GLYPHS = {
   "cube": GlyphCube,
   "flask": GlyphFlask,
   "planet-chart": GlyphPlanetChart,
+  "lens": GlyphLens,
   "astro-cat": GlyphAstroCat,
 };
 

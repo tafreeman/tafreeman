@@ -18,9 +18,10 @@ and alignment with real business needs.
 | Project | What it demonstrates | Links |
 |---|---|---|
 | **agentic-evalkit** | Grades AI agent output against checks you define, and writes up the evidence behind each score. | [Repository](https://github.com/tafreeman/agentic-evalkit) · [Latest release](https://github.com/tafreeman/agentic-evalkit/releases/latest) |
-| **Agentic Runtime Platform** | Runs multi-agent LLM workflows defined in YAML, with human approval required before any tool call and automatic failover when a provider goes down. | [Documentation](https://tafreeman.github.io/agentic-runtime-platform/) · [Repository](https://github.com/tafreeman/agentic-runtime-platform) |
+| **Agentic Runtime Platform** | Runs multi-agent LLM workflows defined in YAML, with fail-closed approval checks on high-impact tool calls and automatic failover when a provider goes down. | [Documentation](https://tafreeman.github.io/agentic-runtime-platform/) · [Repository](https://github.com/tafreeman/agentic-runtime-platform) |
 | **ExecutionKit** | A Python library of LLM calling patterns — voting, retry-and-refine, tool loops, structured output — with no dependencies outside the standard library. | [Documentation](https://tafreeman.github.io/executionkit/) · [Repository](https://github.com/tafreeman/executionkit) |
 | **Financial Scenario Engine** | A local what-if simulator for project budgets: an AI reads your question, and tested code does all the math. | [Live site](https://tafreeman.github.io/financial-scenario-engine/overview/) · [Repository](https://github.com/tafreeman/financial-scenario-engine) |
+| **GroundKit** | A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation is checked against the source before it's returned. | [Documentation](https://tafreeman.github.io/groundkit/) · [Repository](https://github.com/tafreeman/groundkit) |
 
 ## How I approach AI systems
 

@@ -34,6 +34,7 @@ const EXPECTED_IDS = new Set([
   "agentic-runtime-platform",
   "executionkit",
   "financial-scenario-engine",
+  "groundkit",
 ]);
 
 const failures = [];
