@@ -37,8 +37,8 @@ const REPOS = [
     glyph: "cube",
     lang: "Python", langColor: "#3776ab",
     // Kept in lockstep with repo-data.jsx (validator asserts card.status ===
-    // repo.status); executionkit's latest GitHub release is v0.3.0.
-    status: "v0.3.0", statusClass: "",
+    // repo.status); executionkit's latest GitHub release is v0.4.0.
+    status: "v0.4.0", statusClass: "",
   },
   {
     id: "financial-scenario-engine",
@@ -59,8 +59,8 @@ const REPOS = [
     glyph: "lens",
     lang: "Python", langColor: "#3776ab",
     // Kept in lockstep with repo-data.jsx (validator asserts card.status ===
-    // repo.status); groundkit's latest GitHub release is v0.1.0.
-    status: "v0.1.0", statusClass: "",
+    // repo.status); groundkit's latest GitHub release is v0.2.0.
+    status: "v0.2.0", statusClass: "",
   },
   {
     id: "tafreeman",

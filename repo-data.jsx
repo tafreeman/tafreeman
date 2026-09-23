@@ -72,10 +72,10 @@ window.PORTFOLIO = {
       title: "ExecutionKit",
       desc: "A Python library of LLM calling patterns — voting, retry-and-refine, tool loops, structured output — with no dependencies outside the standard library.",
       lang: "Python", langClass: "lang-py",
-      // v0.3.0 is the latest GitHub release (live-verified 2026-07-09); the
+      // v0.4.0 is the latest GitHub release (live-verified 2026-09-23); the
       // validator checks this literal against the release tag, so bump both
-      // together. Was stale at v0.2.0 through the 0.3.0 ship.
-      status: "v0.3.0", statusClass: "",
+      // together.
+      status: "v0.4.0", statusClass: "",
       url: "https://tafreeman.github.io/executionkit/",
       repo: GH + "/executionkit",
       img: "social-previews/executionkit.png",
@@ -103,10 +103,10 @@ window.PORTFOLIO = {
       title: "GroundKit",
       desc: "A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation is checked against the source before it's returned.",
       lang: "Python", langClass: "lang-py",
-      // v0.1.0 is the latest GitHub release (live-verified 2026-09-07); the
+      // v0.2.0 is the latest GitHub release (live-verified 2026-09-23); the
       // validator checks this literal against the release tag, so bump both
       // together.
-      status: "v0.1.0", statusClass: "",
+      status: "v0.2.0", statusClass: "",
       url: "https://tafreeman.github.io/groundkit/",
       repo: GH + "/groundkit",
       img: "social-previews/groundkit.png",
