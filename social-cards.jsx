@@ -15,8 +15,8 @@ const REPOS = [
     glyph: "flask",
     lang: "Python", langColor: "#3776ab",
     // Kept in lockstep with repo-data.jsx (validator asserts card.status ===
-    // repo.status); agentic-evalkit's latest GitHub release is v0.4.0.
-    status: "v0.4.0", statusClass: "",
+    // repo.status); agentic-evalkit's latest GitHub release is v0.4.1.
+    status: "v0.4.1", statusClass: "",
   },
   {
     id: "agentic-runtime-platform",
@@ -59,8 +59,8 @@ const REPOS = [
     glyph: "lens",
     lang: "Python", langColor: "#3776ab",
     // Kept in lockstep with repo-data.jsx (validator asserts card.status ===
-    // repo.status); groundkit's latest GitHub release is v0.2.0.
-    status: "v0.2.0", statusClass: "",
+    // repo.status); groundkit's latest GitHub release is v0.2.1.
+    status: "v0.2.1", statusClass: "",
   },
   {
     id: "tafreeman",
