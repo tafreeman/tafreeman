@@ -45,10 +45,10 @@ window.PORTFOLIO = {
       title: "agentic-evalkit",
       desc: "Grades AI agent output against checks you define, and writes up the evidence behind each score.",
       lang: "Python", langClass: "lang-py",
-      // v0.4.0 is the latest GitHub release (live-verified 2026-09-07); the
+      // v0.4.1 is the latest GitHub release (live-verified 2026-09-23); the
       // validator checks this literal against the release tag, so bump both
-      // together. Was stale at v0.3.0 through the 0.4.0 ship.
-      status: "v0.4.0", statusClass: "",
+      // together.
+      status: "v0.4.1", statusClass: "",
       url: GH + "/agentic-evalkit",
       repo: GH + "/agentic-evalkit",
       img: "social-previews/agentic-evalkit.png",
@@ -103,10 +103,10 @@ window.PORTFOLIO = {
       title: "GroundKit",
       desc: "A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation is checked against the source before it's returned.",
       lang: "Python", langClass: "lang-py",
-      // v0.2.0 is the latest GitHub release (live-verified 2026-09-23); the
+      // v0.2.1 is the latest GitHub release (live-verified 2026-09-23); the
       // validator checks this literal against the release tag, so bump both
       // together.
-      status: "v0.2.0", statusClass: "",
+      status: "v0.2.1", statusClass: "",
       url: "https://tafreeman.github.io/groundkit/",
       repo: GH + "/groundkit",
       img: "social-previews/groundkit.png",
