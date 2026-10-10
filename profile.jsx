@@ -502,7 +502,7 @@ function ContactBar() {
   return (
     <section style={{ background: 'var(--bg)', borderTop: '1px solid var(--border-soft)', padding: 'var(--sp-md) var(--sp-xl)', display: 'flex', gap: 'var(--sp-lg)', flexWrap: 'wrap', alignItems: 'center' }}>
       <span style={{ font: 'var(--fw-regular) 0.75rem/1.33333 var(--font-mono)', letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--fg-2)' }}>Contact</span>
-      <a href="https://www.linkedin.com/in/andy-freeman-architect/" target="_blank" rel="noopener" style={linkStyle}>LinkedIn ↗</a>
+      <a href="https://www.linkedin.com/in/engineer-af/" target="_blank" rel="noopener" style={linkStyle}>LinkedIn ↗</a>
       <a href={PROFILE_GH} target="_blank" rel="noopener" style={linkStyle}>GitHub ↗</a>
     </section>
   );

@@ -8,7 +8,7 @@ I build reliable software that uses AI with clear controls, practical testing,
 and alignment with real business needs.
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-View_site-33b1ff?style=flat-square)](https://tafreeman.github.io/tafreeman/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-andy--freeman--architect-33b1ff?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andy-freeman-architect/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-engineer--af-33b1ff?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/engineer-af/)
 [![GitHub](https://img.shields.io/badge/GitHub-tafreeman-33b1ff?style=flat-square&logo=github&logoColor=white)](https://github.com/tafreeman)
 
 </div>
@@ -38,6 +38,6 @@ The [portfolio site](https://tafreeman.github.io/tafreeman/) visualizes these pr
 
 <div align="center">
 
-[Connect on LinkedIn](https://www.linkedin.com/in/andy-freeman-architect/) · [Browse all public repositories](https://github.com/tafreeman?tab=repositories)
+[Connect on LinkedIn](https://www.linkedin.com/in/engineer-af/) · [Browse all public repositories](https://github.com/tafreeman?tab=repositories)
 
 </div>
