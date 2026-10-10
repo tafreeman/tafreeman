@@ -58,6 +58,6 @@ jobs:
             --exclude-path node_modules --exclude-path .git
             --exclude '^https://fonts\.googleapis\.com/?$'
             --exclude '^https://fonts\.gstatic\.com/?$'
-            --exclude '^https://www\.linkedin\.com/in/andy-freeman-architect/?$'
+            --exclude '^https://www\.linkedin\.com/in/engineer-af/?$'
             README.md '*.html' '*.jsx'
           fail: true
