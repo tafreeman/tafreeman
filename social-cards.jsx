@@ -54,7 +54,7 @@ const REPOS = [
     id: "groundkit",
     eyebrow: "RETRIEVAL",
     name: "groundkit",
-    tagline: "A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation is checked against the source before it's returned.",
+    tagline: "A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation can be re-checked byte-for-byte against the source.",
     cmd: "pip install groundkit",
     glyph: "lens",
     lang: "Python", langColor: "#3776ab",

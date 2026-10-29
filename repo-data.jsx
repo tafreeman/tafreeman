@@ -101,7 +101,7 @@ window.PORTFOLIO = {
       name: "groundkit",
       eyebrow: "RETRIEVAL",
       title: "GroundKit",
-      desc: "A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation is checked against the source before it's returned.",
+      desc: "A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation can be re-checked byte-for-byte against the source.",
       lang: "Python", langClass: "lang-py",
       // v0.2.1 is the latest GitHub release (live-verified 2026-09-23); the
       // validator checks this literal against the release tag, so bump both
