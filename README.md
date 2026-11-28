@@ -23,6 +23,8 @@ and alignment with real business needs.
 | **Financial Scenario Engine** | A local what-if simulator for project budgets: an AI reads your question, and tested code does all the math. | [Live site](https://tafreeman.github.io/financial-scenario-engine/overview/) · [Repository](https://github.com/tafreeman/financial-scenario-engine) |
 | **GroundKit** | A citation-verified retrieval engine for your own documents — every answer points at an exact passage, and the citation can be re-checked byte-for-byte against the source. | [Documentation](https://tafreeman.github.io/groundkit/) · [Repository](https://github.com/tafreeman/groundkit) |
 
+Also: [One Token Explainers](https://tafreeman.github.io/one-token-explainers/) follows a token from training and inference to the streamed reply, with a synchronized 3D diagram and interactive component labs. [Source](https://github.com/tafreeman/one-token-explainers).
+
 ## How I approach AI systems
 
 - Performance metrics and costs should be clear to operators.
